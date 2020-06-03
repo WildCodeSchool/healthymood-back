@@ -13,16 +13,18 @@ const { SubMenu } = Menu;
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const onCollapse = (collapsed) => {
-    console.log(collapsed);
-    setCollapsed({ collapsed });
+
+  const onCollapse = () => {
+    setCollapsed(!collapsed);
   };
+
   return (
     <Sider
-      onClick={() => setCollapsed(!collapsed)}
       collapsible
       collapsed={collapsed}
-      onCollapse={onCollapse}
+      onCollapse={() => {
+        onCollapse();
+      }}
     >
       <div className='logo' />
       <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
