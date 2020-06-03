@@ -1,0 +1,10 @@
+header.ant-layout-header.site-layout-background {
+  background-color: #1d1d1b;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+span.ant-avatar.ant-avatar-circle.ant-avatar-image {
+  margin-right: 15px;
+}

@@ -1,0 +1,16 @@
+.logo-container {
+  padding: 14px;
+  background-color: honeydew;
+}
+
+.logo {
+  background-image: url(../images/healthymood-logo.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 36px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
