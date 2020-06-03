@@ -3,6 +3,7 @@ import React from 'react';
 const Diets = () => {
   return (
     <>
+      <h1>Régimes</h1>
     </>
   );
 };
