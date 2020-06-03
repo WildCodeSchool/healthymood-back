@@ -5,7 +5,8 @@ import {
   BookOutlined,
   FormOutlined,
   TeamOutlined,
-  DashboardOutlined
+  BarChartOutlined,
+  CopyOutlined
 } from '@ant-design/icons';
 import '../Styles/SideBar.css';
 import logo from '../images/healthymood-logo.png';
@@ -34,7 +35,7 @@ const SideBar = () => {
         </Link>
       </div>
       <Menu theme='dark' defaultSelectedKeys={['0']} mode='inline'>
-        <Menu.Item key='0' icon={<DashboardOutlined />}>
+        <Menu.Item key='0' icon={<BarChartOutlined />}>
           <NavLink exact to='/'>Dashboard</NavLink>
         </Menu.Item>
         <SubMenu key='sub1' icon={<FormOutlined />} title='Articles'>
@@ -81,15 +82,20 @@ const SideBar = () => {
           </Menu.Item>
           <Menu.Item key='14'>Ajouter</Menu.Item>
         </SubMenu>
-        <SubMenu key='sub8' icon={<FormOutlined />} title='Pages'>
+        <SubMenu key='sub8' icon={<CopyOutlined />} title='Pages'>
           <Menu.Item key='15'>
             <NavLink exact to='/pages'>Toutes les pages</NavLink>
           </Menu.Item>
           <Menu.Item key='16'>Ajouter</Menu.Item>
         </SubMenu>
-        <Menu.Item key='17' icon={<TeamOutlined />}>
-          <NavLink exact to='/utilisateurs'>Utilisateurs</NavLink>
-        </Menu.Item>
+        <SubMenu key='sub9' icon={<TeamOutlined />} title='Utilisateurs'>
+          <Menu.Item key='17'>
+            <NavLink exact to='/utilisateurs'>Gérer les utilisateurs</NavLink>
+          </Menu.Item>
+          <Menu.Item key='18'>
+            <NavLink exact to='/mon-profil'>Mon Profil</NavLink>
+          </Menu.Item>
+        </SubMenu>
       </Menu>
     </Sider>
   );

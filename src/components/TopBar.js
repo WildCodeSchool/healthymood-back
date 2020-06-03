@@ -12,7 +12,7 @@ const TopBar = () => {
   const menu = (
     <Menu>
       <Menu.Item key='0' icon={<UserOutlined />}>
-        <Link exact to='#Profile' className='dropdown-link'>Mon Profile</Link>
+        <Link exact to='/mon-profil' className='dropdown-link'>Mon Profil</Link>
       </Menu.Item>
       <Menu.Item key='1' icon={<LogoutOutlined />}>
         <Link exact to='#Logout' className='dropdown-link'>Déconnexion</Link>
