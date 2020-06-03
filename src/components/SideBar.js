@@ -14,11 +14,14 @@ const SideBar = () => {
   const onCollapse = () => {
     setCollapsed(!collapsed);
   };
+
   return (
     <Sider
       collapsible
       collapsed={collapsed}
-      onCollapse={() => { onCollapse(); }}
+      onCollapse={() => {
+        onCollapse();
+      }}
     >
       <div className='logo' />
       <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
