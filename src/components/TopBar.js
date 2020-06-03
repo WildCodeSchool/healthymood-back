@@ -1,7 +1,7 @@
-import React from "react";
-import { Layout } from "antd";
+import React from 'react';
+import { Layout } from 'antd';
 
-const { Header, Breadcrumb } = Layout;
+const { Header } = Layout;
 
 const TopBar = () => {
   return (

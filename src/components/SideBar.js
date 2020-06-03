@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Layout, Menu } from "antd";
+import React, { useState } from 'react';
+import { Layout, Menu } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+  UserOutlined
+} from '@ant-design/icons';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -16,7 +16,7 @@ const SideBar = () => {
   return (
     <Sider onClick={() => setIsCollapsed(!isCollapsed)}>
       <div className='logo' />
-      <Menu theme='dark' defaultSelectedKeys={["1"]} mode='inline'>
+      <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
         <Menu.Item key='1' icon={<PieChartOutlined />}>
           Option 1
         </Menu.Item>
