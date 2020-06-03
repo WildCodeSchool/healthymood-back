@@ -12,10 +12,14 @@ const TopBar = () => {
   const menu = (
     <Menu>
       <Menu.Item key='0' icon={<UserOutlined />}>
-        <Link exact to='/mon-profil' className='dropdown-link'>Mon Profil</Link>
+        <Link exact to='/mon-profil' className='dropdown-link'>
+          Mon Profil
+        </Link>
       </Menu.Item>
       <Menu.Item key='1' icon={<LogoutOutlined />}>
-        <Link exact to='#Logout' className='dropdown-link'>Déconnexion</Link>
+        <Link exact to='#Logout' className='dropdown-link'>
+          Déconnexion
+        </Link>
       </Menu.Item>
     </Menu>
   );
@@ -23,10 +27,14 @@ const TopBar = () => {
     <>
       <Header className='site-layout-background header' style={{ padding: 0 }}>
         <Dropdown overlay={menu} trigger={['click']} placement='bottomLeft'>
-          <a className='ant-dropdown-link' onClick={e => e.preventDefault()}>
+          <span
+            className='ant-dropdown-toggler'
+            onClick={(e) => e.preventDefault()}
+          >
             <Avatar src={avatar} />
-          </a>
-        </Dropdown>,
+          </span>
+        </Dropdown>
+        ,
       </Header>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
