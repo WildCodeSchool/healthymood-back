@@ -12,9 +12,18 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const SideBar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const onCollapse = (collapsed) => {
+    console.log(collapsed);
+    setCollapsed({ collapsed });
+  };
   return (
-    <Sider onClick={() => setIsCollapsed(!isCollapsed)}>
+    <Sider
+      onClick={() => setCollapsed(!collapsed)}
+      collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapse}
+    >
       <div className='logo' />
       <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
         <Menu.Item key='1' icon={<PieChartOutlined />}>
