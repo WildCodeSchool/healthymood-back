@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Home = () => {
+const Notifications = () => {
   return (
     <>
     </>
   );
 };
 
-export default Home;
+export default Notifications;

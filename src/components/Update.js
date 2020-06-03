@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Home = () => {
+const Update = () => {
   return (
     <>
     </>
   );
 };
 
-export default Home;
+export default Update;

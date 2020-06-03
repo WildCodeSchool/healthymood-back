@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Home = () => {
+const Meals = () => {
   return (
     <>
     </>
   );
 };
 
-export default Home;
+export default Meals;

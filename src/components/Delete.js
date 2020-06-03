@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Home = () => {
+const Delete = () => {
   return (
     <>
     </>
   );
 };
 
-export default Home;
+export default Delete;
