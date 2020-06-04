@@ -1,0 +1,23 @@
+header.ant-layout-header.site-layout-background {
+  background-color: #020c17;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+span.ant-avatar.ant-avatar-circle.ant-avatar-image {
+  margin-right: 48px;
+}
+
+.dropdown-link {
+  color: rgba(0, 0, 0, 0.65);
+  transition-duration: 2ms;
+}
+
+.dropdown-link:hover {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-dropdown-toggler {
+  cursor: pointer;
+}
