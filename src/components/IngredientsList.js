@@ -96,7 +96,6 @@ const IngredientsList = () => {
   return (
     <>
       <h1>Liste de tous les ingrédients</h1>
-      <Table columns={columns} dataSource={data} />
       <Space style={{ marginBottom: 16 }}>
         <Button>Sort age</Button>
         <Button>Clear filters</Button>
