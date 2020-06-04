@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 
 // To do : Turn this class into hook and pass props for the modal content
@@ -11,19 +11,19 @@ const Add = (props) => {
 
   const showModal = () => {
     setIsOpen({
-      visible: true,
+      visible: true
     });
   };
 
   const handleOk = () => {
     setIsOpen({
       ModalText: 'The modal will be closed after two seconds',
-      confirmLoading: true,
+      confirmLoading: true
     });
     setTimeout(() => {
       setIsOpen({
         visible: false,
-        confirmLoading: false,
+        confirmLoading: false
       });
     }, 2000);
   };
@@ -31,7 +31,7 @@ const Add = (props) => {
   const handleCancel = () => {
     console.log('Clicked cancel button');
     setIsOpen({
-      visible: false,
+      visible: false
     });
   };
 
@@ -39,11 +39,11 @@ const Add = (props) => {
 
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
+      <Button type='primary' onClick={showModal}>
         Open Modal with async logic
       </Button>
       <Modal
-        title="Title"
+        title='Title'
         visible={visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
@@ -53,6 +53,6 @@ const Add = (props) => {
       </Modal>
     </div>
   );
-}
+};
 
 export default Add;
