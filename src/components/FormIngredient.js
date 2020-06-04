@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Modal } from 'antd';
 
 const FormItem = Form.Item;
 
 const FormIngredient = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
-    <div>
+
+    < div >
       <Form className='form-ingredient' style={{ width: '250px', margin: 'auto' }}>
-        <h1>Ajouter un Ingredient</h1>
-        <FormItem label='Ingredient'>
-          <Input
-            type='text'
-            placeholder="Nom de l'ingrédient"
-          />
-        </FormItem>
+
+        <Modal
+          title="Ajouter un Ingredient"
+          onCancel={() => setVisible(false)}
+          onOk={() => setVisible(false)}
+          visible={visible}
+        >
+          <FormItem label='Ingredient'>
+            <Input
+              type='text'
+              placeholder="Nom de l'ingrédient"
+            />
+          </FormItem>
+          <FormItem>
+            <Checkbox>Potentiellement allergène</Checkbox>
+          </FormItem>
+        </Modal>
         <FormItem>
-          <Checkbox>Potentiellement allergène</Checkbox>
-        </FormItem>
-        <FormItem>
-          <Button type='primary' size='default'> Ajouter un Ingredient</Button>
+          <Button type='primary' size='default' onClick={() => setVisible(true)}> Ajouter un Ingredient</Button>
         </FormItem>
       </Form>
-    </div>
+    </div >
   );
 };
 
