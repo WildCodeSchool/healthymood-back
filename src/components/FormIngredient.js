@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Form, Input, Button, Checkbox, Modal } from 'antd';
+import { Form, Input, Checkbox, Modal } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -28,9 +28,7 @@ const FormIngredient = () => {
             <Checkbox>Potentiellement allergène</Checkbox>
           </FormItem>
         </Modal>
-        <FormItem>
-          <Button type='primary' size='default' onClick={() => setVisible(true)}> Ajouter un Ingredient</Button>
-        </FormItem>
+
       </Form>
     </div>
   );
