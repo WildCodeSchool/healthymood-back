@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
-import FormIngredient from './FormIngredient'
+import FormIngredient from './FormIngredient';
 
 // To do : Passer en props les formulaires
 const ModalForm = (props) => {
@@ -17,10 +17,10 @@ const ModalForm = (props) => {
         onOk={() => setIsOpen(false)}
         onCancel={() => setIsOpen(false)}
         footer={[
-          <Button key="back" onClick={() => setIsOpen(false)}>
+          <Button key='back' onClick={() => setIsOpen(false)}>
             Annuler
           </Button>,
-          <Button key="submit" type="primary" onClick={() => setIsOpen(false)}>
+          <Button key='submit' type='primary' onClick={() => setIsOpen(false)}>
             Ajouter
           </Button>
         ]}
