@@ -37,7 +37,7 @@ const IngredientsList = () => {
     {
       title: 'Ingrédient',
       dataIndex: 'name',
-      key: 'name',
+      key: 'name'
       // filters: [
       //   { text: 'Joe', value: 'Joe' },
       //   { text: 'Jim', value: 'Jim' }
@@ -53,12 +53,12 @@ const IngredientsList = () => {
     {
       title: 'Supprimer',
       key: 'supprimer',
-      dataIndex: 'Delete',
+      dataIndex: 'Delete'
     },
     {
       title: 'Editer',
       key: 'edit',
-      dataIndex: 'edit',
+      dataIndex: 'edit'
     }
   ];
   return (

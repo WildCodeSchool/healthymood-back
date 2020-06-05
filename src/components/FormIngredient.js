@@ -9,11 +9,11 @@ const FormIngredient = () => {
 
   return (
 
-    < div >
+    <div>
       <Form className='form-ingredient' style={{ width: '250px', margin: 'auto' }}>
 
         <Modal
-          title="Ajouter un Ingredient"
+          title='Ajouter un Ingredient'
           onCancel={() => setVisible(false)}
           onOk={() => setVisible(false)}
           visible={visible}
@@ -32,7 +32,7 @@ const FormIngredient = () => {
           <Button type='primary' size='default' onClick={() => setVisible(true)}> Ajouter un Ingredient</Button>
         </FormItem>
       </Form>
-    </div >
+    </div>
   );
 };
 
