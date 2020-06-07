@@ -1,0 +1,14 @@
+.logo-container {
+  padding: 14px;
+  background-color: honeydew;
+}
+
+.logo img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
