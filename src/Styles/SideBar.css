@@ -12,4 +12,5 @@
 
 .site-layout .site-layout-background {
   background: #fff;
+  min-width: 250px;
 }

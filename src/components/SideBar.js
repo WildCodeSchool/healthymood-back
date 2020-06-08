@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import {
   BookOutlined,
@@ -14,93 +14,89 @@ import logo from '../images/healthymood-logo.png';
 import smallLogo from '../images/healthymood-small.png';
 
 const { Sider } = Layout;
-
 const { SubMenu } = Menu;
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const onCollapse = () => {
-    setCollapsed(!collapsed);
-  };
+  const onCollapse = () => { setCollapsed(!collapsed); };
 
   return (
 
     <Sider
+      style={{ width: "500px" }}
       collapsible
       collapsed={collapsed}
-      onCollapse={() => {
-        onCollapse();
-      }}
+      onCollapse={() => { onCollapse() }}
     >
       <div className='logo-container'>
-        <Link exact to='/' className='logo'>
+        <Link to='/' className='logo'>
           <img src={collapsed ? smallLogo : logo} alt='HealthyMood' />
         </Link>
       </div>
       <Menu theme='dark' defaultSelectedKeys={['0']} mode='inline'>
         <Menu.Item key='0' icon={<BarChartOutlined />}>
-          <NavLink exact to='/'>
-              Dashboard
-          </NavLink>
+          <Link to='/'>
+            Dashboard
+          </Link>
         </Menu.Item>
         <Menu.Item key='1' icon={<FormOutlined />}>
-          <NavLink exact to='/articles'>
-              Articles
-          </NavLink>
+          <Link to='/articles'>
+            Articles
+          </Link>
         </Menu.Item>
         <Menu.Item key='3' icon={<FormOutlined />}>
-          <NavLink exact to='/recettes'>
-              Recettes
-          </NavLink>
+          <Link to='/recettes'>
+            Recettes
+          </Link>
         </Menu.Item>
         <SubMenu key='sub1' icon={<BookOutlined />} title='Catégories'>
           <Menu.Item key='5'>
-            <NavLink exact to='/categories-articles'>
-                Catégories articles
-            </NavLink>
+            <Link to='/categories-articles'>
+              Catégories articles
+            </Link>
           </Menu.Item>
           <Menu.Item key='6'>
-            <NavLink exact to='/categories-recettes'>
-                Catégories recettes
-            </NavLink>
+            <Link to='/categories-recettes'>
+              Catégories recettes
+            </Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key='7' icon={<FormOutlined />}>
-          <NavLink exact to='/ingredients'>
-              Ingrédients
-          </NavLink>
+          <Link to='/ingredients'>
+            Ingrédients
+          </Link>
         </Menu.Item>
         <Menu.Item key='9' icon={<FormOutlined />}>
-          <NavLink exact to='/types-plats'>
-              Types de plats
-          </NavLink>
+          <Link to='/types-plats'>
+            Types de plats
+          </Link>
         </Menu.Item>
         <Menu.Item key='11' icon={<FormOutlined />}>
-          <NavLink exact to='/types-repas'>
-              Types de repas
-          </NavLink>
+          <Link to='/types-repas'>
+            Types de repas
+          </Link>
         </Menu.Item>
         <Menu.Item key='13' icon={<FormOutlined />}>
-          <NavLink exact to='/regimes'>
-              Tous les Régimes
-          </NavLink>
+          <Link to='/regimes'>
+            Tous les Régimes
+          </Link>
         </Menu.Item>
 
         <Menu.Item key='15' icon={<CopyOutlined />}>
-          <NavLink exact to='/pages'>
-              Toutes les pages
-          </NavLink>
+          <Link to='/pages'>
+            Toutes les pages
+          </Link>
         </Menu.Item>
 
         <Menu.Item key='17' icon={<TeamOutlined />}>
-          <NavLink exact to='/utilisateurs'>
-              Gérer les utilisateurs
-          </NavLink>
+          <Link to='/utilisateurs'>
+            Gérer les utilisateurs
+          </Link>
         </Menu.Item>
         <Menu.Item key='18' icon={<UserOutlined />}>
-          <NavLink exact to='/mon-profil'>
-              Mon Profil
-          </NavLink>
+          <Link to='/mon-profil'>
+            Mon Profil
+          </Link>
         </Menu.Item>
       </Menu>
     </Sider>
