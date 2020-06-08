@@ -1,34 +1,26 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Space } from 'antd';
 
 const data = [
   {
     key: '1',
     name: 'Banane',
-    is_allergen: 'oui',
-    Delete: <button>Supprimer</button>,
-    edit: <button>Editer</button>
+    is_allergen: 'oui'
   },
   {
     key: '2',
     name: 'Tomate',
-    is_allergen: 'non',
-    Delete: <button>Supprimer</button>,
-    edit: <button>Editer</button>
+    is_allergen: 'non'
   },
   {
     key: '3',
     name: 'Riz',
-    is_allergen: 'oui',
-    Delete: <button>Supprimer</button>,
-    edit: <button>Editer</button>
+    is_allergen: 'oui'
   },
   {
     key: '4',
     name: 'Comcombre',
-    is_allergen: 'non',
-    Delete: <button>Supprimer</button>,
-    edit: <button>Editer</button>
+    is_allergen: 'non'
   }
 ];
 
@@ -38,27 +30,25 @@ const IngredientsList = () => {
       title: 'Ingrédient',
       dataIndex: 'name',
       key: 'name'
-      // filters: [
-      //   { text: 'Joe', value: 'Joe' },
-      //   { text: 'Jim', value: 'Jim' }
-      // ]
     },
     {
       title: 'Allergène',
       dataIndex: 'is_allergen',
       key: 'is_allergen',
-      // sorter: (a, b) => a.age - b.age,
-      ellipsis: true
+      filters: [
+        { text: 'Allergène', value: 'oui' },
+        { text: 'Non allergène', value: 'non' }
+      ]
     },
     {
-      title: 'Supprimer',
-      key: 'supprimer',
-      dataIndex: 'Delete'
-    },
-    {
-      title: 'Editer',
-      key: 'edit',
-      dataIndex: 'edit'
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size='middle'>
+          <button>Editer</button>
+          <button>Supprimer</button>
+        </Space>
+      )
     }
   ];
   return (
