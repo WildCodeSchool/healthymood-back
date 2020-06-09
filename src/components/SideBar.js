@@ -23,10 +23,10 @@ const SideBar = () => {
   return (
 
     <Sider
-      style={{ width: "500px" }}
+      style={{ width: '500px' }}
       collapsible
       collapsed={collapsed}
-      onCollapse={() => { onCollapse() }}
+      onCollapse={() => { onCollapse(); }}
     >
       <div className='logo-container'>
         <Link to='/' className='logo'>
