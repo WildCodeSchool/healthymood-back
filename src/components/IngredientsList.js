@@ -5,22 +5,26 @@ const data = [
   {
     key: '1',
     name: 'Banane',
-    is_allergen: 'oui'
+    is_allergen: 'oui',
+    calories: 30
   },
   {
     key: '2',
     name: 'Tomate',
-    is_allergen: 'non'
+    is_allergen: 'non',
+    calories: 10
   },
   {
     key: '3',
     name: 'Riz',
-    is_allergen: 'oui'
+    is_allergen: 'oui',
+    calories: 90
   },
   {
     key: '4',
     name: 'Comcombre',
-    is_allergen: 'non'
+    is_allergen: 'non',
+    calories: 20
   }
 ];
 
@@ -39,6 +43,11 @@ const IngredientsList = () => {
         { text: 'Allergène', value: 'oui' },
         { text: 'Non allergène', value: 'non' }
       ]
+    },
+    {
+      title: 'Calories / 100gr',
+      dataIndex: 'calories',
+      key: 'calories'
     },
     {
       title: 'Action',
