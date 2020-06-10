@@ -21,13 +21,11 @@ const SideBar = () => {
   const onCollapse = () => { setCollapsed(!collapsed); };
 
   return (
-
     <Sider
       style={{ width: '500px' }}
       collapsible
       collapsed={collapsed}
-      onCollapse={() => { onCollapse(); }}
-    >
+      onCollapse={() => { onCollapse(); }}>
       <div className='logo-container'>
         <Link to='/' className='logo'>
           <img src={collapsed ? smallLogo : logo} alt='HealthyMood' />
@@ -39,17 +37,29 @@ const SideBar = () => {
             Dashboard
           </Link>
         </Menu.Item>
-        <Menu.Item key='1' icon={<FormOutlined />}>
-          <Link to='/articles'>
-            Articles
+        <SubMenu key='sub1' icon={<FormOutlined />} title='Articles'>
+          <Menu.Item key='1'>
+            <Link exact to='/articles'>Nos articles</Link>
+          </Menu.Item>
+          <Menu.Item key='2'>
+            <Link exact to='/addArticle'>Ajouter</Link>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu key='sub3' icon={<FormOutlined />} title='Recettes'>
+          <Menu.Item key='3' icon={<FormOutlined />}>
+            <Link to='/recipes'>
+              Nos recettes
           </Link>
-        </Menu.Item>
-        <Menu.Item key='3' icon={<FormOutlined />}>
-          <Link to='/recettes'>
-            Recettes
-          </Link>
-        </Menu.Item>
-        <SubMenu key='sub1' icon={<BookOutlined />} title='Catégories'>
+          </Menu.Item>
+          <Menu.Item key='4' icon={<FormOutlined />}>
+            <Link to='/addRecipes'>
+              Ajouter
+              </Link>
+          </Menu.Item>
+        </SubMenu>
+
+
+        <SubMenu key='sub2' icon={<BookOutlined />} title='Catégories'>
           <Menu.Item key='5'>
             <Link to='/categories-articles'>
               Catégories articles
@@ -81,13 +91,18 @@ const SideBar = () => {
             Tous les Régimes
           </Link>
         </Menu.Item>
-
-        <Menu.Item key='15' icon={<CopyOutlined />}>
-          <Link to='/pages'>
-            Toutes les pages
+        <SubMenu key='sub7' icon={<FormOutlined />} title='Pages'>
+          <Menu.Item key='15' icon={<CopyOutlined />}>
+            <Link to='/pages'>
+              Nos pages
           </Link>
-        </Menu.Item>
-
+          </Menu.Item>
+          <Menu.Item key='4' icon={<FormOutlined />}>
+            <Link to='/addPages'>
+              Ajouter
+              </Link>
+          </Menu.Item>
+        </SubMenu>
         <Menu.Item key='17' icon={<TeamOutlined />}>
           <Link to='/utilisateurs'>
             Gérer les utilisateurs
@@ -99,7 +114,7 @@ const SideBar = () => {
           </Link>
         </Menu.Item>
       </Menu>
-    </Sider>
+    </Sider >
 
   );
 };

@@ -1,11 +1,12 @@
 import React from 'react';
+import '../Styles/Editor.css';
+import EditorComponent from '../components/EditorComponent';
 
 const Pages = () => {
   return (
     <>
-      <h1>Pages</h1>
+      <EditorComponent />
     </>
   );
-};
-
+}
 export default Pages;
