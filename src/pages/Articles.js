@@ -1,12 +1,10 @@
 import React from 'react';
-import '../Styles/Editor.css';
 import { Editor } from '@tinymce/tinymce-react';
 import { Input } from 'antd';
 
 class Articles extends React.Component {
   handleEditorChange = (content, editor) => {
     console.log('Content was updated:', content);
-    
   }
 
   render () {
