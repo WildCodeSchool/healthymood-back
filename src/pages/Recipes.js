@@ -6,7 +6,6 @@ const Recipes = () => {
   return (
     <EditorComponent />
   );
-}
-
+};
 
 export default Recipes;

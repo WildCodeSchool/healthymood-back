@@ -25,7 +25,8 @@ const SideBar = () => {
       style={{ width: '500px' }}
       collapsible
       collapsed={collapsed}
-      onCollapse={() => { onCollapse(); }}>
+      onCollapse={() => { onCollapse(); }}
+    >
       <div className='logo-container'>
         <Link to='/' className='logo'>
           <img src={collapsed ? smallLogo : logo} alt='HealthyMood' />
@@ -42,22 +43,21 @@ const SideBar = () => {
             <Link exact to='/articles'>Nos articles</Link>
           </Menu.Item>
           <Menu.Item key='2'>
-            <Link exact to='/addArticle'>Ajouter</Link>
+            <Link exact to='/articles/ajouter'>Ajouter</Link>
           </Menu.Item>
         </SubMenu>
         <SubMenu key='sub3' icon={<FormOutlined />} title='Recettes'>
           <Menu.Item key='3' icon={<FormOutlined />}>
-            <Link to='/recipes'>
+            <Link to='/recettes'>
               Nos recettes
-          </Link>
+            </Link>
           </Menu.Item>
           <Menu.Item key='4' icon={<FormOutlined />}>
-            <Link to='/addRecipes'>
+            <Link to='/recettes/ajouter'>
               Ajouter
-              </Link>
+            </Link>
           </Menu.Item>
         </SubMenu>
-
 
         <SubMenu key='sub2' icon={<BookOutlined />} title='Catégories'>
           <Menu.Item key='5'>
@@ -95,12 +95,12 @@ const SideBar = () => {
           <Menu.Item key='15' icon={<CopyOutlined />}>
             <Link to='/pages'>
               Nos pages
-          </Link>
+            </Link>
           </Menu.Item>
           <Menu.Item key='4' icon={<FormOutlined />}>
-            <Link to='/addPages'>
+            <Link to='/pages/ajouter'>
               Ajouter
-              </Link>
+            </Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key='17' icon={<TeamOutlined />}>
@@ -114,7 +114,7 @@ const SideBar = () => {
           </Link>
         </Menu.Item>
       </Menu>
-    </Sider >
+    </Sider>
 
   );
 };

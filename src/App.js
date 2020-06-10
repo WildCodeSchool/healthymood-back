@@ -23,7 +23,7 @@ import AdminProfil from './pages/AdminProfil';
 
 const { Content } = Layout;
 
-function App () {
+function App() {
   return (
     <div className='App'>
       <Router>

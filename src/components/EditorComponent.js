@@ -9,8 +9,19 @@ const EditorComponent = () => {
             <Input className='editor-title' size='large' placeholder='Titre' />
             <Editor
                 apiKey='amntzl33pmjmf0hj96f03mr21hnr3lwuxt2dry7jsxi2wjdx'
-                initialValue='<p>This is the initial content of the editor</p>'
+                initialValue="<p>This is the initialorem Ipsum is simply 
+                            dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever
+                        since the 1500s, when an unknown printer took a galley of type
+                        and scrambled it to make a type specimen book. It has survived
+                        not only five centuries, but also the leap into electronic 
+                        typesetting, remaining essentially unchanged. It was popularised in
+                        the 1960s with the release of Letraset sheets containing Lorem 
+                        Ipsum passages, and more recently
+                    with desktop publishing software like Aldus PageMaker
+                including versions of Lorem Ipsu content of the editor</p>"
                 init={{
+
                     autosave_interval: '2s',
                     plugins: [
                         'advlist autolink lists link image charmap print preview anchor',
@@ -22,6 +33,6 @@ const EditorComponent = () => {
                 }}
             />
         </div>
-    )
-}
+    );
+};
 export default EditorComponent;
