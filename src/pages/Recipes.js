@@ -1,11 +1,12 @@
 import React from 'react';
+import '../Styles/Editor.css';
+import EditorComponent from '../components/EditorComponent';
 
 const Recipes = () => {
   return (
-    <>
-      <h1>Recettes</h1>
-    </>
+    <EditorComponent />
   );
-};
+}
+
 
 export default Recipes;
