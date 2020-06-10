@@ -1,8 +1,15 @@
 .editor-container {
-    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
     margin: auto;
 }
 
 .editor-title {
     margin-bottom: 20px;
+}
+
+.editor-button {
+    margin-top: 20px;
+    align-self: flex-end;
 }

@@ -1,35 +1,71 @@
 import React from 'react';
-import '../Styles/Editor.css';
-import { Editor } from '@tinymce/tinymce-react';
-import { Input } from 'antd';
+import { Table, Space } from 'antd';
 
-class Articles extends React.Component {
-  handleEditorChange = (content, editor) => {
-    console.log('Content was updated:', content);
+const data = [
+  {
+    key: '1',
+    name: 'Vegan',
+    is_allergen: 'oui',
+    calories: 30
+  },
+  {
+    key: '2',
+    name: 'Viandar',
+    is_allergen: 'non',
+    calories: 10
+  },
+  {
+    key: '3',
+    name: 'Vegetarien',
+    is_allergen: 'oui',
+    calories: 90
+  },
+  {
+    key: '4',
+    name: 'Coucou',
+    is_allergen: 'non',
+    calories: 20
   }
+];
 
-  render () {
-    return (
-      <div className='editor-container'>
-        <Input className='editor-title' size='large' placeholder='Titre' />
-        <Editor
-          apiKey='amntzl33pmjmf0hj96f03mr21hnr3lwuxt2dry7jsxi2wjdx'
-          initialValue='<p>This is the initial content of the editor</p>'
-          init={{
-            autosave_interval: '2s',
-            plugins: [
-              'advlist autolink lists link image charmap print preview anchor',
-              'searchreplace visualblocks code fullscreen',
-              'insertdatetime media table paste code help wordcount'
-            ],
-            toolbar:
-              'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
-          }}
-          onEditorChange={this.handleEditorChange}
-        />
-      </div>
-    );
-  }
-}
+const Articles = () => {
+  const columns = [
+    {
+      title: 'Pages',
+      dataIndex: 'name',
+      key: 'name'
+    },
+    {
+      title: 'Allergène',
+      dataIndex: 'is_allergen',
+      key: 'is_allergen',
+      filters: [
+        { text: 'Allergène', value: 'oui' },
+        { text: 'Non allergène', value: 'non' }
+      ]
+    },
+    {
+      title: 'Calories / 100gr',
+      dataIndex: 'calories',
+      key: 'calories'
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size='middle'>
+          <button>Editer</button>
+          <button>Supprimer</button>
+        </Space>
+      )
+    }
+  ];
+  return (
+    <>
+      <h1>Liste de tous les articles</h1>
+      <Table columns={columns} dataSource={data} />
+    </>
+  );
+};
 
 export default Articles;

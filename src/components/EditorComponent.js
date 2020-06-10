@@ -1,12 +1,12 @@
 import React from 'react';
 import '../Styles/Editor.css';
 import { Editor } from '@tinymce/tinymce-react';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 
 const EditorComponent = () => {
     return (
         <div className='editor-container'>
-            <Input className='editor-title' size='large' placeholder='Titre' />
+            <Input className='editor-title' size='large' placeholder='Ajouter un titre' />
             <Editor
                 apiKey='amntzl33pmjmf0hj96f03mr21hnr3lwuxt2dry7jsxi2wjdx'
                 initialValue="<p>This is the initialorem Ipsum is simply 
@@ -32,6 +32,7 @@ const EditorComponent = () => {
                         'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
                 }}
             />
+            <Button className='editor-button' size='large'>Ajouter</Button>
         </div>
     );
 };
