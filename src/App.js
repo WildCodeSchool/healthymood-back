@@ -12,7 +12,7 @@ import Home from './pages/Home';
 import Articles from './pages/Articles';
 import AddArticle from './pages/AddArticle';
 import Recipes from './pages/Recipes';
-import AddRecipe from './pages/AddRecipe'
+import AddRecipe from './pages/AddRecipe';
 import CategoryArticles from './pages/CategoryArticles';
 import CategoryRecipes from './pages/CategoryRecipes';
 import Ingredients from './pages/Ingredients';
@@ -26,7 +26,7 @@ import AdminProfil from './pages/AdminProfil';
 
 const { Content } = Layout;
 
-function App() {
+function App () {
   return (
     <div className='App'>
       <Router>
