@@ -43,23 +43,23 @@ const SideBar = () => {
             <Link exact to='/articles'>Nos articles</Link>
           </Menu.Item>
           <Menu.Item key='2'>
-            <Link exact to='/addArticle'>Ajouter</Link>
+            <Link exact to='/articles/ajouter'>Ajouter</Link>
           </Menu.Item>
         </SubMenu>
-        <SubMenu key='sub3' icon={<FormOutlined />} title='Recettes'>
-          <Menu.Item key='3' icon={<FormOutlined />}>
-            <Link to='/recipes'>
+        <SubMenu key='sub2' icon={<FormOutlined />} title='Recettes'>
+          <Menu.Item key='3'>
+            <Link to='/recettes'>
               Nos recettes
             </Link>
           </Menu.Item>
-          <Menu.Item key='4' icon={<FormOutlined />}>
-            <Link to='/addRecipes'>
+          <Menu.Item key='4'>
+            <Link to='/recettes/ajouter'>
               Ajouter
             </Link>
           </Menu.Item>
         </SubMenu>
 
-        <SubMenu key='sub2' icon={<BookOutlined />} title='Catégories'>
+        <SubMenu key='sub3' icon={<BookOutlined />} title='Catégories'>
           <Menu.Item key='5'>
             <Link to='/categories-articles'>
               Catégories articles
@@ -76,39 +76,39 @@ const SideBar = () => {
             Ingrédients
           </Link>
         </Menu.Item>
-        <Menu.Item key='9' icon={<FormOutlined />}>
+        <Menu.Item key='8' icon={<FormOutlined />}>
           <Link to='/types-plats'>
             Types de plats
           </Link>
         </Menu.Item>
-        <Menu.Item key='11' icon={<FormOutlined />}>
+        <Menu.Item key='9' icon={<FormOutlined />}>
           <Link to='/types-repas'>
             Types de repas
           </Link>
         </Menu.Item>
-        <Menu.Item key='13' icon={<FormOutlined />}>
+        <Menu.Item key='10' icon={<FormOutlined />}>
           <Link to='/regimes'>
             Tous les Régimes
           </Link>
         </Menu.Item>
-        <SubMenu key='sub7' icon={<FormOutlined />} title='Pages'>
-          <Menu.Item key='15' icon={<CopyOutlined />}>
+        <SubMenu key='sub4' icon={<CopyOutlined />} title='Pages'>
+          <Menu.Item key='11'>
             <Link to='/pages'>
               Nos pages
             </Link>
           </Menu.Item>
-          <Menu.Item key='4' icon={<FormOutlined />}>
-            <Link to='/addPages'>
+          <Menu.Item key='12'>
+            <Link to='/pages/ajouter'>
               Ajouter
             </Link>
           </Menu.Item>
         </SubMenu>
-        <Menu.Item key='17' icon={<TeamOutlined />}>
+        <Menu.Item key='13' icon={<TeamOutlined />}>
           <Link to='/utilisateurs'>
             Gérer les utilisateurs
           </Link>
         </Menu.Item>
-        <Menu.Item key='18' icon={<UserOutlined />}>
+        <Menu.Item key='14' icon={<UserOutlined />}>
           <Link to='/mon-profil'>
             Mon Profil
           </Link>
