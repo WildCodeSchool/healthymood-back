@@ -1,7 +1,6 @@
 .logo-container {
-  height: 64px;
-  padding: 10px;
-  background-color: white;
+  padding: 14px;
+  background-color: honeydew;
 }
 
 .logo img {
@@ -12,5 +11,4 @@
 
 .site-layout .site-layout-background {
   background: #fff;
-  min-width: 250px;
 }
