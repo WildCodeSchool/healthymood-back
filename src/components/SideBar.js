@@ -40,10 +40,10 @@ const SideBar = () => {
         </Menu.Item>
         <SubMenu key='sub1' icon={<FormOutlined />} title='Articles'>
           <Menu.Item key='1'>
-            <Link exact to='/articles'>Nos articles</Link>
+            <Link to='/articles'>Nos articles</Link>
           </Menu.Item>
           <Menu.Item key='2'>
-            <Link exact to='/articles/ajouter'>Ajouter</Link>
+            <Link to='/articles/ajouter'>Ajouter</Link>
           </Menu.Item>
         </SubMenu>
         <SubMenu key='sub2' icon={<FormOutlined />} title='Recettes'>
