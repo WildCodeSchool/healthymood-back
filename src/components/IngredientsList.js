@@ -1,34 +1,10 @@
 import React from 'react';
 import { Table, Space } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const data = [
-  {
-    key: '1',
-    name: 'Banane',
-    is_allergen: 'oui',
-    calories: 30
-  },
-  {
-    key: '2',
-    name: 'Tomate',
-    is_allergen: 'non',
-    calories: 10
-  },
-  {
-    key: '3',
-    name: 'Riz',
-    is_allergen: 'oui',
-    calories: 90
-  },
-  {
-    key: '4',
-    name: 'Comcombre',
-    is_allergen: 'non',
-    calories: 20
-  }
-];
+const IngredientsList = (props) => {
+  const data = props.ingrdientsData;
 
-const IngredientsList = () => {
   const columns = [
     {
       title: 'Ingrédient',
@@ -54,8 +30,8 @@ const IngredientsList = () => {
       key: 'action',
       render: (text, record) => (
         <Space size='middle'>
-          <button>Editer</button>
-          <button>Supprimer</button>
+          <EditOutlined style={{ color: '#1a8ffb' }} />
+          <DeleteOutlined style={{ color: '#ee5253' }} />
         </Space>
       )
     }

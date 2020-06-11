@@ -1,7 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Form, Input, Space, Button, Checkbox } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Form, Input, Checkbox, Button } from 'antd';
 
 const FormIngredient = () => {
   const onFinish = values => {
@@ -9,51 +8,25 @@ const FormIngredient = () => {
   };
 
   return (
-    <Form name='dynamic_form_nest_item' onFinish={onFinish} autoComplete='off'>
-      <Form.List name='ingredients'>
-        {(fields, { add, remove }) => {
-          return (
-            <div>
-              {fields.map(field => (
-                <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align='start'>
-                  <Form.Item
-                    {...field}
-                    name={[field.name, 'ingredient']}
-                    fieldKey={[field.fieldKey, 'ingredient-name']}
-                    rules={[{ required: true, message: 'Missing ingredient name' }]}
-                  >
-                    <Input placeholder='First Name' />
-                  </Form.Item>
-                  <Form.Item
-                    {...field}
-                    fieldKey={[field.fieldKey, 'allergen']}
-                  >
-                    <Checkbox>Allergène</Checkbox>
-                  </Form.Item>
-
-                  <MinusCircleOutlined
-                    onClick={() => {
-                      remove(field.name);
-                    }}
-                  />
-                </Space>
-              ))}
-
-              <Form.Item>
-                <Button
-                  type='dashed'
-                  onClick={() => {
-                    add();
-                  }}
-                  block
-                >
-                  <PlusOutlined /> Add field
-                </Button>
-              </Form.Item>
-            </div>
-          );
-        }}
-      </Form.List>
+    <Form
+      name='form'
+      onFinish={onFinish}
+      autoComplete='off'
+    >
+      <div>
+        <Form.Item
+          name='ingredient'
+          rules={[{ required: true, message: 'Veuillez entrer un nom' }]}
+        >
+          <Input placeholder="Nom de l'ingrédient" required />
+        </Form.Item>
+        <Form.Item name='is_allergen' valuePropName='checked'>
+          <Checkbox defaultChecked={false}>Allergène</Checkbox>
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType='submit'>Enregistrer</Button>
+        </Form.Item>
+      </div>
     </Form>
   );
 };
