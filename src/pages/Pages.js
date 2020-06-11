@@ -1,30 +1,34 @@
 import React from 'react';
 import { Table, Space } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const data = [
   {
     key: '1',
-    name: 'Vegan',
-    is_allergen: 'oui',
-    calories: 30
+    name: 'Page1',
+    author: 'Jean',
+    date: {
+      creation_date: 2020,
+      last_modification_date: 2020
+    }
   },
   {
     key: '2',
-    name: 'Viandar',
-    is_allergen: 'non',
-    calories: 10
+    name: 'Page2',
+    author: 'Jean',
+    date: {
+      creation_date: 2020,
+      last_modification_date: 2020
+    }
   },
   {
     key: '3',
-    name: 'Vegetarien',
-    is_allergen: 'oui',
-    calories: 90
-  },
-  {
-    key: '4',
-    name: 'Coucou',
-    is_allergen: 'non',
-    calories: 20
+    name: 'Page3',
+    author: 'Jean',
+    date: {
+      creation_date: 2020,
+      last_modification_date: 2020
+    }
   }
 ];
 
@@ -36,26 +40,22 @@ const Pages = () => {
       key: 'name'
     },
     {
-      title: 'Allergène',
-      dataIndex: 'is_allergen',
-      key: 'is_allergen',
-      filters: [
-        { text: 'Allergène', value: 'oui' },
-        { text: 'Non allergène', value: 'non' }
-      ]
+      title: 'Auteur',
+      dataIndex: 'author',
+      key: 'author',
     },
     {
-      title: 'Calories / 100gr',
-      dataIndex: 'calories',
-      key: 'calories'
+      title: 'Date',
+      dataIndex: 'creation_date',
+      key: 'creation_date'
     },
     {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
         <Space size='middle'>
-          <button>Editer</button>
-          <button>Supprimer</button>
+          <EditOutlined style={{ color: '#1a8ffb' }} />
+          <DeleteOutlined style={{ color: '#ee5253' }} />
         </Space>
       )
     }
