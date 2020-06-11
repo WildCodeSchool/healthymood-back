@@ -42,7 +42,7 @@ const Pages = () => {
     {
       title: 'Auteur',
       dataIndex: 'author',
-      key: 'author',
+      key: 'author'
     },
     {
       title: 'Date',
