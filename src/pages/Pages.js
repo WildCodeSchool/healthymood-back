@@ -8,5 +8,5 @@ const Pages = () => {
       <EditorComponent />
     </>
   );
-}
+};
 export default Pages;

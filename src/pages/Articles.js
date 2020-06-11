@@ -8,5 +8,5 @@ const Articles = () => {
       <EditorComponent />
     </>
   );
-}
+};
 export default Articles;
