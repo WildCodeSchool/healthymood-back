@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
-import FormIngredient from './FormIngredient';
 
-// To do : Passer en props les formulaires
-const ModalForm = (props) => {
+function ModalForm(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <Button type='primary' onClick={() => setIsOpen(true)}>
-        Ajouter un ingrédient
+        {props.btnTitle}
       </Button>
       <Modal
-        title='Ajouter un ingrédient'
+        title={props.title}
         visible={isOpen}
         onOk={() => setIsOpen(false)}
         onCancel={() => setIsOpen(false)}
@@ -25,7 +23,7 @@ const ModalForm = (props) => {
           </Button>
         ]}
       >
-        <FormIngredient />
+        {props.component}
       </Modal>
     </div>
   );
