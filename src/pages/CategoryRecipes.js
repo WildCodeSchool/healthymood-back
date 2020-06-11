@@ -1,9 +1,12 @@
 import React from 'react';
+import RecipesCategoriesList from '../components/RecipesCategoriesList';
+import ModalRecipesCategories from '../components/ModalRecipesCategories';
 
 const CategoryRecipes = () => {
   return (
     <>
-      <h1>Catégories de recettes</h1>
+      <ModalRecipesCategories />
+      <RecipesCategoriesList />
     </>
   );
 };
