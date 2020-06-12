@@ -6,6 +6,8 @@ const Ingredients = (props) => {
   return (
     <>
       <FormIngredient />
+
+      <hr />
       <IngredientsList />
     </>
   );

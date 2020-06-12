@@ -1,38 +1,32 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Form, Input, Checkbox, Button } from 'antd';
+import React, { useState } from "react";
+import '../Styles/form.css'
 
 const FormIngredient = () => {
-  const onFinish = values => {
-    console.log('Received values of form:', values);
-  };
+  const [formData, setFormData] = useState({
+    name: '',
+    is_allergen: false,
+  });
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormData({
+      name: e.target.name.value, is_allergen: e.target.is_allergen.checked,
+    });
+    console.log(formData)
   };
 
   return (
-    <Form
-      name='form'
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete='off'
-    >
-      <div>
-        <Form.Item
-          name='ingredient'
-          rules={[{ required: true, message: 'Veuillez entrer un nom' }]}
-        >
-          <Input placeholder="Nom de l'ingrédient" required />
-        </Form.Item>
-        <Form.Item name='is_allergen' valuePropName='checked' noStyle>
-          <Checkbox>Allergène</Checkbox>
-        </Form.Item>
-        <Form.Item>
-          <Button htmlType='submit'>Enregistrer</Button>
-        </Form.Item>
+    <form className="form-inline" onSubmit={(e) => handleSubmit(e)}>
+      <div className='form-group'>
+        <label htmlFor='name'>Nom de l'ingredient</label>
+        <input name='name' id='name' onChange={(e) => setFormData({ ...formData, name: e.target.value })} type='text' required placeholder='Entrez un nom' />
       </div>
-    </Form>
+      <div className='form-group'>
+        <label htmlFor='is_allergen'>allergène</label>
+        <input type='checkbox' name='is_allergen' id='is_allergen' />
+      </div>
+      <button type='submit'>Enregistrer</button>
+    </form>
   );
 };
 
