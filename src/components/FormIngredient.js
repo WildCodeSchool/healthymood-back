@@ -3,7 +3,6 @@ import 'antd/dist/antd.css';
 import { Form, Input, Checkbox, Button } from 'antd';
 
 const FormIngredient = () => {
-
   const onFinish = values => {
     console.log('Received values of form:', values);
   };
