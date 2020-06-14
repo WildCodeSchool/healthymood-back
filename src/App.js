@@ -13,7 +13,6 @@ import Articles from './pages/Articles';
 import Recipes from './pages/Recipes';
 import CategoryArticles from './pages/CategoryArticles';
 import CategoryRecipes from './pages/CategoryRecipes';
-
 import Ingredients from './pages/Ingredients';
 import Dishes from './pages/Dishes';
 import Meals from './pages/Meals';
@@ -24,7 +23,7 @@ import AdminProfil from './pages/AdminProfil';
 
 const { Content } = Layout;
 
-function App () {
+function App() {
   return (
     <div className='App'>
       <Router>
