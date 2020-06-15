@@ -5,9 +5,11 @@ import {
   _updateElement,
   _deleteElement
 } from '../dataService/data.service';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import '../Styles/Form.css';
 
 function FormIngredient () {
-  const initialIngredient = { name: '', surname: '', is_allergen: false };
+  const initialIngredient = { name: '', is_allergen: false };
   const [Ingredients, setIngredients] = useState([]);
   const [currentIngredient, setCurrentIngredient] = useState(initialIngredient);
   const [isEditing, setIsEditing] = useState(false);
@@ -66,11 +68,10 @@ function FormIngredient () {
     return Ingredients.map(I => (
       <tr key={I.id}>
         <td>{I.name}</td>
-        <td>{I.surname}</td>
-        <td>{I.is_allergen ? 'Yes' : 'No'}</td>
-        <td>
-          <button onClick={() => handleEdit(I)}>Edit</button>
-          <button onClick={() => handleDelete(I.id)}>Delete</button>
+        <td>{I.is_allergen ? 'Oui' : 'Non'}</td>
+        <td className='actions-column'>
+          <EditOutlined className='edit-icon' onClick={() => handleEdit(I)} />
+          <DeleteOutlined className='delete-icon' onClick={() => handleDelete(I.id)} />
         </td>
       </tr>
     ));
@@ -78,17 +79,9 @@ function FormIngredient () {
 
   function formRender () {
     return (
-      <form onSubmit={handleSubmit}>
+      <form class='form-inline' onSubmit={handleSubmit}>
         <div>
-          <label> SurnNom de l'ingredient</label>
-          <input
-            type='text'
-            name='surname'
-            required
-            value={currentIngredient.surname}
-            onChange={handleChange}
-          />
-          <label> Nom de l'ingredient</label>
+          <label> Nom de l'ingredient :</label>
           <input
             type='text'
             name='name'
@@ -109,20 +102,18 @@ function FormIngredient () {
             />
           </label>
         </div>
-        <button>Submit</button>
+        <button className='form-button' type='submit'>Enregistrer</button>
       </form>
     );
   }
   return (
     <div>
       {formRender()}
-      <h2>Liste d'ingredients</h2>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Allergène</th>
+            <th className='name-column'>Ingrédient</th>
+            <th className='-allergen-column'>Allergène</th>
             <th>Actions</th>
           </tr>
         </thead>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../Styles/form.css';
 
 const FormArticleCategory = () => {
   const [formData, setFormData] = useState({
