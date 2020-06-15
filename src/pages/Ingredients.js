@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IngredientsList from '../components/IngredientsList';
-import FormIngredient from '../components/FormIngredient';
+import IngredientContext from '../contexts/IngredientContext';
 
-const Ingredients = (props) => {
+const Ingredients = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    is_allergen: false,
+  });
+
   return (
-    <>
-      <FormIngredient />
-      <IngredientsList />
-    </>
+    <IngredientContext.Provider value={{formData, setFormData}}>
+      <>
+        <IngredientsList />
+      </>
+    </IngredientContext.Provider>
   );
 };
 
