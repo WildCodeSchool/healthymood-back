@@ -79,22 +79,22 @@ function FormIngredient () {
 
   function formRender () {
     return (
+
       <form class='form-inline' onSubmit={handleSubmit}>
         <div>
-          <label> Nom de l'ingredient :</label>
+          <label className='hide-label' for='name'> Nom de l'ingredient :</label>
           <input
+            placeholder='Ajouter un ingrédient'
             type='text'
             name='name'
             required
             value={currentIngredient.name}
             onChange={handleChange}
           />
-
         </div>
-        <div>
-          <label>Allergène
+        <div className='is-allergen-container'>
+          <label for='is_allergen'>Allergène
             <input
-              style={{ margin: '10px' }}
               type='checkbox'
               name='is_allergen'
               value={Ingredients.is_allergen}
@@ -102,7 +102,12 @@ function FormIngredient () {
             />
           </label>
         </div>
-        <button className='form-button' type='submit'>Enregistrer</button>
+        <button className='btn' type='submit'>Enregistrer</button>
+        <div className='search-container'>
+          <label className='hide-label' for='ingredient-search'>Rechercher un ingredient</label>
+          <input placeholder='Rechercher un ingrédient' type='search' id='ingredient-search' name='q' aria-label='Search through ingredients' />
+          <button className='btn' type='search'>Rechercher</button>
+        </div>
       </form>
     );
   }

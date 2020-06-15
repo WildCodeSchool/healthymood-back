@@ -6,8 +6,16 @@
   padding: 10px;
 }
 
-.form-inline label {
-  margin: 5px 10px 5px 0;
+.hide-label {
+  display: none;
+}
+
+.is-allergen-container {
+  display: flex;
+}
+
+label[for='is_allergen'] input {
+  margin: 10px;
 }
 
 .form-inline input {
@@ -19,17 +27,8 @@
   border-radius: 5px;
 }
 
-.form-button {
-  padding: 10px 20px;
-  background-color: #1890ff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  color: white;
-}
-
-.form-button:hover {
-  cursor: pointer;
-  background-color: #0d7ae0;
+.search-container {
+  margin-left: auto;
 }
 
 table { 
@@ -46,7 +45,7 @@ th {
   font-weight: bold; 
 }
 td, th { 
-  padding: 10px; 
+  padding: 15px; 
   border: 1px solid #ccc; 
   text-align: center; 
 }
