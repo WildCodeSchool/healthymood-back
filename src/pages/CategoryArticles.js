@@ -1,7 +1,6 @@
 import React from 'react';
 import FormArticleCategory from '../components/FormArticleCategory';
 
-
 const CategoryArticles = () => {
   return (
     <>

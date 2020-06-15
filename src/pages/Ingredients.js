@@ -1,7 +1,7 @@
 import React from 'react';
 import FormIngredient from '../components/FormIngredient';
 
-function Ingredients(props) {
+function Ingredients (props) {
   return (
     <>
       <h2>Liste d'ingredients</h2>
