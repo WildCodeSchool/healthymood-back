@@ -5,8 +5,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 const IngredientsList = () => {
-
-  const {formData, setFormData} = useContext(IngredientContext);
+  const { formData, setFormData } = useContext(IngredientContext);
 
   const [ingredientsData, setIngredientsData] = useState([]);
 
@@ -14,15 +13,14 @@ const IngredientsList = () => {
     e.preventDefault();
     setFormData({
       name: e.target.name.value,
-      is_allergen: e.target.is_allergen.checked,
+      is_allergen: e.target.is_allergen.checked
     });
     console.log(formData);
-    
   };
 
   useEffect((formData) => {
-    setIngredientsData(...ingredientsData, formData)
-  }, [ingredientsData])
+    setIngredientsData(...ingredientsData, formData);
+  }, [ingredientsData]);
 
   const columns = [
     {

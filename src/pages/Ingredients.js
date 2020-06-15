@@ -5,11 +5,11 @@ import IngredientContext from '../contexts/IngredientContext';
 const Ingredients = () => {
   const [formData, setFormData] = useState({
     name: '',
-    is_allergen: false,
+    is_allergen: false
   });
 
   return (
-    <IngredientContext.Provider value={{formData, setFormData}}>
+    <IngredientContext.Provider value={{ formData, setFormData }}>
       <>
         <IngredientsList />
       </>
