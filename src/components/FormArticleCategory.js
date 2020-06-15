@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { _getElements, _createElement, _updateElement, _deleteElement } from '../dataService/data.service';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function FormArticleCategory () {
+function FormArticleCategory() {
   const initialForm = { name: '' };
   const [articleCategory, setArticleCategory] = useState([]);
   const [currentArticleCategory, setCurrentArticleCategory] = useState(initialForm);
@@ -16,17 +17,17 @@ function FormArticleCategory () {
       );
   }, []);
 
-  function handleChange (event) {
+  function handleChange(event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     setCurrentArticleCategory(prevArticleCategory => ({ ...prevArticleCategory, [name]: value }));
   }
-  function handleEdit (articleCategory) {
+  function handleEdit(articleCategory) {
     setIsEditing(true);
     setCurrentArticleCategory(articleCategory);
   }
-  function handleSubmit (e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (isEditing) {
       _updateElement(currentArticleCategory)
@@ -47,25 +48,25 @@ function FormArticleCategory () {
         );
     }
   }
-  function handleDelete (articleCategoryId) {
+  function handleDelete(articleCategoryId) {
     _deleteElement(articleCategoryId).then(
       data => {
         setArticleCategory(data);
       }
     );
   }
-  function listRender () {
+  function listRender() {
     return articleCategory.map(a => (
       <tr key={a.id}>
         <td>{a.name}</td>
         <td>
-          <button onClick={() => handleEdit(a)}>Edit</button>
-          <button onClick={() => handleDelete(a.id)}>Delete</button>
+          <EditOutlined className='edit-icon' onClick={() => handleEdit(a)} />
+          <DeleteOutlined className='delete-icon' onClick={() => handleDelete(a.id)} />
         </td>
       </tr>
     ));
   }
-  function formRender () {
+  function formRender() {
     return (
       <form className='form-inline' onSubmit={handleSubmit}>
         <div>
@@ -78,7 +79,7 @@ function FormArticleCategory () {
             onChange={handleChange}
           />
         </div>
-        <button>Envoyer</button>
+        <button className='form-button'>Envoyer</button>
       </form>
     );
   }
@@ -88,7 +89,7 @@ function FormArticleCategory () {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th >Name</th>
             <th>Actions</th>
           </tr>
         </thead>
