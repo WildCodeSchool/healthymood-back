@@ -5,7 +5,7 @@ const CategoryRecipes = () => {
   return (
     <>
       <h1>Catégories de recettes</h1>
-      <FormArticleCategory />
+
     </>
   );
 };
