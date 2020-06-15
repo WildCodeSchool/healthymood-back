@@ -4,7 +4,7 @@ let data = [];
 fetch("https://world.openfoodfacts.org/api/v0/product/04963406")
     .then(res => res.json())
     .then((result) => {
-        data.push({
+        data({
             name: result.product.images[1].uploader,
             is_allergen: false
         });

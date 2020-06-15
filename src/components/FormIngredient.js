@@ -46,13 +46,12 @@ function FormIngredient () {
         }
         );
     } else {
-      _createElement(currentIngredient).then(
-        data => {
+      _createElement(currentIngredient)
+        .then(data => {
           setIngredients(data);
           setCurrentIngredient(initialIngredient);
-          console.log(data);
         }
-      );
+        );
     }
   }
 
@@ -79,7 +78,6 @@ function FormIngredient () {
 
   function formRender () {
     return (
-
       <form class='form-inline' onSubmit={handleSubmit}>
         <div>
           <label className='hide-label' for='name'> Nom de l'ingredient :</label>

@@ -7,7 +7,6 @@ function Ingredients (props) {
       <h2>Liste d'ingredients</h2>
       <FormIngredient />
     </>
-
   );
 }
 
