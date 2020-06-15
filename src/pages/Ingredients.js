@@ -1,16 +1,14 @@
 import React from 'react';
-import IngredientsList from '../components/IngredientsList';
 import FormIngredient from '../components/FormIngredient';
 
-const Ingredients = (props) => {
+function Ingredients(props) {
   return (
     <>
+      <h1>ici</h1>
       <FormIngredient />
-
-      <hr />
-      <IngredientsList />
     </>
+
   );
-};
+}
 
 export default Ingredients;

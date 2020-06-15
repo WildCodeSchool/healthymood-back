@@ -6,7 +6,7 @@ import {
   _deleteElement
 } from '../dataService/data.service';
 
-function Ingredients () {
+function FormIngredient () {
   const initialIngredient = { name: '', surname: '', is_allergen: false };
   const [Ingredients, setIngredients] = useState([]);
   const [currentIngredient, setCurrentIngredient] = useState(initialIngredient);
@@ -132,4 +132,4 @@ function Ingredients () {
   );
 }
 
-export default Ingredients;
+export default FormIngredient;
