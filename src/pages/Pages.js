@@ -1,7 +1,7 @@
 import React from 'react';
 
+const Pages = () => {
 
-function Pages(props) {
   return (
     <div>
       <h1>Pages</h1>

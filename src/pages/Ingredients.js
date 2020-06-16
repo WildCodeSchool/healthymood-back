@@ -1,17 +1,14 @@
 import React from 'react';
-import ModalForm from '../components/ModalForm';
-import IngredientsList from '../components/IngredientsList';
 import FormIngredient from '../components/FormIngredient';
 
-const Ingredients = () => {
+function Ingredients(props) {
   return (
     <>
-      <ModalForm title="Ajouter des Ingredients" btnTitle="Ajouter" component={<FormIngredient />} />
+      <h2>Liste d'ingredients</h2>
+      <FormIngredient />
 
-      <hr />
-      <IngredientsList />
     </>
   );
-};
+}
 
 export default Ingredients;

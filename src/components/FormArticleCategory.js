@@ -1,60 +1,102 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Form, Input, Space, Button } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from 'react';
+import { _getElements, _createElement, _updateElement, _deleteElement } from '../dataService/data.service';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import '../Styles/Form.css';
 
-const FormArticleCategory = () => {
-    const onFinish = values => {
-        console.log('Received values of form:', values);
-    };
+function FormArticleCategory() {
+  const initialForm = { name: '' };
+  const [articleCategory, setArticleCategory] = useState([]);
+  const [currentArticleCategory, setCurrentArticleCategory] = useState(initialForm);
+  const [isEditing, setIsEditing] = useState(false);
 
-    return (
-        <Form name='dynamic_form_nest_item' onFinish={onFinish} autoComplete='off'>
-            <Form.List name='category'>
-                {(fields, { add, remove }) => {
-                    return (
-                        <div>
-                            {fields.map(field => (
-                                <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align='start'>
-                                    <Form.Item
-                                        {...field}
-                                        name={[field.name, 'Category']}
-                                        fieldKey={[field.fieldKey, 'Category-name']}
-                                        rules={[{ required: true, message: 'Missing Category name' }]}
-                                    >
-                                        <Input placeholder='Category Name' />
-                                    </Form.Item>
-                                    <Form.Item
-                                        {...field}
-                                        fieldKey={[field.fieldKey, 'Name']}
-                                    >
-                                    </Form.Item>
+  useEffect(() => {
+    _getElements()
+      .then(data => {
+        setArticleCategory(data);
+      }
+      );
+  }, []);
 
-                                    <MinusCircleOutlined
-                                        onClick={() => {
-                                            remove(field.name);
-                                        }}
-                                    />
-                                </Space>
-                            ))}
-
-                            <Form.Item>
-                                <Button
-                                    type='dashed'
-                                    onClick={() => {
-                                        add();
-                                    }}
-                                    block
-                                >
-                                    <PlusOutlined /> Add field
-                </Button>
-                            </Form.Item>
-                        </div>
-                    );
-                }}
-            </Form.List>
-        </Form>
+  async function handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    setCurrentArticleCategory(prevArticleCategory => ({ ...prevArticleCategory, [name]: value }));
+  }
+  async function handleEdit(articleCategory) {
+    setIsEditing(true);
+    setCurrentArticleCategory(articleCategory);
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (isEditing) {
+      _updateElement(currentArticleCategory)
+        .then(data => {
+          setArticleCategory(data);
+          setCurrentArticleCategory(currentArticleCategory);
+          setIsEditing(false);
+          console.log(data);
+        }
+        );
+    } else {
+      _createElement(currentArticleCategory)
+        .then(
+          data => {
+            setArticleCategory(data);
+            setCurrentArticleCategory(initialForm);
+          }
+        );
+    }
+  }
+  async function handleDelete(articleCategoryId) {
+    _deleteElement(articleCategoryId).then(
+      data => {
+        setArticleCategory(data);
+      }
     );
-};
+  }
+  function listRender() {
+    return articleCategory.map(a => (
+      <tr key={a.id}>
+        <td>{a.name}</td>
+        <td>
+          <EditOutlined className='edit-icon' onClick={() => handleEdit(a)} />
+          <DeleteOutlined className='delete-icon' onClick={() => handleDelete(a.id)} />
+        </td>
+      </tr>
+    ));
+  }
+  function formRender() {
+    return (
+      <form className='form-inline' onSubmit={handleSubmit}>
+        <div>
+          <label>Nom de Categorie</label>
+          <input
+            type='text'
+            name='name'
+            required
+            value={currentArticleCategory.name}
+            onChange={handleChange}
+          />
+        </div>
+        <button className='form-button'>Ajouter</button>
+      </form>
+    );
+  }
+  return (
+    <div>
+      {formRender()}
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>{listRender()}</tbody>
+      </table>
+    </div>
+  );
+}
 
 export default FormArticleCategory;
