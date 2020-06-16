@@ -17,17 +17,17 @@ function FormArticleCategory() {
       );
   }, []);
 
-  function handleChange(event) {
+  async function handleChange(event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     setCurrentArticleCategory(prevArticleCategory => ({ ...prevArticleCategory, [name]: value }));
   }
-  function handleEdit(articleCategory) {
+  async function handleEdit(articleCategory) {
     setIsEditing(true);
     setCurrentArticleCategory(articleCategory);
   }
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (isEditing) {
       _updateElement(currentArticleCategory)
@@ -48,7 +48,7 @@ function FormArticleCategory() {
         );
     }
   }
-  function handleDelete(articleCategoryId) {
+  async function handleDelete(articleCategoryId) {
     _deleteElement(articleCategoryId).then(
       data => {
         setArticleCategory(data);
@@ -89,7 +89,7 @@ function FormArticleCategory() {
       <table>
         <thead>
           <tr>
-            <th >Name</th>
+            <th>Name</th>
             <th>Actions</th>
           </tr>
         </thead>
