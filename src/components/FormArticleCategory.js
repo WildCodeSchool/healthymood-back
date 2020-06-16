@@ -3,7 +3,7 @@ import { _getElements, _createElement, _updateElement, _deleteElement } from '..
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function FormArticleCategory() {
+function FormArticleCategory () {
   const initialForm = { name: '' };
   const [articleCategory, setArticleCategory] = useState([]);
   const [currentArticleCategory, setCurrentArticleCategory] = useState(initialForm);
@@ -17,17 +17,17 @@ function FormArticleCategory() {
       );
   }, []);
 
-  async function handleChange(event) {
+  async function handleChange (event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     setCurrentArticleCategory(prevArticleCategory => ({ ...prevArticleCategory, [name]: value }));
   }
-  async function handleEdit(articleCategory) {
+  async function handleEdit (articleCategory) {
     setIsEditing(true);
     setCurrentArticleCategory(articleCategory);
   }
-  async function handleSubmit(e) {
+  async function handleSubmit (e) {
     e.preventDefault();
     if (isEditing) {
       _updateElement(currentArticleCategory)
@@ -48,14 +48,14 @@ function FormArticleCategory() {
         );
     }
   }
-  async function handleDelete(articleCategoryId) {
+  async function handleDelete (articleCategoryId) {
     _deleteElement(articleCategoryId).then(
       data => {
         setArticleCategory(data);
       }
     );
   }
-  function listRender() {
+  function listRender () {
     return articleCategory.map(a => (
       <tr key={a.id}>
         <td>{a.name}</td>
@@ -66,7 +66,7 @@ function FormArticleCategory() {
       </tr>
     ));
   }
-  function formRender() {
+  function formRender () {
     return (
       <form className='form-inline' onSubmit={handleSubmit}>
         <div>

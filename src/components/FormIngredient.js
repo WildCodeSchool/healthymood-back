@@ -8,7 +8,7 @@ import {
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function FormIngredient() {
+function FormIngredient () {
   const initialIngredient = { name: '', is_allergen: false };
   const [Ingredients, setIngredients] = useState([]);
   const [currentIngredient, setCurrentIngredient] = useState(initialIngredient);
@@ -22,19 +22,19 @@ function FormIngredient() {
       );
   }, []);
 
-  function handleChange(event) {
+  function handleChange (event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setCurrentIngredient(prevIngredient => ({ ...prevIngredient, [name]: value }));
   }
 
-  function handleEdit(Ingredient) {
+  function handleEdit (Ingredient) {
     setIsEditing(true);
     setCurrentIngredient(Ingredient);
   }
 
-  function handleSubmit(e) {
+  function handleSubmit (e) {
     e.preventDefault();
     if (isEditing) {
       _updateElement(currentIngredient)
@@ -55,7 +55,7 @@ function FormIngredient() {
     }
   }
 
-  function handleDelete(ingredientId) {
+  function handleDelete (ingredientId) {
     _deleteElement(ingredientId).then(
       data => {
         setIngredients(data);
@@ -63,7 +63,7 @@ function FormIngredient() {
     );
   }
 
-  function listRender() {
+  function listRender () {
     return Ingredients.map(I => (
       <tr key={I.id}>
         <td>{I.name}</td>
@@ -76,7 +76,7 @@ function FormIngredient() {
     ));
   }
 
-  function formRender() {
+  function formRender () {
     return (
       <form className='form-inline' onSubmit={handleSubmit}>
         <div>
