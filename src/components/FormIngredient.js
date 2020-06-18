@@ -112,16 +112,18 @@ function FormIngredient () {
   return (
     <div>
       {formRender()}
-      <table>
-        <thead>
-          <tr>
-            <th className='name-column'>Ingrédient</th>
-            <th className='-allergen-column'>Allergène</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>{listRender()}</tbody>
-      </table>
+      <div className='scroll'>
+        <table>
+          <thead>
+            <tr>
+              <th className='name-column'>Ingrédient</th>
+              <th className='-allergen-column'>Allergène</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>{listRender()}</tbody>
+        </table>
+      </div>
     </div>
   );
 }

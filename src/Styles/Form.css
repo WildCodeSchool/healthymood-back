@@ -34,7 +34,9 @@ label[for='is_allergen'] input {
 table { 
   width: 100%; 
   border-collapse: collapse; 
+  position: relative;
 }
+
 /* Zebra striping */
 tr:nth-of-type(odd) { 
   background: #eee; 

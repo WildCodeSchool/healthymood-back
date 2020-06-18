@@ -9,7 +9,8 @@
     margin-bottom: 20px;
 }
 
-.editor-button .btn {
+.editor-button {
     margin-top: 20px;
     align-self: flex-end;
 }
+

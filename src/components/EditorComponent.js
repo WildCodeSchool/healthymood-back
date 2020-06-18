@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Styles/Editor.css';
 import { Editor } from '@tinymce/tinymce-react';
-import { Input, Button } from 'antd';
+import { Input } from 'antd';
 
 const EditorComponent = () => {
   return (
@@ -21,7 +21,7 @@ const EditorComponent = () => {
                     with desktop publishing software like Aldus PageMaker
                 including versions of Lorem Ipsu content of the editor</p>"
         init={{
-
+          height: 500,
           autosave_interval: '2s',
           plugins: [
             'advlist autolink lists link image charmap print preview anchor',
@@ -32,7 +32,7 @@ const EditorComponent = () => {
                         'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
         }}
       />
-      <Button className='editor-button' size='large'>Ajouter</Button>
+      <button className='editor-button btn' type='submit'>Ajouter</button>
     </div>
   );
 };
