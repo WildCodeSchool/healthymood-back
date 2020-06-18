@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Layout, Menu } from 'antd';
 import {
   BookOutlined,
   FormOutlined,
   TeamOutlined,
   UserOutlined,
   BarChartOutlined,
-  CopyOutlined,
-} from "@ant-design/icons";
-import "../Styles/SideBar.css";
-import logo from "../images/healthymood-logo.png";
-import smallLogo from "../images/hm-logo-small.png";
+  CopyOutlined
+} from '@ant-design/icons';
+import '../Styles/SideBar.css';
+import logo from '../images/healthymood-logo.png';
+import smallLogo from '../images/hm-logo-small.png';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -24,18 +24,19 @@ const SideBar = () => {
 
   return (
     <Sider
-      style={{ width: "500px" }}
+      style={{ width: '500px' }}
       collapsible
       collapsed={collapsed}
       onCollapse={() => {
         onCollapse();
-      }}>
+      }}
+    >
       <div className='logo-container'>
         <Link to='/' className='logo'>
           <img src={collapsed ? smallLogo : logo} alt='HealthyMood' />
         </Link>
       </div>
-      <Menu theme='dark' defaultSelectedKeys={["0"]} mode='inline'>
+      <Menu theme='dark' defaultSelectedKeys={['0']} mode='inline'>
         <Menu.Item key='0' icon={<BarChartOutlined />}>
           <Link to='/'>Dashboard</Link>
         </Menu.Item>

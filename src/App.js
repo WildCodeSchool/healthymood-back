@@ -1,36 +1,36 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Layout } from "antd";
-import "./Styles/App.css";
-import SideBar from "./components/SideBar";
-import TopBar from "./components/TopBar";
-import Home from "./pages/Home";
-import Articles from "./pages/Articles";
-import AddArticle from "./pages/AddArticle";
-import Recipes from "./pages/Recipes";
-import AddRecipe from "./pages/AddRecipe";
-import CategoryArticles from "./pages/CategoryArticles";
-import CategoryRecipes from "./pages/CategoryRecipes";
-import Ingredients from "./pages/Ingredients";
-import Dishes from "./pages/Dishes";
-import Meals from "./pages/Meals";
-import Diets from "./pages/Diets";
-import Pages from "./pages/Pages";
-import AddPage from "./pages/AddPage";
-import Users from "./pages/Users";
-import AdminProfil from "./pages/AdminProfil";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Layout } from 'antd';
+import './Styles/App.css';
+import SideBar from './components/SideBar';
+import TopBar from './components/TopBar';
+import Home from './pages/Home';
+import Articles from './pages/Articles';
+import AddArticle from './pages/AddArticle';
+import Recipes from './pages/Recipes';
+import AddRecipe from './pages/AddRecipe';
+import CategoryArticles from './pages/CategoryArticles';
+import CategoryRecipes from './pages/CategoryRecipes';
+import Ingredients from './pages/Ingredients';
+import Dishes from './pages/Dishes';
+import Meals from './pages/Meals';
+import Diets from './pages/Diets';
+import Pages from './pages/Pages';
+import AddPage from './pages/AddPage';
+import Users from './pages/Users';
+import AdminProfil from './pages/AdminProfil';
 
 const { Content } = Layout;
 
-function App() {
+function App () {
   return (
     <div className='App'>
       <Router>
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout style={{ minHeight: '100vh' }}>
           <SideBar />
           <Layout className='site-layout'>
             <TopBar />
-            <Content style={{ margin: "0 16px" }}>
+            <Content style={{ margin: '0 16px' }}>
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/articles' component={Articles} />
