@@ -2,12 +2,13 @@
   height: 64px;
   padding: 10px;
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo img {
   width: 100%;
-  object-fit: cover;
-  object-position: center;
 }
 
 .site-layout .site-layout-background {
