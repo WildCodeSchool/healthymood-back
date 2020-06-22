@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 
-
 // To do : Passer en props les formulaires
 const ModalForm = (props) => {
   const [isOpen, setIsOpen] = useState(false);

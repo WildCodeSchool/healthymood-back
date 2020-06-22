@@ -2,7 +2,8 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  privateRoute
 } from 'react-router-dom';
 import { Layout } from 'antd';
 import './Styles/App.css';
@@ -20,10 +21,11 @@ import Diets from './pages/Diets';
 import Pages from './pages/Pages';
 import Users from './pages/Users';
 import AdminProfil from './pages/AdminProfil';
+import AdminConnection from './pages/AdminConnection';
 
 const { Content } = Layout;
 
-function App() {
+function App () {
   return (
     <div className='App'>
       <Router>
@@ -33,18 +35,35 @@ function App() {
             <TopBar />
             <Content style={{ margin: '0 16px' }}>
               <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/articles' component={Articles} />
-                <Route exact path='/recettes' component={Recipes} />
-                <Route exact path='/categories-articles' component={CategoryArticles} />
-                <Route exact path='/categories-recettes' component={CategoryRecipes} />
-                <Route exact path='/ingredients' component={Ingredients} />
-                <Route exact path='/types-plats' component={Dishes} />
-                <Route exact path='/types-repas' component={Meals} />
-                <Route exact path='/regimes' component={Diets} />
-                <Route exact path='/pages' component={Pages} />
-                <Route exact path='/utilisateurs' component={Users} />
-                <Route exact path='/mon-profil' component={AdminProfil} />
+                <Route exact path='/connexion' component={AdminConnection} />
+                <privateRoute exact path='/' component={Home} />
+                <privateRoute exact path='/articles' component={Articles} />
+                <privateRoute exact path='/recettes' component={Recipes} />
+                <privateRoute
+                  exact
+                  path='/categories-articles'
+                  component={CategoryArticles}
+                />
+                <privateRoute
+                  exact
+                  path='/categories-recettes'
+                  component={CategoryRecipes}
+                />
+                <privateRoute
+                  exact
+                  path='/ingredients'
+                  component={Ingredients}
+                />
+                <privateRoute exact path='/types-plats' component={Dishes} />
+                <privateRoute exact path='/types-repas' component={Meals} />
+                <privateRoute exact path='/regimes' component={Diets} />
+                <privateRoute exact path='/pages' component={Pages} />
+                <privateRoute exact path='/utilisateurs' component={Users} />
+                <privateRoute
+                  exact
+                  path='/mon-profil'
+                  component={AdminProfil}
+                />
               </Switch>
             </Content>
           </Layout>

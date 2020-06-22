@@ -2,7 +2,6 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Form, Input, Checkbox } from 'antd';
 
-
 const FormIngredient = () => {
   const onFinish = values => {
     console.log('Received values of form:', values);
