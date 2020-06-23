@@ -6,10 +6,6 @@
   padding: 10px;
 }
 
-.hide-label {
-  display: none;
-}
-
 .is-allergen-container {
   display: flex;
 }
@@ -20,7 +16,7 @@ label[for='is_allergen'] input {
 
 .form-inline input {
   vertical-align: middle;
-  margin: 5px 10px 5px 0;
+  margin: 5px 10px 5px 0px;
   padding: 10px;
   background-color: #fff;
   border: 1px solid #ddd;

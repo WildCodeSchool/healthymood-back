@@ -47,3 +47,7 @@ input[type='checkbox'] {
   width: 18px;
   height: 18px;
 }
+
+.hide-label {
+  display: none;
+}
