@@ -2,9 +2,9 @@ import React from 'react';
 
 const Articles = () => {
   return (
-    <>
-      <h1>Articles</h1>
-    </>
+    <div>
+      <h1>Liste de tous les articles</h1>
+    </div>
   );
 };
 
