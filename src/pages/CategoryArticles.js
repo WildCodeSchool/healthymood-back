@@ -64,7 +64,7 @@ function CategoryArticles() {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder="Nouvelle Catégorie d'article"
+            placeholder="New Catégorie d'article"
             value={fields.name}
             onChange={handleFieldChange}
           />
@@ -77,7 +77,7 @@ function CategoryArticles() {
           Save
         </button>
         {newResourceSaveError && (
-          <p className='errorText'>An error occured while saving the task</p>
+          <p className='errorText'>An error occured while saving the categories</p>
         )}
       </form>
       {listRender()}

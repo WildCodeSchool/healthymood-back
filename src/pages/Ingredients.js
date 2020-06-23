@@ -1,20 +1,10 @@
 import React from 'react';
-<<<<<<< HEAD
-import FormIngredient from '../components/FormIngredient';
-
-function Ingredients(props) {
-  return (
-    <>
-      <h2>Liste d'ingredients</h2>
-      <FormIngredient />
-
-=======
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients () {
+function Ingredients() {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '', is_allergen: false });
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
 
@@ -34,12 +24,12 @@ function Ingredients () {
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching the tasks.</p>
+        <p className='errorText'>An error occured while fetching Ingredients.</p>
       </div>
     );
   }
   if (!tasksToShow) return 'Loading...';
-  function listRender () {
+  function listRender() {
     return (
       <table className='list-render'>
         <thead>
@@ -78,7 +68,7 @@ function Ingredients () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder='Nouveau Ingredient'
+            placeholder='New Ingredient'
             value={fields.name}
             onChange={handleFieldChange}
           />
@@ -104,7 +94,6 @@ function Ingredients () {
         )}
       </form>
       {listRender()}
->>>>>>> feature/us2-CRUD-ingredients
     </>
 
   );

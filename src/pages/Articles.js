@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Articles = () => {
   return (
     <div>
@@ -10,4 +9,3 @@ const Articles = () => {
 };
 
 export default Articles;
-

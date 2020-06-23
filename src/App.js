@@ -41,11 +41,7 @@ function App () {
                 <Route exact path='/articles/ajouter' component={AddArticle} />
                 <Route exact path='/recettes' component={Recipes} />
                 <Route exact path='/recettes/ajouter' component={AddRecipe} />
-<<<<<<< HEAD
-                <Route exact path='/categories-articles' component={CategoryArticles} />
-=======
                 <Route exact path='/article_categories' component={CategoryArticles} />
->>>>>>> feature/us2-CRUD-ingredients
                 <Route exact path='/categories-recettes' component={CategoryRecipes} />
                 <Route exact path='/ingredients' component={Ingredients} />
                 <Route exact path='/types-plats' component={Dishes} />

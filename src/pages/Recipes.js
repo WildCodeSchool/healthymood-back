@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Recipes = () => {
   return (
     <div>
@@ -10,4 +9,3 @@ const Recipes = () => {
 };
 
 export default Recipes;
-
