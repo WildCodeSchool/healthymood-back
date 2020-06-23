@@ -50,6 +50,12 @@ td, th {
   border: 1px solid #ccc; 
   text-align: center; 
 }
+<<<<<<< HEAD
+=======
+.list-render td:nth-child(1){
+  text-align: left;
+}
+>>>>>>> feature/us2-CRUD-ingredients
 
 .edit-icon {
   font-size: 24px;
