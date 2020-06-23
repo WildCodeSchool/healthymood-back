@@ -8,14 +8,35 @@
 
 .form-login {
   background-color: white;
-  width: 500px;
-  height: 500px;
+  width: 20vw;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-shadow: 1px 0px 10px -3px rgba(0,0,0,0.50);
+  border-radius: 6px;
+  margin-top: 5vh;
+  padding: 30px;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .form-login input {
-  margin: 10px;
+  width: 100%;
+  margin: 10px 0px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-login .btn {
+  width: 100%;
+  margin-top: 10px;
 }

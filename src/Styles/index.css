@@ -30,13 +30,17 @@ code {
   outline: none;
 }
 
+input {
+  box-sizing: border-box;
+}
+
 input[type='text']:hover, input[type='search']:hover, input[type='email']:hover, input[type='password']:hover {
   border: solid 1px;
   border-color: #0D7AE0;
   transition: ease-in 200ms
 }
 
-input[type='text']:focus, input[type='search']:focus {
+input[type='text']:focus, input[type='search']:focus, input[type='email']:focus, input[type='password']:focus {
   border-color: #40a9ff;
   border-right-width: 1px;
   outline: 0;
