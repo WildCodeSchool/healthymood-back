@@ -29,15 +29,22 @@ const { Content } = Layout;
 
 const App = () => {
   const [authenticateUser, setAuthenticateUser] = useState(false);
-  const token = useContext(authenticationContext);
+  const [token, setToken] = useState(null);
+  const contextToken = useContext(authenticationContext);
+
+  const saveToken = (token) => {
+    setToken(token);
+    window.localStorage.setItem('token', token);
+  };
+
   const handleAuthenticate = () => {
     setTimeout(() => {
       setAuthenticateUser(true);
     }, 1000);
-    console.log(token);
+    console.log(contextToken);
   };
   return (
-    <authenticationContext.Provider value={token}>
+    <authenticationContext.Provider value={{ token, saveToken }}>
       <div className='App'>
         <Router>
           <Switch>
