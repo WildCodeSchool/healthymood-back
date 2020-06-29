@@ -48,20 +48,10 @@ const PrivateRoute = ({ children, ...rest }) => {
 };
 
 const App = () => {
-  const [authenticateUser, setAuthenticateUser] = useState(false);
-  const contextToken = useContext(AuthContext);
-
   const [token, setToken] = useState(window.localStorage.getItem('authToken'));
   const setTokenInLocalStorage = (token) => {
     window.localStorage.setItem('authToken', token);
     setToken(token);
-  };
-
-  const handleAuthenticate = () => {
-    setTimeout(() => {
-      setAuthenticateUser(true);
-    }, 1000);
-    console.log(contextToken);
   };
   return (
     <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage }}>
@@ -69,9 +59,9 @@ const App = () => {
         <Router>
           <Switch>
             <Layout style={{ minHeight: '100vh' }}>
-              {!authenticateUser ? (
+              {!token.length > 0 ? (
                 <Route exact path='/login'>
-                  <AdminAuth onAuthenticate={handleAuthenticate} />
+                  <AdminAuth />
                 </Route>
               ) : (
                 <>

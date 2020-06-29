@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
+import API from '../API';
 import AuthContext from '../context/authContext';
 import '../Styles/AdminAuth.css';
 import logo from '../images/healthymood-logo.png';
+import { Link } from 'react-router-dom';
 
-const AdminAuth = ({ onAuthenticate }) => {
+const AdminAuth = () => {
   const { setToken } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = e.target;
-    axios.post('http://localhost:3000/auth/login', { email: data.email.value, password: data.password.value })
+    API.post({ email: data.email.value, password: data.password.value })
       .then(res => setToken(res.data.token));
-    onAuthenticate();
   };
   return (
     <main className='login-page'>
@@ -32,10 +32,7 @@ const AdminAuth = ({ onAuthenticate }) => {
             </label>
           </div>
         </div>
-        <button className='btn' type='submit'>Connexion</button>
-        <span className='forget'>
-          <a href='#'>Mot de passe oublié ?</a>
-        </span>
+        <Link to='/'><button className='btn' type='submit'>Connexion</button></Link>
       </form>
     </main>
   );
