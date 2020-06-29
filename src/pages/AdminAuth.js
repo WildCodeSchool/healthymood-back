@@ -1,17 +1,29 @@
-import React, { useContext } from 'react';
-import API from '../API';
+import React, { useState, useContext } from 'react';
+import API from '../services/API';
 import AuthContext from '../context/authContext';
 import '../Styles/AdminAuth.css';
 import logo from '../images/healthymood-logo.png';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const AdminAuth = () => {
+  const [loading, setLoading] = useState(false);
   const { setToken } = useContext(AuthContext);
+  const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = e.target;
-    API.post({ email: data.email.value, password: data.password.value })
-      .then(res => setToken(res.data.token));
+    console.log('post');
+    API.post('/auth/login', { email: data.email.value, password: data.password.value })
+      .then(res => {
+        console.log(res.data.token);
+        setToken(res.data.token);
+        setLoading(false);
+        history.push('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   return (
     <main className='login-page'>
@@ -32,7 +44,7 @@ const AdminAuth = () => {
             </label>
           </div>
         </div>
-        <Link to='/'><button className='btn' type='submit'>Connexion</button></Link>
+        <button className='btn' type='submit' disabled={!!loading}>Connexion</button>
       </form>
     </main>
   );

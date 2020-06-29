@@ -42,7 +42,7 @@ const PrivateRoute = ({ children, ...rest }) => {
               state: { from: location }
             }}
           />
-      )}
+        )}
     />
   );
 };
