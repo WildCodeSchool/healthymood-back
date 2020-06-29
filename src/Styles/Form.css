@@ -1,0 +1,104 @@
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  background-color: gainsboro;
+  padding: 10px;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-button {
+  padding: 10px 20px;
+  background-color: #1890ff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+}
+
+.form-button:hover {
+  cursor: pointer;
+  background-color: #0d7ae0;
+}
+
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+th { 
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+}
+td, th { 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  text-align: center; 
+}
+.list-render td:nth-child(1){
+  text-align: left;
+}
+
+.edit-icon {
+  font-size: 24px;
+  color: #1a8ffb;
+}
+
+  .delete-icon {
+    font-size: 24px;
+    color: #ee5253;
+  }
+
+  @media 
+  only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  /* Force table to not be like tables anymore */
+  table, thead, tbody, th, td, tr { 
+  display: block; 
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+  }
+
+}
