@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Layout, Breadcrumb, Avatar, Dropdown, Menu } from 'antd';
 import { useLocation, Link } from 'react-router-dom';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import avatar from '../images/Luffy-One-Piece.png';
 import '../Styles/TopBar.css';
+import AuthContext from '../context/authContext';
 
 const { Header } = Layout;
 
 const TopBar = () => {
   const location = useLocation().pathname.substr(1);
+  const setTokenInLocalStorage = useContext(AuthContext).setToken;
   const menu = (
     <Menu>
       <Menu.Item key='0' icon={<UserOutlined />}>
@@ -17,7 +19,7 @@ const TopBar = () => {
         </Link>
       </Menu.Item>
       <Menu.Item key='1' icon={<LogoutOutlined />}>
-        <Link exact to='#Logout' className='dropdown-link'>
+        <Link exact to='/login' onClick={() => setTokenInLocalStorage('')} className='dropdown-link'>
           Déconnexion
         </Link>
       </Menu.Item>

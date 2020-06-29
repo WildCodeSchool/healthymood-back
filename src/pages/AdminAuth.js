@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
-import authenticationContext from '../context/authenticationContext';
+import AuthContext from '../context/authContext';
 import '../Styles/AdminAuth.css';
 import logo from '../images/healthymood-logo.png';
 
 const AdminAuth = ({ onAuthenticate }) => {
-  const { saveToken } = useContext(authenticationContext);
+  const { setToken } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = e.target;
     axios.post('http://localhost:3000/auth/login', { email: data.email.value, password: data.password.value })
-      .then(res => saveToken(res.data.token));
+      .then(res => setToken(res.data.token));
     onAuthenticate();
   };
   return (

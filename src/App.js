@@ -3,9 +3,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  privateRoute
+  Redirect
 } from 'react-router-dom';
-import authenticationContext from './context/authenticationContext';
+import AuthContext from './context/authContext';
 
 import { Layout } from 'antd';
 import './Styles/App.css';
@@ -27,14 +27,34 @@ import AdminAuth from './pages/AdminAuth';
 
 const { Content } = Layout;
 
+const PrivateRoute = ({ children, ...rest }) => {
+  const { token } = useContext(AuthContext);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        token ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: location }
+            }}
+          />
+      )}
+    />
+  );
+};
+
 const App = () => {
   const [authenticateUser, setAuthenticateUser] = useState(false);
-  const [token, setToken] = useState(null);
-  const contextToken = useContext(authenticationContext);
+  const contextToken = useContext(AuthContext);
 
-  const saveToken = (token) => {
+  const [token, setToken] = useState(window.localStorage.getItem('authToken'));
+  const setTokenInLocalStorage = (token) => {
+    window.localStorage.setItem('authToken', token);
     setToken(token);
-    window.localStorage.setItem('token', token);
   };
 
   const handleAuthenticate = () => {
@@ -44,13 +64,13 @@ const App = () => {
     console.log(contextToken);
   };
   return (
-    <authenticationContext.Provider value={{ token, saveToken }}>
+    <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage }}>
       <div className='App'>
         <Router>
           <Switch>
             <Layout style={{ minHeight: '100vh' }}>
               {!authenticateUser ? (
-                <Route exact path='/connexion'>
+                <Route exact path='/login'>
                   <AdminAuth onAuthenticate={handleAuthenticate} />
                 </Route>
               ) : (
@@ -59,42 +79,42 @@ const App = () => {
                   <Layout className='site-layout'>
                     <TopBar />
                     <Content style={{ margin: '0 16px' }}>
-                      <privateRoute exact path='/' component={Home} />
-                      <privateRoute exact path='/articles' component={Articles} />
-                      <privateRoute exact path='/recettes' component={Recipes} />
-                      <privateRoute
-                        exact
-                        path='/categories-articles'
-                        component={CategoryArticles}
-                      />
-                      <privateRoute
-                        exact
-                        path='/categories-recettes'
-                        component={CategoryRecipes}
-                      />
-                      <privateRoute
-                        exact
-                        path='/ingredients'
-                        component={Ingredients}
-                      />
-                      <privateRoute
-                        exact
-                        path='/types-plats'
-                        component={Dishes}
-                      />
-                      <privateRoute exact path='/types-repas' component={Meals} />
-                      <privateRoute exact path='/regimes' component={Diets} />
-                      <privateRoute exact path='/pages' component={Pages} />
-                      <privateRoute
-                        exact
-                        path='/utilisateurs'
-                        component={Users}
-                      />
-                      <privateRoute
-                        exact
-                        path='/mon-profil'
-                        component={AdminProfil}
-                      />
+                      <PrivateRoute exact path='/'>
+                        <Home />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/articles'>
+                        <Articles />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/recettes'>
+                        <Recipes />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/categories-articles'>
+                        <CategoryArticles />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/categories-recettes'>
+                        <CategoryRecipes />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/ingredients'>
+                        <Ingredients />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/types-plats'>
+                        <Dishes />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/types-repas'>
+                        <Meals />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/regimes'>
+                        <Diets />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/pages'>
+                        <Pages />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/utilisateurs'>
+                        <Users />
+                      </PrivateRoute>
+                      <PrivateRoute exact path='/mon-profil'>
+                        <AdminProfil />
+                      </PrivateRoute>
                     </Content>
                   </Layout>
                 </>
@@ -103,7 +123,7 @@ const App = () => {
           </Switch>
         </Router>
       </div>
-    </authenticationContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
