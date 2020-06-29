@@ -1,6 +1,6 @@
 import React from 'react';
 import '../Styles/Editor.css';
-import EditorComponent from '../components/EditorComponent'
+import EditorComponent from '../components/EditorComponent';
 
 const AddPage = () => {
   return (

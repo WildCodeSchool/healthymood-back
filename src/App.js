@@ -42,7 +42,7 @@ const PrivateRoute = ({ children, ...rest }) => {
               state: { from: location }
             }}
           />
-        )}
+      )}
     />
   );
 };
@@ -58,57 +58,52 @@ const App = () => {
       <div className='App'>
         <Router>
           <Switch>
+            <Route exact path='/login'>
+              <AdminAuth />
+            </Route>
             <Layout style={{ minHeight: '100vh' }}>
-              {!token.length > 0 ? (
-                <Route exact path='/login'>
-                  <AdminAuth />
-                </Route>
-              ) : (
-                <>
-                  <SideBar />
-                  <Layout className='site-layout'>
-                    <TopBar />
-                    <Content style={{ margin: '0 16px' }}>
-                      <PrivateRoute exact path='/'>
-                        <Home />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/articles'>
-                        <Articles />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/recettes'>
-                        <Recipes />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/categories-articles'>
-                        <CategoryArticles />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/categories-recettes'>
-                        <CategoryRecipes />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/ingredients'>
-                        <Ingredients />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/types-plats'>
-                        <Dishes />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/types-repas'>
-                        <Meals />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/regimes'>
-                        <Diets />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/pages'>
-                        <Pages />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/utilisateurs'>
-                        <Users />
-                      </PrivateRoute>
-                      <PrivateRoute exact path='/mon-profil'>
-                        <AdminProfil />
-                      </PrivateRoute>
-                    </Content>
-                  </Layout>
-                </>
-              )}
+              <SideBar />
+              <Layout className='site-layout'>
+                <TopBar />
+                <Content style={{ margin: '0 16px' }}>
+                  <PrivateRoute exact path='/'>
+                    <Home />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/articles'>
+                    <Articles />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/recettes'>
+                    <Recipes />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/categories-articles'>
+                    <CategoryArticles />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/categories-recettes'>
+                    <CategoryRecipes />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/ingredients'>
+                    <Ingredients />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/types-plats'>
+                    <Dishes />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/types-repas'>
+                    <Meals />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/regimes'>
+                    <Diets />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/pages'>
+                    <Pages />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/utilisateurs'>
+                    <Users />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/mon-profil'>
+                    <AdminProfil />
+                  </PrivateRoute>
+                </Content>
+              </Layout>
             </Layout>
           </Switch>
         </Router>

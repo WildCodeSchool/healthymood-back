@@ -3,7 +3,6 @@ import '../Styles/Editor.css';
 import { Editor } from '@tinymce/tinymce-react';
 import { Input, Button } from 'antd';
 
-
 const EditorComponent = () => {
   return (
     <div className='editor-container'>
