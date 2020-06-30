@@ -4,7 +4,7 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients() {
+function Ingredients () {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '', is_allergen: false });
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
 
@@ -29,7 +29,7 @@ function Ingredients() {
     );
   }
   if (!tasksToShow) return 'Loading...';
-  function listRender() {
+  function listRender () {
     return (
       <table className='list-render'>
         <thead>
@@ -63,7 +63,8 @@ function Ingredients() {
       <h1> Ingredients</h1>
       <form className='form-inline' onSubmit={SaveTask}>
         <div>
-          <input className="input-form-all"
+          <input
+            className='input-form-all'
             required
             name='name'
             id='name'

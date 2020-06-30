@@ -26,7 +26,7 @@ import AdminProfil from './pages/AdminProfil';
 
 const { Content } = Layout;
 
-function App() {
+function App () {
   return (
     <div className='App'>
       <Router>
@@ -34,7 +34,7 @@ function App() {
           <SideBar />
           <Layout className='site-layout'>
             <TopBar />
-            <Content >
+            <Content>
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/articles' component={Articles} />
