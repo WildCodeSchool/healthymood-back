@@ -26,7 +26,7 @@ import AdminProfil from './pages/AdminProfil';
 
 const { Content } = Layout;
 
-function App () {
+function App() {
   return (
     <div className='App'>
       <Router>
@@ -41,11 +41,11 @@ function App () {
                 <Route exact path='/articles/ajouter' component={AddArticle} />
                 <Route exact path='/recettes' component={Recipes} />
                 <Route exact path='/recettes/ajouter' component={AddRecipe} />
-                <Route exact path='/categories-articles' component={CategoryArticles} />
-                <Route exact path='/categories-recettes' component={CategoryRecipes} />
+                <Route exact path='/article_categories' component={CategoryArticles} />
+                <Route exact path='/recipe_categories' component={CategoryRecipes} />
                 <Route exact path='/ingredients' component={Ingredients} />
                 <Route exact path='/types-plats' component={Dishes} />
-                <Route exact path='/types-repas' component={Meals} />
+                <Route exact path='/meal_types' component={Meals} />
                 <Route exact path='/regimes' component={Diets} />
                 <Route exact path='/pages' component={Pages} />
                 <Route exact path='/pages/ajouter' component={AddPage} />

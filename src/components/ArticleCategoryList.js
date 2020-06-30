@@ -1,34 +1,17 @@
 import React from 'react';
 import { Table, Space } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import '../Styles/Icons.css';
 
-const data = [
-  {
-    key: '1',
-    name: 'Quiches'
-  },
-  {
-    key: '2',
-    name: 'Tartes'
-  },
-  {
-    key: '3',
-    name: 'Soupes'
-  },
-  {
-    key: '4',
-    name: 'Cakes'
-  }
-];
+const ArticleCategoryList = (props) => {
+  const data = props.articlesCategoriesData;
 
-const RecipesCategoriesList = () => {
   const columns = [
     {
-      title: 'Catégories de Recettes',
+      title: 'Articles',
       dataIndex: 'name',
       key: 'name'
     },
+
     {
       title: 'Action',
       key: 'action',
@@ -42,10 +25,10 @@ const RecipesCategoriesList = () => {
   ];
   return (
     <>
-      <h1>Liste de toutes les Catégories de recettes</h1>
+      <h1>Liste de tous les Articles</h1>
       <Table columns={columns} dataSource={data} />
     </>
   );
 };
 
-export default RecipesCategoriesList;
+export default ArticleCategoryList;

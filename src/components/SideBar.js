@@ -59,10 +59,10 @@ const SideBar = () => {
 
         <SubMenu key='sub3' icon={<BookOutlined />} title='Catégories'>
           <Menu.Item key='5'>
-            <Link to='/categories-articles'>Catégories articles</Link>
+            <Link to='/article_categories'>Catégories articles</Link>
           </Menu.Item>
           <Menu.Item key='6'>
-            <Link to='/categories-recettes'>Catégories recettes</Link>
+            <Link to='/recipe_categories'>Catégories recettes</Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key='7' icon={<FormOutlined />}>
@@ -72,7 +72,7 @@ const SideBar = () => {
           <Link to='/types-plats'>Types de plats</Link>
         </Menu.Item>
         <Menu.Item key='9' icon={<FormOutlined />}>
-          <Link to='/types-repas'>Types de repas</Link>
+          <Link to='/meal_types'>Types de repas</Link>
         </Menu.Item>
         <Menu.Item key='10' icon={<FormOutlined />}>
           <Link to='/regimes'>Tous les Régimes</Link>
