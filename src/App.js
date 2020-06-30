@@ -44,9 +44,9 @@ function App () {
                 <Route exact path='/article_categories' component={CategoryArticles} />
                 <Route exact path='/categories-recettes' component={CategoryRecipes} />
                 <Route exact path='/ingredients' component={Ingredients} />
-                <Route exact path='/types-plats' component={Dishes} />
+                <Route exact path='/dish_types' component={Dishes} />
                 <Route exact path='/meal_types' component={Meals} />
-                <Route exact path='/regimes' component={Diets} />
+                <Route exact path='/diet' component={Diets} />
                 <Route exact path='/pages' component={Pages} />
                 <Route exact path='/pages/ajouter' component={AddPage} />
                 <Route exact path='/utilisateurs' component={Users} />
