@@ -60,6 +60,7 @@ function Ingredients () {
   }
   return (
     <>
+      <h1> Ingredients</h1>
       <form className='form-inline' onSubmit={SaveTask}>
         <div>
           <input
