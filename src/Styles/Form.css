@@ -6,33 +6,36 @@
   padding: 10px;
 }
 
-.is-allergen-container {
-  display: flex;
-}
-
-label[for='is_allergen'] input {
-  margin: 10px;
+.form-inline label {
+  margin: 5px 10px 5px 0;
 }
 
 .form-inline input {
   vertical-align: middle;
-  margin: 5px 10px 5px 0px;
+  margin: 5px 10px 5px 0;
   padding: 10px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-.search-container {
-  margin-left: auto;
+.form-button {
+  padding: 10px 20px;
+  background-color: #1890ff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+}
+
+.form-button:hover {
+  cursor: pointer;
+  background-color: #0d7ae0;
 }
 
 table { 
   width: 100%; 
   border-collapse: collapse; 
-  position: relative;
 }
-
 /* Zebra striping */
 tr:nth-of-type(odd) { 
   background: #eee; 
@@ -43,9 +46,12 @@ th {
   font-weight: bold; 
 }
 td, th { 
-  padding: 15px; 
+  padding: 10px; 
   border: 1px solid #ccc; 
   text-align: center; 
+}
+.list-render td:nth-child(1){
+  text-align: left;
 }
 
 .edit-icon {
@@ -59,21 +65,21 @@ td, th {
 }
 
 @media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+  only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
+  /* Force table to not be like tables anymore */
+  table, thead, tbody, th, td, tr { 
+  display: block; 
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
 	tr { border: 1px solid #ccc; }
 	
 	td { 

@@ -1,14 +1,14 @@
 import React from 'react';
 import '../Styles/Editor.css';
 import { Editor } from '@tinymce/tinymce-react';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 
 const EditorComponent = () => {
   return (
     <div className='editor-container'>
       <Input className='editor-title' size='large' placeholder='Ajouter un titre' />
       <Editor
-        apiKey='amntzl33pmjmf0hj96f03mr21hnr3lwuxt2dry7jsxi2wjdx'
+        apiKey={process.env.REACT_APP_API_KEY}
         initialValue="<p>This is the initialorem Ipsum is simply
                             dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever
@@ -22,6 +22,7 @@ const EditorComponent = () => {
                 including versions of Lorem Ipsu content of the editor</p>"
         init={{
           height: 500,
+
           autosave_interval: '2s',
           plugins: [
             'advlist autolink lists link image charmap print preview anchor',
@@ -29,10 +30,10 @@ const EditorComponent = () => {
             'insertdatetime media table paste code help wordcount'
           ],
           toolbar:
-                        'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+            'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
         }}
       />
-      <button className='editor-button btn' type='submit'>Ajouter</button>
+      <Button className='editor-button' size='large'>Ajouter</Button>
     </div>
   );
 };

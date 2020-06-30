@@ -10,6 +10,54 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}  
+
+.btn {
+  padding: 10px 20px;
+  background-color: #1890ff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+  vertical-align: middle;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #0d7ae0;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+input {
+  box-sizing: border-box;
+}
+
+input[type='text']:hover, input[type='search']:hover, input[type='email']:hover, input[type='password']:hover {
+  border: solid 1px;
+  border-color: #0D7AE0;
+  transition: ease-in 200ms
+}
+
+input[type='text']:focus, input[type='search']:focus, input[type='email']:focus, input[type='password']:focus, input[type='checkbox']:focus {
+  border-color: #40a9ff;
+  border-right-width: 1px;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+}
+
+input[type='checkbox']:hover {
+  cursor: pointer;
+}
+
+.hide-label {
+  display: none;
 }
 
 .btn {
