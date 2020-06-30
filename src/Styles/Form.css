@@ -10,13 +10,14 @@
   margin: 5px 10px 5px 0;
 }
 
-.form-inline input {
+.input-form-all{
   vertical-align: middle;
   margin: 5px 10px 5px 0;
   padding: 10px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 20%;
 }
 
 .form-button {
