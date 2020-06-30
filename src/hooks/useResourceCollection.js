@@ -5,7 +5,7 @@ import { findIndex, omit, find } from 'lodash';
 import uniqid from 'uniqid';
 import { useState } from 'react';
 
-export default function useResourceCollection(collectionRelativeUrl) {
+export default function useResourceCollection (collectionRelativeUrl) {
   collectionRelativeUrl = '/' + collectionRelativeUrl.replace('/', '');
   let fetchResponse = null;
   const { data: collection, error: fetchCollectionError, mutate } = useSWR(collectionRelativeUrl, {

@@ -14,6 +14,6 @@ const placeTokenInRequestHeaders = req => {
   return req;
 };
 
-API.interceptors.request.use(placeTokenInRequestHeaders);*/
+API.interceptors.request.use(placeTokenInRequestHeaders); */
 
 export default API;

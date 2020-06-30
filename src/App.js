@@ -34,7 +34,7 @@ function App() {
           <SideBar />
           <Layout className='site-layout'>
             <TopBar />
-            <Content style={{ margin: '0 16px' }}>
+            <Content >
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/articles' component={Articles} />
