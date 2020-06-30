@@ -9,7 +9,7 @@ function Dishes () {
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/dish_types');
 
   const DeleteTask = async (task) => {
-    if (window.confirm('Are you sure you want to delete this dish types ?')) {
+    if (window.confirm('Are you sure you want to delete this dish type ?')) {
       deleteResource(task.id, { optimistic: true });
     }
   };
@@ -77,7 +77,7 @@ function Dishes () {
           Save
         </button>
         {newResourceSaveError && (
-          <p className='errorText'>An error occured while saving the task</p>
+          <p className='errorText'>An error occured while saving the dish type</p>
         )}
       </form>
       {listRender()}
