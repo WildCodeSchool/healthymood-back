@@ -69,7 +69,7 @@ const SideBar = () => {
           <Link to='/ingredients'>Ingrédients</Link>
         </Menu.Item>
         <Menu.Item key='8' icon={<FormOutlined />}>
-          <Link to='/types-plats'>Types de plats</Link>
+          <Link to='/dish_types'>Types de plats</Link>
         </Menu.Item>
         <Menu.Item key='9' icon={<FormOutlined />}>
           <Link to='/meal_types'>Types de repas</Link>
