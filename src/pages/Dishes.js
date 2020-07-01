@@ -5,33 +5,36 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function Dishes () {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/dish_types');
+  const initialForm = ({
+    name: ''
+  });
+  const { fields, setFields, handleFieldChange } = useFormData(initialForm);
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: dishesToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/dish_types');
 
-  const DeleteTask = async (task) => {
-    if (window.confirm('Are you sure you want to delete this dish type ?')) {
-      deleteResource(task.id, { optimistic: true });
+  const DeleteDishes = async (dish) => {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de plat ?')) {
+      deleteResource(dish.id, { optimistic: true });
     }
   };
-  const SaveTask = async (event) => {
+  const SaveDishes = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ name: '' });
+    setFields(initialForm);
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async dish => {
+    setFields(dish);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching dish types.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des types de plat.</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender () {
+  if (!dishesToShow) return 'Chargement...';
+  function Renderlist () {
     return (
-      <table className='list-render'>
+      <table className='render-list'>
         <thead>
           <tr>
             <td>Nom</td>
@@ -39,13 +42,13 @@ function Dishes () {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.data.map(t => {
+          {dishesToShow.map(t => {
             return (
               <tr key={t.id}>
-                <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
+                <td>{t.name}</td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteDishes(t)} />
                 </td>
               </tr>
             );
@@ -56,7 +59,7 @@ function Dishes () {
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveTask}>
+      <form className='form-inline' onSubmit={SaveDishes}>
         <div>
           <input
             required
@@ -64,23 +67,23 @@ function Dishes () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder='New Dish type'
+            placeholder='Nouveau type de plat'
             value={fields.name}
             onChange={handleFieldChange}
           />
         </div>
         <button
           className='form-button'
-          onClick={SaveTask}
+          onClick={SaveDishes}
           disabled={newResourceIsSaving || fields.name === ''}
         >
-          Save
+          Enregistrer
         </button>
         {newResourceSaveError && (
-          <p className='errorText'>An error occured while saving the dish type</p>
+          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de plat.</p>
         )}
       </form>
-      {listRender()}
+      {Renderlist()}
     </>
 
   );
