@@ -64,6 +64,7 @@ function Ingredients () {
       <form className='form-inline' onSubmit={SaveTask}>
         <div>
           <input
+            type='text'
             required
             name='name'
             id='name'
