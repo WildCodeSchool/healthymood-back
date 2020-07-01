@@ -70,28 +70,31 @@ const Pages = () => {
       <h1>Pages</h1>
       <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
         <label className='hide-label' htmlFor='title'>titre</label>
-        <input type='text' name='title' placeholder='Ajouter un titre' />
+        <input type='text' name='title' placeholder='Ajouter un titre' required />
         <label className='hide-label' htmlFor='slug'>slug</label>
-        <input type='text' name='slug' placeholder='Ajouter un slug' />
+        <input type='text' name='slug' placeholder='Ajouter un slug' required />
         <EditorComponent
           apiKey={process.env.REACT_APP_API_KEY}
           initialValue=''
           init={{
             height: 500,
-            autosave_interval: '2s',
+            autosave_interval: '5s',
             plugins: [
               'advlist autolink lists link image charmap print preview anchor',
               'searchreplace visualblocks code fullscreen',
-              'insertdatetime media table paste code help wordcount'
+              'insertdatetime media table paste code help wordcount',
+              'autosave'
             ],
+            autosave_retention: '30m',
+            autosave_restore_when_empty: true,
             toolbar:
               'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
           }}
           value={content}
-          onEditorChange={(e) => handleEditorChange(e)}
+          onSaveContent={(e) => handleEditorChange(e)}
         />
         <label className='hide-label' htmlFor='content'>contenu</label>
-        <textarea className='hidden' name='content' value={content.content} />
+        <textarea className='hidden' name='content' value={content.content} required />
         <label htmlFor='published'>
           Publier ?
         </label>

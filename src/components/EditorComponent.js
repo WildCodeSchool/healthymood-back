@@ -3,6 +3,7 @@ import '../Styles/Editor.css';
 import { Editor } from '@tinymce/tinymce-react';
 
 const EditorComponent = ({ apiKey, initialValue, init, value, onEditorChange }) => {
+  console.log(window.localStorage);
   return (
     <div className='editor-container'>
       <Editor
@@ -10,7 +11,7 @@ const EditorComponent = ({ apiKey, initialValue, init, value, onEditorChange }) 
         initialValue={initialValue}
         init={init}
         value={value}
-        onEditorChange={(e) => onEditorChange(e)}
+        onSaveContent={(e) => onEditorChange(e)}
       />
     </div>
   );
