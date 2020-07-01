@@ -84,13 +84,13 @@ const App = () => {
                   <PrivateRoute exact path='/ingredients'>
                     <Ingredients />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/types-plats'>
+                  <PrivateRoute exact path='/dish_types'>
                     <Dishes />
                   </PrivateRoute>
                   <PrivateRoute exact path='/types-repas'>
                     <Meals />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/regimes'>
+                  <PrivateRoute exact path='/diet'>
                     <Diets />
                   </PrivateRoute>
                   <PrivateRoute exact path='/pages'>
