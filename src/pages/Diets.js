@@ -5,33 +5,36 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function Diets () {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/diet');
+  const initialForm = ({
+    name: ''
+  });
+  const { fields, setFields, handleFieldChange } = useFormData(initialForm);
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: dietToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/diet');
 
-  const DeleteTask = async (task) => {
-    if (window.confirm('Are you sure you want to delete this Diet?')) {
-      deleteResource(task.id, { optimistic: true });
+  const DeleteDiets = async (diet) => {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de régime ?')) {
+      deleteResource(diet.id, { optimistic: true });
     }
   };
-  const SaveTask = async (event) => {
+  const SaveDiets = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ name: '' });
+    setFields(initialForm);
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async diet => {
+    setFields(diet);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching Diet.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des types de régimes.</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender () {
+  if (!dietToShow) return 'Chargement...';
+  function Renderlist () {
     return (
-      <table className='list-render'>
+      <table className='render-list'>
         <thead>
           <tr>
             <td>Nom</td>
@@ -39,13 +42,13 @@ function Diets () {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.data.map(t => {
+          {dietToShow.map(t => {
             return (
               <tr key={t.id}>
-                <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
+                <td>{t.name}</td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteDiets(t)} />
                 </td>
               </tr>
             );
@@ -56,7 +59,7 @@ function Diets () {
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveTask}>
+      <form className='form-inline' onSubmit={SaveDiets}>
         <div>
           <input
             required
@@ -64,23 +67,23 @@ function Diets () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder='New Diet'
+            placeholder='Nouveau type de régime'
             value={fields.name}
             onChange={handleFieldChange}
           />
         </div>
         <button
           className='form-button'
-          onClick={SaveTask}
-          disabled={newResourceIsSaving || fields.name === ''}
+          onClick={SaveDiets}
+          disabled={newResourceIsSaving}
         >
-          Save
+          Enregistrer
         </button>
         {newResourceSaveError && (
-          <p className='errorText'>An error occured while saving the diet</p>
+          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de régime.</p>
         )}
       </form>
-      {listRender()}
+      {Renderlist()}
     </>
 
   );
