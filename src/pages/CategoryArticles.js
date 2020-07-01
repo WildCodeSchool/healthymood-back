@@ -4,7 +4,7 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function CategoryArticles() {
+function CategoryArticles () {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
 
@@ -29,7 +29,7 @@ function CategoryArticles() {
     );
   }
   if (!tasksToShow) return 'Loading...';
-  function listRender() {
+  function listRender () {
     return (
       <table className='list-render'>
         <thead>
@@ -76,7 +76,7 @@ function CategoryArticles() {
             disabled={newResourceIsSaving || fields.name === ''}
           >
             Save
-        </button>
+          </button>
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
           )}

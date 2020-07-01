@@ -4,7 +4,7 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Meals() {
+function Meals () {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/meal_types');
 
@@ -29,7 +29,7 @@ function Meals() {
     );
   }
   if (!tasksToShow) return 'Loading...';
-  function listRender() {
+  function listRender () {
     return (
       <table className='list-render'>
         <thead>
@@ -75,7 +75,7 @@ function Meals() {
             disabled={newResourceIsSaving || fields.name === ''}
           >
             Save
-        </button>
+          </button>
           {newResourceSaveError && (
             <p className='errorText'>An error occured while saving the list of Meal</p>
           )}
