@@ -4,20 +4,20 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients() {
-  const initialform = ({ name: '', is_allergen: false })
-  const { fields, setFields, handleFieldChange } = useFormData(initialform);
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
+function Ingredients () {
+  const initialForm = ({ name: '', is_allergen: false });
+  const { fields, setFields, handleFieldChange } = useFormData(initialForm);
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
 
-  const DeleteIngredient = async (ingredient) => {
-    if (window.confirm('Are you sure you want to delete this Ingredient?')) {
+  const DeleteIngredients = async (ingredient) => {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer cet ingrédient ?')) {
       deleteResource(ingredient.id, { optimistic: true });
     }
   };
-  const SaveIngredient = async (event) => {
+  const SaveIngredients = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields(initialform);
+    setFields(initialForm);
   };
   const fillForm = async ingredient => {
     setFields(ingredient);
@@ -25,14 +25,14 @@ function Ingredients() {
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>Une erreur a la récuperation de la list d'ingrédients.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des ingrédients.</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender() {
+  if (!ingredientsToShow) return 'Chargement...';
+  function Renderlist () {
     return (
-      <table className='list-render'>
+      <table className='render-list'>
         <thead>
           <tr>
             <td>Nom</td>
@@ -41,7 +41,7 @@ function Ingredients() {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.map(t => {
+          {ingredientsToShow.map(t => {
             return (
               <tr key={t.id}>
                 <td>{t.name}</td>
@@ -50,7 +50,7 @@ function Ingredients() {
                 </td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteIngredient(t)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteIngredients(t)} />
                 </td>
               </tr>
             );
@@ -61,43 +61,39 @@ function Ingredients() {
   }
   return (
     <>
-      <h1> Ingredients</h1>
-      <div>
-        <form className='form-inline' onSubmit={SaveIngredient}>
+      <form className='form-inline' onSubmit={SaveIngredients}>
+        <div>
           <input
-            className='input-form-all'
             required
             name='name'
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder='New Ingredient'
+            placeholder='Nouvel ingredient'
             value={fields.name}
             onChange={handleFieldChange}
           />
           <label>Allergene ?</label>
           <input
-            className='input-form-all'
             type='checkbox'
             id='is_allergen'
             name='is_allergen'
             checked={fields.is_allergen}
             onChange={handleFieldChange}
           />
-
-          <button
-            className='form-button'
-            onClick={SaveIngredient}
-            disabled={newResourceIsSaving || fields.name === ''}
-          >
-            Save
-          </button>
-          {newResourceSaveError && (
-            <p className='errorText'>An error occured while saving the task</p>
-          )}
-        </form>
-      </div>
-      {listRender()}
+        </div>
+        <button
+          className='form-button'
+          onClick={SaveIngredients}
+          disabled={newResourceIsSaving}
+        >
+          Enregistrer
+        </button>
+        {newResourceSaveError && (
+          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde de l'ingrédient.</p>
+        )}
+      </form>
+      {Renderlist()}
     </>
 
   );

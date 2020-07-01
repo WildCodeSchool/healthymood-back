@@ -56,7 +56,7 @@ td, th {
   border: 1px solid #ccc; 
   text-align: center; 
 }
-.list-render td:nth-child(1){
+.render-list td:nth-child(1){
   text-align: left;
 }
 
