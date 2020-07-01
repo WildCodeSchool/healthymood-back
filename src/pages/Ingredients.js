@@ -4,32 +4,33 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients () {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '', is_allergen: false });
+function Ingredients() {
+  const initialform = ({ name: '', is_allergen: false })
+  const { fields, setFields, handleFieldChange } = useFormData(initialform);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
 
-  const DeleteTask = async (task) => {
+  const DeleteIngredient = async (ingredient) => {
     if (window.confirm('Are you sure you want to delete this Ingredient?')) {
-      deleteResource(task.id, { optimistic: true });
+      deleteResource(ingredient.id, { optimistic: true });
     }
   };
-  const SaveTask = async (event) => {
+  const SaveIngredient = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ name: '', is_allergen: false });
+    setFields(initialform);
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async ingredient => {
+    setFields(ingredient);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching Ingredients.</p>
+        <p className='errorText'>Une erreur a la récuperation de la list d'ingrédients.</p>
       </div>
     );
   }
   if (!tasksToShow) return 'Loading...';
-  function listRender () {
+  function listRender() {
     return (
       <table className='list-render'>
         <thead>
@@ -40,16 +41,16 @@ function Ingredients () {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.data.map(t => {
+          {tasksToShow.map(t => {
             return (
               <tr key={t.id}>
-                <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
+                <td>{t.name}</td>
                 <td>
                   {t.is_allergen ? 'oui' : 'non'}
                 </td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteIngredient(t)} />
                 </td>
               </tr>
             );
@@ -62,7 +63,7 @@ function Ingredients () {
     <>
       <h1> Ingredients</h1>
       <div>
-        <form className='form-inline' onSubmit={SaveTask}>
+        <form className='form-inline' onSubmit={SaveIngredient}>
           <input
             className='input-form-all'
             required
@@ -86,7 +87,7 @@ function Ingredients () {
 
           <button
             className='form-button'
-            onClick={SaveTask}
+            onClick={SaveIngredient}
             disabled={newResourceIsSaving || fields.name === ''}
           >
             Save

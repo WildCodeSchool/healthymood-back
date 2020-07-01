@@ -5,7 +5,7 @@ import { findIndex, omit, find } from 'lodash';
 import uniqid from 'uniqid';
 import { useState } from 'react';
 
-export default function useResourceCollection (collectionRelativeUrl) {
+export default function useResourceCollection(collectionRelativeUrl) {
   collectionRelativeUrl = '/' + collectionRelativeUrl.replace('/', '');
   let fetchResponse = null;
   const { data: collection, error: fetchCollectionError, mutate } = useSWR(collectionRelativeUrl, {
@@ -13,7 +13,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
       fetchResponse = API.get(...args);
       const res = await fetchResponse;
       // handle pagination here ?
-      return res.data;
+      return res.data.data;
     }
   });
   const [newResourceIsSaving, setNewResourceIsSaving] = useState(false);
@@ -26,13 +26,13 @@ export default function useResourceCollection (collectionRelativeUrl) {
     return new Promise((resolve, reject) => {
       mutate(async collectionItems => {
         return produce(collectionItems, draft => {
-          const localResourceIndex = findIndex(draft.data, { id });
+          const localResourceIndex = findIndex(draft, { id });
           console.log(localResourceIndex);
           if (localResourceIndex === -1) {
             reject(new Error('index not found'));
           } else {
-            const newVersion = { ...draft.data[localResourceIndex], ...changedAttributes };
-            draft.data[localResourceIndex] = newVersion;
+            const newVersion = { ...draft[localResourceIndex], ...changedAttributes };
+            draft[localResourceIndex] = newVersion;
             resolve(newVersion);
           }
         });
@@ -45,7 +45,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
       mutate(async collectionItems => {
         return produce(collectionItems, draft => {
           const newResourceAttributes = { id: uniqid(), ...attributes };
-          draft.data.push(newResourceAttributes);
+          draft.push(newResourceAttributes);
           resolve(newResourceAttributes);
         });
       }, false);
@@ -56,11 +56,11 @@ export default function useResourceCollection (collectionRelativeUrl) {
     return new Promise((resolve, reject) => {
       mutate(async collectionItems => {
         return produce(collectionItems, draft => {
-          const localResourceIndex = findIndex(draft.data, { id });
+          const localResourceIndex = findIndex(draft, { id });
           if (localResourceIndex === -1) {
             reject(new Error('index not found'));
           } else {
-            draft.data.splice(localResourceIndex, 1);
+            draft.splice(localResourceIndex, 1);
             resolve();
           }
         });
@@ -78,7 +78,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
       try {
         tmpId = (await addResourceLocally({ ...attributes, _saving: true })).id;
         const res = await API.post(collectionRelativeUrl, sanitizedAttributes);
-        patchResourceLocally(tmpId, { ...res.data, _saving: false });
+        patchResourceLocally(tmpId, { ...res.data.data, _saving: false });
         resolve(res);
       } catch (err) {
         console.error(err);
@@ -91,7 +91,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
     } else {
       try {
         const res = await API.post(collectionRelativeUrl, sanitizedAttributes);
-        addResourceLocally(res.data);
+        addResourceLocally(res.data.data);
         resolve(res);
       } catch (err) {
         console.error(err);
@@ -111,7 +111,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
         savedAttributes = { ...(await getRessource(attributes.id)) };
         await patchResourceLocally(attributes.id, { ...attributes, _saving: true });
         const res = await API.patch(collectionRelativeUrl + '/' + attributes.id, sanitizedAttributes);
-        await patchResourceLocally(attributes.id, { ...res.data, _saving: false });
+        await patchResourceLocally(attributes.id, { ...res.data.data, _saving: false });
         resolve(res);
       } catch (err) {
         console.error(err);
@@ -122,7 +122,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
       try {
         await patchResourceLocally(attributes.id, { _saving: true });
         const res = await API.patch(collectionRelativeUrl + '/' + attributes.id, sanitizedAttributes);
-        await patchResourceLocally(attributes.id, { ...res.data, _saving: false });
+        await patchResourceLocally(attributes.id, { ...res.data.data, _saving: false });
         resolve(res);
       } catch (err) {
         console.error(err);
@@ -145,7 +145,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
 
   const deleteResource = async (id, options = {}) => {
     const { optimistic } = options;
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => { // eslint-disable-lint
       if (optimistic) {
         let savedAttributes = {};
         try {

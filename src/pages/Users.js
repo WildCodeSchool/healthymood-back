@@ -1,40 +1,36 @@
 import React from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 import '../Styles/Users.css';
 
 function Users() {
-  const initialForm = ({ firstname: '', username: '', email: '', is_admin: false, blocked: false, password: '123' });
+  const initialForm = ({ is_admin: false, blocked: false });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/users');
+  const { saveResource, newResourceSaveError, newResourceIsSaving, collection: UsersToShow, fetchCollectionError: fetchError } = useResourceCollection('/users');
 
-  const DeleteTask = async (task) => {
-    if (window.confirm('Etes vous certain de supprimer cet Utilisteur ?')) {
-      deleteResource(task.id, { optimistic: false });
-    }
-  };
-  const SaveTask = async (event) => {
+
+  const SaveUser = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ initialForm });
+    setFields({ is_admin: false, blocked: false });
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async user => {
+    setFields(user);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching Users.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des Utilisateurs.</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender() {
+  if (!UsersToShow) return 'Loading...';
+  function RenderList() {
     return (
       <>
-        <table className='list-render'>
+        <table className='Render-list'>
           <thead>
             <tr>
               <td>Nom</td>
@@ -46,18 +42,16 @@ function Users() {
             </tr>
           </thead>
           <tbody>
-            {tasksToShow.data.map(t => {
+            {UsersToShow.map(u => {
               return (
-                <tr key={t.id}>
-                  <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.firstname}</td>
-
-                  <td>{t.username}</td>
-                  <td>{t.email}</td>
-                  <td>{t.is_admin ? 'oui' : 'non'}</td>
-                  <td>{t.blocked ? 'Bloqué' : 'Autorisé'}</td>
+                <tr key={u.id}>
+                  <td>{u.firstname}</td>
+                  <td>{u.username}</td>
+                  <td>{u.email}</td>
+                  <td>{u.is_admin ? 'oui' : 'non'}</td>
+                  <td>{u.blocked ? 'Bloqué' : 'Autorisé'}</td>
                   <td>
-                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                    <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(u)} />
                   </td>
                 </tr>
               );
@@ -71,61 +65,20 @@ function Users() {
     <>
       <h1> Gestion des Utilisateurs</h1>
       <div>
-
-        <form className='form-inline' onSubmit={SaveTask}>
-          <input
-            className='input-form-all'
-            required
-            name='firstname'
-            type='text'
-            id='firstname'
-            minLength='3'
-            maxLength='20'
-            placeholder='Nouvel Utilisateur '
-            value={fields.firstname}
-            onChange={handleFieldChange}
-          />
-          <input
-            className='input-form-all'
-            required
-            type='text'
-            name='username'
-            id='username'
-            minLength='3'
-            maxLength='20'
-            placeholder='Pseudo'
-            value={fields.username}
-            onChange={handleFieldChange}
-          />
-
-          <input
-            className='input-form-all'
-            type='email'
-            id='email'
-            name='email'
-            placeholder='email '
-            value={fields.email}
-            onChange={handleFieldChange}
-            required
-          />
+        <form className='form-inline' onSubmit={SaveUser}>
           <div style={{ margin: '10px' }}><h3>Admin</h3></div>
-
           <label className='switch'>
-            <input
-              className='input-form-all'
+            <input className='input-form-all'
               required
               type='checkbox'
               name='is_admin'
               id='is_admin'
-              minLength='3'
-              maxLength='20'
               placeholder='Role'
               checked={fields.is_admin}
               onChange={handleFieldChange}
             />
             <div className='slider' />
           </label>
-
           <div style={{ margin: '10px' }}><h3>Autorisé/Bloqué</h3></div>
           <label className='switch'>
             <input
@@ -134,8 +87,6 @@ function Users() {
               type='checkbox'
               name='blocked'
               id='blocked'
-              minLength='3'
-              maxLength='20'
               placeholder='bloqué ? '
               checked={fields.blocked}
               onChange={handleFieldChange}
@@ -145,17 +96,17 @@ function Users() {
 
           <button
             className='form-button'
-            onClick={SaveTask}
-            disabled={newResourceIsSaving || fields.firstname === ''}
+            disabled={newResourceIsSaving || fields.name === ''}
+            onClick={SaveUser}
           >
-            Save
+            Enregistrer
           </button>
           {newResourceSaveError && (
-            <p className='errorText'>An error occured while saving the Recipes</p>
+            <p className='errorText'>Une erreur a la récuperation des Utilisateurs</p>
           )}
         </form>
       </div>
-      {listRender()}
+      {RenderList()}
     </>
   );
 }

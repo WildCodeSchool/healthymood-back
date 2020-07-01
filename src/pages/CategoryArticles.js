@@ -39,7 +39,7 @@ function CategoryArticles () {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.data.map(t => {
+          {tasksToShow.map(t => {
             return (
               <tr key={t.id}>
                 <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
