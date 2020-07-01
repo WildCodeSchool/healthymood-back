@@ -4,7 +4,7 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function CategoryArticles () {
+function CategoryArticles() {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
 
@@ -29,7 +29,7 @@ function CategoryArticles () {
     );
   }
   if (!tasksToShow) return 'Loading...';
-  function listRender () {
+  function listRender() {
     return (
       <table className='list-render'>
         <thead>
@@ -56,8 +56,8 @@ function CategoryArticles () {
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveTask}>
-        <div>
+      <div>
+        <form className='form-inline' onSubmit={SaveTask}>
           <input
             className='input-form-all'
             required
@@ -69,18 +69,19 @@ function CategoryArticles () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-        </div>
-        <button
-          className='form-button'
-          onClick={SaveTask}
-          disabled={newResourceIsSaving || fields.name === ''}
-        >
-          Save
+
+          <button
+            className='form-button'
+            onClick={SaveTask}
+            disabled={newResourceIsSaving || fields.name === ''}
+          >
+            Save
         </button>
-        {newResourceSaveError && (
-          <p className='errorText'>An error occured while saving the categories</p>
-        )}
-      </form>
+          {newResourceSaveError && (
+            <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
+          )}
+        </form>
+      </div>
       {listRender()}
     </>
 
