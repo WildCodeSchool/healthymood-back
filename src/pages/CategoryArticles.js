@@ -6,30 +6,30 @@ import '../Styles/Form.css';
 
 function CategoryArticles () {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: categoryToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
 
-  const DeleteTask = async (task) => {
+  const DeleteCategory = async (cat) => {
     if (window.confirm('Are you sure you want to delete this Catégorie?')) {
-      deleteResource(task.id, { optimistic: true });
+      deleteResource(cat.id, { optimistic: true });
     }
   };
-  const SaveTask = async (event) => {
+  const SaveCategory = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
     setFields({ name: '' });
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async category => {
+    setFields(category);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching the tasks.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des Catégories.</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender () {
+  if (!categoryToShow) return 'Chargement...';
+  function RenderList() {
     return (
       <table className='render-list'>
         <thead>
@@ -39,13 +39,13 @@ function CategoryArticles () {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.map(t => {
+          {categoryToShow.map(c => {
             return (
-              <tr key={t.id}>
-                <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
+              <tr key={c.id}>
+                <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
                 <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                  <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteCategory(c)} />
                 </td>
               </tr>
             );
@@ -57,7 +57,7 @@ function CategoryArticles () {
   return (
     <>
       <div>
-        <form className='form-inline' onSubmit={SaveTask}>
+        <form className='form-inline' onSubmit={SaveCategory}>
           <input
             className='input-form-all'
             required
@@ -72,7 +72,7 @@ function CategoryArticles () {
 
           <button
             className='form-button'
-            onClick={SaveTask}
+            onClick={SaveCategory}
             disabled={newResourceIsSaving || fields.name === ''}
           >
             Save
@@ -82,7 +82,7 @@ function CategoryArticles () {
           )}
         </form>
       </div>
-      {listRender()}
+      {RenderList()}
     </>
 
   );
