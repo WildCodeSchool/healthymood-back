@@ -58,22 +58,21 @@ function Meals () {
     );
   }
   return (
-    <> 
-     <div>
+    <><div>
       <form className='form-inline' onSubmit={SaveMeal}>
-      
-          <input
-            className='input-form-all'
-            required
-            name='name'
-            id='name'
-            minLength='3'
-            maxLength='20'
-            placeholder='Nouveau type de repas'
-            value={fields.name}
-            onChange={handleFieldChange}
-          />
-       
+
+        <input
+          className='input-form-all'
+          required
+          name='name'
+          id='name'
+          minLength='3'
+          maxLength='20'
+          placeholder='Nouveau type de repas'
+          value={fields.name}
+          onChange={handleFieldChange}
+        />
+
         <button
           className='form-button'
           onClick={SaveMeal}
@@ -84,7 +83,7 @@ function Meals () {
         {newResourceSaveError && (
           <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de repas.</p>
         )}
-      </form> 
+      </form>
       </div>
       {Renderlist()}
     </>

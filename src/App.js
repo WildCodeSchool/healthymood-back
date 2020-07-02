@@ -33,8 +33,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     <Route
       {...rest}
       render={({ location }) =>
-        token ? children : <Redirect to={{ pathname: '/login', state: { from: location } }} />
-      }
+        token ? children : <Redirect to={{ pathname: '/login', state: { from: location } }} />}
     />
   );
 };
@@ -57,14 +56,14 @@ const App = () => {
               <SideBar />
               <Layout className='site-layout'>
                 <TopBar />
-                <Content >
+                <Content>
                   <PrivateRoute exact path='/'>
                     <Home />
                   </PrivateRoute>
                   <PrivateRoute exact path='/articles'>
                     <Articles />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/recettes'>
+                  <PrivateRoute exact path='/recipes'>
                     <Recipes />
                   </PrivateRoute>
                   <PrivateRoute exact path='/article_categories'>
@@ -88,7 +87,7 @@ const App = () => {
                   <PrivateRoute exact path='/pages'>
                     <Pages />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/utilisateurs'>
+                  <PrivateRoute exact path='/users'>
                     <Users />
                   </PrivateRoute>
                   <PrivateRoute exact path='/mon-profil'>

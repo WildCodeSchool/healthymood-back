@@ -4,11 +4,8 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients() {
-  const initialForm = ({
-    name: '',
-    is_allergen: false
-  });
+function Ingredients () {
+  const initialForm = ({ name: '', is_allergen: false });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
 
@@ -33,7 +30,7 @@ function Ingredients() {
     );
   }
   if (!ingredientsToShow) return 'Chargement...';
-  function Renderlist() {
+  function Renderlist () {
     return (
       <table className='render-list'>
         <thead>
@@ -68,7 +65,7 @@ function Ingredients() {
         <form className='form-inline' onSubmit={SaveIngredients}>
 
           <input
-            className="input-form-all"
+            className='input-form-all'
             required
             name='name'
             id='name'
@@ -80,6 +77,7 @@ function Ingredients() {
           />
           <label>Allergene ?</label>
           <input
+            style={{ margin: '10px' }}
             type='checkbox'
             id='is_allergen'
             name='is_allergen'
@@ -93,7 +91,7 @@ function Ingredients() {
             disabled={newResourceIsSaving}
           >
             Enregistrer
-        </button>
+          </button>
           {newResourceSaveError && (
             <p className='errorText'>Une erreur s'est produite lors de la sauvegarde de l'ingrédient.</p>
           )}

@@ -57,9 +57,12 @@ function Dishes () {
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveDishes}>
-        <div>
+
+      <div>
+        <form className='form-inline' onSubmit={SaveDishes}>
+
           <input
+            className='input-form-all'
             required
             name='name'
             id='name'
@@ -69,18 +72,19 @@ function Dishes () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-        </div>
-        <button
-          className='form-button'
-          onClick={SaveDishes}
-          disabled={newResourceIsSaving || fields.name === ''}
-        >
+
+          <button
+            className='form-button'
+            onClick={SaveDishes}
+            disabled={newResourceIsSaving || fields.name === ''}
+          >
           Enregistrer
-        </button>
-        {newResourceSaveError && (
-          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de plat.</p>
-        )}
-      </form>
+          </button>
+          {newResourceSaveError && (
+            <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de plat.</p>
+          )}
+        </form>
+      </div>
       {Renderlist()}
     </>
 

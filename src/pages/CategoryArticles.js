@@ -5,31 +5,34 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function CategoryArticles () {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: categoryToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
+  const initialForm = ({
+    name: ''
+  });
+  const { fields, setFields, handleFieldChange } = useFormData(initialForm);
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: categoryArticlesToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
 
-  const DeleteCategory = async (cat) => {
-    if (window.confirm('Êtes vous sûr de vouloir supprimer cette Catégorie?')) {
-      deleteResource(cat.id, { optimistic: true });
+  const DeleteCategoryArticles = async (categoryArticles) => {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer cette catégorie d\'article?')) {
+      deleteResource(categoryArticles.id, { optimistic: true });
     }
   };
-  const SaveCategory = async (event) => {
+  const SaveCategoryArticles = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ name: '' });
+    setFields(initialForm);
   };
-  const fillForm = async category => {
-    setFields(category);
+  const fillForm = async categoryArticles => {
+    setFields(categoryArticles);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>Une erreur s'est produite lors de la récupération des Catégories.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des catégories d'articles.</p>
       </div>
     );
   }
-  if (!categoryToShow) return 'Chargement...';
-  function RenderList() {
+  if (!categoryArticlesToShow) return 'Chargement...';
+  function Renderlist () {
     return (
       <table className='render-list'>
         <thead>
@@ -39,13 +42,14 @@ function CategoryArticles () {
           </tr>
         </thead>
         <tbody>
-          {categoryToShow.map(c => {
+
+          {categoryArticlesToShow.map(t => {
             return (
-              <tr key={c.id}>
-                <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
+              <tr key={t.id}>
+                <td>{t.name}</td>
                 <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteCategory(c)} />
+                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteCategoryArticles(t)} />
                 </td>
               </tr>
             );
@@ -57,7 +61,8 @@ function CategoryArticles () {
   return (
     <>
       <div>
-        <form className='form-inline' onSubmit={SaveCategory}>
+        <form className='form-inline' onSubmit={SaveCategoryArticles}>
+
           <input
             className='input-form-all'
             required
@@ -65,14 +70,13 @@ function CategoryArticles () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder="New Catégorie d'article"
+            placeholder="Nouvelle catégorie d'article"
             value={fields.name}
             onChange={handleFieldChange}
           />
-
           <button
             className='form-button'
-            onClick={SaveCategory}
+            onClick={SaveCategoryArticles}
             disabled={newResourceIsSaving || fields.name === ''}
           >
             Save
@@ -80,9 +84,11 @@ function CategoryArticles () {
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
           )}
+
         </form>
       </div>
-      {RenderList()}
+
+      {Renderlist()}
     </>
 
   );
