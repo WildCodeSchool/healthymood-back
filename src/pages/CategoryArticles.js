@@ -4,7 +4,7 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function CategoryArticles() {
+function CategoryArticles () {
   const initialForm = ({
     name: ''
   });
@@ -32,7 +32,7 @@ function CategoryArticles() {
     );
   }
   if (!categoryArticlesToShow) return 'Chargement...';
-  function Renderlist() {
+  function Renderlist () {
     return (
       <table className='render-list'>
         <thead>
@@ -61,7 +61,8 @@ function CategoryArticles() {
     <>
       <form className='form-inline' onSubmit={SaveCategoryArticles}>
         <div>
-          <input className="input-form-all"
+          <input
+            className='input-form-all'
             required
             name='name'
             id='name'

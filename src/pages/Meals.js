@@ -61,7 +61,8 @@ function Meals () {
     <>
       <form className='form-inline' onSubmit={SaveMeal}>
         <div>
-          <input className="input-form-all"
+          <input
+            className='input-form-all'
             required
             name='name'
             id='name'

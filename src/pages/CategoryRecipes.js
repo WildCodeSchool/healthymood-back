@@ -3,7 +3,7 @@ import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
-function CategoryRecipes() {
+function CategoryRecipes () {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: CatRecipeToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
 
@@ -28,7 +28,7 @@ function CategoryRecipes() {
     );
   }
   if (!CatRecipeToShow) return 'Loading...';
-  function Renderlist() {
+  function Renderlist () {
     return (
       <table className='render-list'>
         <thead>
@@ -58,7 +58,8 @@ function CategoryRecipes() {
       <div>
         <form className='form-inline' onSubmit={SaveCatRecipe}>
 
-          <input className="input-form-all"
+          <input
+            className='input-form-all'
             required
             name='name'
             id='name'
@@ -75,7 +76,7 @@ function CategoryRecipes() {
             disabled={newResourceIsSaving || fields.name === ''}
           >
             Save
-        </button>
+          </button>
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la Catégorie Recette</p>
           )}
