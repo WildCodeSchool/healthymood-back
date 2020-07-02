@@ -38,12 +38,6 @@ const AdminAuth = () => {
         <div className='form-group'>
           <label htmlFor='password'>Mot de passe</label>
           <input type='password' name='password' id='password' required placeholder='Mot de passe sécurisé' />
-          <div className='remember-forget-container'>
-            <input className='remember-checkbox' type='checkbox' checked='checked' name='remember' />
-            <label className='remember-label' htmlFor='remember'>
-              Se souvenir de moi
-            </label>
-          </div>
         </div>
         <button className='btn' type='submit' disabled={!!loading}>Connexion</button>
       </form>

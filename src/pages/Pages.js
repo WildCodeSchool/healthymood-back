@@ -6,6 +6,7 @@ import authContext from '../context/authContext';
 import jwtDecode from 'jwt-decode';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../Styles/EditorForm.css';
 
 const Pages = () => {
   let formData;
@@ -58,7 +59,7 @@ const Pages = () => {
   }, [state]);
 
   return (
-    <div>
+    <>
       <ToastContainer
         position='top-right'
         autoclose={5000}
@@ -94,14 +95,14 @@ const Pages = () => {
           onSaveContent={(e) => handleEditorChange(e)}
         />
         <label className='hide-label' htmlFor='content'>contenu</label>
-        <textarea className='hidden' name='content' value={content.content} required />
+        <textarea className='hidden' name='content' value={content.content} />
         <label htmlFor='published'>
           Publier ?
         </label>
         <input type='checkbox' name='published' />
         <button type='submit' className='btn' disabled={!!state.loading}>Ajouter</button>
       </form>
-    </div>
+    </>
   );
 };
 

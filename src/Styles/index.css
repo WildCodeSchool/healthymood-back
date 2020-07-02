@@ -10,7 +10,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}  
+}
+
+main.ant-layout-content {
+  overflow-y: auto;
+}
 
 .btn {
   padding: 10px 20px;

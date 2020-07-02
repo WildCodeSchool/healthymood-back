@@ -1,0 +1,11 @@
+.editor-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-form input {
+  width: 62.5vw;
+  margin: 0px 0px 10px 0px;
+}
