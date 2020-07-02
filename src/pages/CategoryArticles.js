@@ -9,7 +9,7 @@ function CategoryArticles () {
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: categoryToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
 
   const DeleteCategory = async (cat) => {
-    if (window.confirm('Are you sure you want to delete this Catégorie?')) {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer cette Catégorie?')) {
       deleteResource(cat.id, { optimistic: true });
     }
   };
