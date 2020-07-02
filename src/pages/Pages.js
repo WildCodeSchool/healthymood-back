@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import EditorComponent from '../components/EditorComponent';
 import useEditor from '../hooks/useEditor';
 import API from '../services/API';
-import authContext from '../context/authContext';
-import jwtDecode from 'jwt-decode';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../Styles/EditorForm.css';
@@ -17,8 +15,6 @@ const Pages = () => {
     message: null,
     success: false
   });
-  const { token } = useContext(authContext);
-  const userIdFromToken = jwtDecode(token).id;
 
   const toastr = (success, show, message) => {
     if (show) {
@@ -39,7 +35,7 @@ const Pages = () => {
       content: data.content.value,
       slug: data.slug.value,
       published: data.published.checked,
-      user_id: userIdFromToken
+      user_id: 25
     };
     API.post('/generic_pages', formData)
       .then(res => {
