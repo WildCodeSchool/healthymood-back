@@ -62,6 +62,7 @@ function CategoryArticles () {
       <form className='form-inline' onSubmit={SaveCategoryArticles}>
         <div>
           <input
+            className='input-form-all'
             required
             name='name'
             id='name'
@@ -85,7 +86,6 @@ function CategoryArticles () {
       </form>
       {Renderlist()}
     </>
-
   );
 }
 
