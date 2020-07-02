@@ -31,7 +31,7 @@ function CategoryArticles () {
   if (!tasksToShow) return 'Loading...';
   function listRender () {
     return (
-      <table className='list-render'>
+      <table className='render-list'>
         <thead>
           <tr>
             <td>Nom</td>

@@ -5,11 +5,10 @@ import { EditOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 import '../Styles/Users.css';
 
-function Users() {
+function Users () {
   const initialForm = ({ is_admin: false, blocked: false });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceSaveError, newResourceIsSaving, collection: UsersToShow, fetchCollectionError: fetchError } = useResourceCollection('/users');
-
 
   const SaveUser = async (event) => {
     event.preventDefault();
@@ -27,7 +26,7 @@ function Users() {
     );
   }
   if (!UsersToShow) return 'Loading...';
-  function RenderList() {
+  function RenderList () {
     return (
       <>
         <table className='Render-list'>
@@ -68,7 +67,8 @@ function Users() {
         <form className='form-inline' onSubmit={SaveUser}>
           <div style={{ margin: '10px' }}><h3>Admin</h3></div>
           <label className='switch'>
-            <input className='input-form-all'
+            <input
+              className='input-form-all'
               required
               type='checkbox'
               name='is_admin'
@@ -96,7 +96,7 @@ function Users() {
 
           <button
             className='form-button'
-            disabled={newResourceIsSaving || fields.name === ''}
+            disabled={newResourceIsSaving}
             onClick={SaveUser}
           >
             Enregistrer

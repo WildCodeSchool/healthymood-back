@@ -5,7 +5,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function Dishes () {
-  const initialForm = ({name: ''});
+  const initialForm = ({ name: '' });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: dishesToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/dish_types');
 
@@ -88,4 +88,3 @@ function Dishes () {
 }
 
 export default Dishes;
-

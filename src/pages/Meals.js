@@ -5,33 +5,36 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function Meals () {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/meal_types');
+  const initialForm = ({
+    name: ''
+  });
+  const { fields, setFields, handleFieldChange } = useFormData(initialForm);
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: mealsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/meal_types');
 
-  const DeleteTask = async (task) => {
-    if (window.confirm('Are you sure you want to delete this Meal Type ?')) {
-      deleteResource(task.id, { optimistic: true });
+  const DeleteMeals = async (meal) => {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de repas ?')) {
+      deleteResource(meal.id, { optimistic: true });
     }
   };
-  const SaveTask = async (event) => {
+  const SaveMeal = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ name: '' });
+    setFields(initialForm);
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async meal => {
+    setFields(meal);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching List of Meals.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des types de repas.</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender () {
+  if (!mealsToShow) return 'Chargement...';
+  function Renderlist () {
     return (
-      <table className='list-render'>
+      <table className='render-list'>
         <thead>
           <tr>
             <td>Nom</td>
@@ -39,13 +42,13 @@ function Meals () {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.data.map(t => {
+          {mealsToShow.map(t => {
             return (
               <tr key={t.id}>
-                <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
+                <td>{t.name}</td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteMeals(t)} />
                 </td>
               </tr>
             );
@@ -55,9 +58,10 @@ function Meals () {
     );
   }
   return (
-    <>
-      <div>
-        <form className='form-inline' onSubmit={SaveTask}>
+    <> 
+     <div>
+      <form className='form-inline' onSubmit={SaveMeal}>
+      
           <input
             className='input-form-all'
             required
@@ -65,23 +69,24 @@ function Meals () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder='New Type de repas'
+            placeholder='Nouveau type de repas'
             value={fields.name}
             onChange={handleFieldChange}
           />
-          <button
-            className='form-button'
-            onClick={SaveTask}
-            disabled={newResourceIsSaving || fields.name === ''}
-          >
-            Save
-          </button>
-          {newResourceSaveError && (
-            <p className='errorText'>An error occured while saving the list of Meal</p>
-          )}
-        </form>
+       
+        <button
+          className='form-button'
+          onClick={SaveMeal}
+          disabled={newResourceIsSaving || fields.name === ''}
+        >
+          Save
+        </button>
+        {newResourceSaveError && (
+          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de repas.</p>
+        )}
+      </form> 
       </div>
-      {listRender()}
+      {Renderlist()}
     </>
 
   );
