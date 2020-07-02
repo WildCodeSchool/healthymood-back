@@ -67,6 +67,7 @@ function Ingredients () {
       <form className='form-inline' onSubmit={SaveIngredients}>
         <div>
           <input
+            className='input-form-all'
             required
             name='name'
             id='name'

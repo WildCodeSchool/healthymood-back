@@ -62,7 +62,7 @@ const SideBar = () => {
             <Link to='/article_categories'>Catégories articles</Link>
           </Menu.Item>
           <Menu.Item key='6'>
-            <Link to='/categories-recettes'>Catégories recettes</Link>
+            <Link to='/recipe_categories'>Catégories recettes</Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key='7' icon={<FormOutlined />}>

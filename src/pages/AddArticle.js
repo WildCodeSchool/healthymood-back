@@ -5,7 +5,6 @@ const AddArticle = () => {
   return (
     <>
       <p>Test AddArticle</p>
-
     </>
   );
 };

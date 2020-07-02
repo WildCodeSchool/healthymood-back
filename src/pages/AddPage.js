@@ -7,7 +7,6 @@ const AddPage = () => {
     <>
       <p>Test AddPage</p>
       <EditorComponent />
-
     </>
   );
 };
