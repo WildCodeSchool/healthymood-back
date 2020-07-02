@@ -5,32 +5,32 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 function CategoryRecipes() {
   const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: CatRecipeToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
 
   const DeleteTask = async (task) => {
-    if (window.confirm('Are you sure you want to delete this Recipe ?')) {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer cette catégorie de recette?')) {
       deleteResource(task.id, { optimistic: true });
     }
   };
-  const SaveTask = async (event) => {
+  const SaveCatRecipe = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
     setFields({ name: '' });
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async cat => {
+    setFields(cat);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching Recipe.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des catégories</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender() {
+  if (!CatRecipeToShow) return 'Loading...';
+  function Renderlist() {
     return (
-      <table className='list-render'>
+      <table className='render-list'>
         <thead>
           <tr>
             <td>Nom</td>
@@ -38,13 +38,13 @@ function CategoryRecipes() {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.data.map(t => {
+          {CatRecipeToShow.map(c => {
             return (
-              <tr key={t.id}>
-                <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
+              <tr key={c.id}>
+                <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
                 <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                  <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
                 </td>
               </tr>
             );
@@ -56,7 +56,7 @@ function CategoryRecipes() {
   return (
     <>
       <div>
-        <form className='form-inline' onSubmit={SaveTask}>
+        <form className='form-inline' onSubmit={SaveCatRecipe}>
 
           <input className="input-form-all"
             required
@@ -71,17 +71,17 @@ function CategoryRecipes() {
 
           <button
             className='form-button'
-            onClick={SaveTask}
+            onClick={SaveCatRecipe}
             disabled={newResourceIsSaving || fields.name === ''}
           >
             Save
         </button>
           {newResourceSaveError && (
-            <p className='errorText'>An error occured while saving the Recipes</p>
+            <p className='errorText'>Une erreur lors de l'ajout de la Catégorie Recette</p>
           )}
         </form>
       </div>
-      {listRender()}
+      {Renderlist()}
     </>
   );
 }

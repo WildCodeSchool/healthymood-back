@@ -5,33 +5,36 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function CategoryArticles() {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
-  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: tasksToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
+  const initialForm = ({
+    name: ''
+  });
+  const { fields, setFields, handleFieldChange } = useFormData(initialForm);
+  const { saveResource, newResourceIsSaving, newResourceSaveError, collection: categoryArticlesToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
 
-  const DeleteTask = async (task) => {
-    if (window.confirm('Are you sure you want to delete this Catégorie?')) {
-      deleteResource(task.id, { optimistic: true });
+  const DeleteCategoryArticles = async (categoryArticles) => {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer cette catégorie d\'article?')) {
+      deleteResource(categoryArticles.id, { optimistic: true });
     }
   };
-  const SaveTask = async (event) => {
+  const SaveCategoryArticles = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ name: '' });
+    setFields(initialForm);
   };
-  const fillForm = async task => {
-    setFields(task);
+  const fillForm = async categoryArticles => {
+    setFields(categoryArticles);
   };
   if (fetchError) {
     return (
       <div>
-        <p className='errorText'>An error occured while fetching the tasks.</p>
+        <p className='errorText'>Une erreur s'est produite lors de la récupération des catégories d'articles.</p>
       </div>
     );
   }
-  if (!tasksToShow) return 'Loading...';
-  function listRender() {
+  if (!categoryArticlesToShow) return 'Chargement...';
+  function Renderlist() {
     return (
-      <table className='list-render'>
+      <table className='render-list'>
         <thead>
           <tr>
             <td>Nom</td>
@@ -39,13 +42,13 @@ function CategoryArticles() {
           </tr>
         </thead>
         <tbody>
-          {tasksToShow.data.map(t => {
+          {categoryArticlesToShow.map(t => {
             return (
               <tr key={t.id}>
-                <td style={{ opacity: (!!t._saving || !!t._deleting) ? 0.7 : 1 }}>{t.name}</td>
+                <td>{t.name}</td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(t)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeleteCategoryArticles(t)} />
                 </td>
               </tr>
             );
@@ -56,7 +59,7 @@ function CategoryArticles() {
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveTask}>
+      <form className='form-inline' onSubmit={SaveCategoryArticles}>
         <div>
           <input className="input-form-all"
             required
@@ -64,25 +67,24 @@ function CategoryArticles() {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder="New Catégorie d'article"
+            placeholder="Nouvelle catégorie d'article"
             value={fields.name}
             onChange={handleFieldChange}
           />
         </div>
         <button
           className='form-button'
-          onClick={SaveTask}
+          onClick={SaveCategoryArticles}
           disabled={newResourceIsSaving || fields.name === ''}
         >
           Save
         </button>
         {newResourceSaveError && (
-          <p className='errorText'>An error occured while saving the categories</p>
+          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde de la catégorie d'articles.</p>
         )}
       </form>
-      {listRender()}
+      {Renderlist()}
     </>
-
   );
 }
 
