@@ -145,7 +145,7 @@ export default function useResourceCollection (collectionRelativeUrl) {
 
   const deleteResource = async (id, options = {}) => {
     const { optimistic } = options;
-    return new Promise(async (resolve, reject) => { // eslint-disable-line
+    return new Promise(async (resolve, reject) => { // eslint-disable-lint
       if (optimistic) {
         let savedAttributes = {};
         try {

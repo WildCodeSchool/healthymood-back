@@ -86,7 +86,7 @@ const SideBar = () => {
           </Menu.Item>
         </SubMenu>
         <Menu.Item key='13' icon={<TeamOutlined />}>
-          <Link to='/utilisateurs'>Gérer les utilisateurs</Link>
+          <Link to='/users'>Gérer les utilisateurs</Link>
         </Menu.Item>
         <Menu.Item key='14' icon={<UserOutlined />}>
           <Link to='/mon-profil'>Mon Profil</Link>

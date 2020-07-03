@@ -59,9 +59,10 @@ function Diets () {
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveDiets}>
-        <div>
+      <div>
+        <form className='form-inline' onSubmit={SaveDiets}>
           <input
+            className='input-form-all'
             required
             name='name'
             id='name'
@@ -71,18 +72,19 @@ function Diets () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-        </div>
-        <button
-          className='form-button'
-          onClick={SaveDiets}
-          disabled={newResourceIsSaving}
-        >
+
+          <button
+            className='form-button'
+            onClick={SaveDiets}
+            disabled={newResourceIsSaving}
+          >
           Enregistrer
-        </button>
-        {newResourceSaveError && (
-          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de régime.</p>
-        )}
-      </form>
+          </button>
+          {newResourceSaveError && (
+            <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de régime.</p>
+          )}
+        </form>
+      </div>
       {Renderlist()}
     </>
 
