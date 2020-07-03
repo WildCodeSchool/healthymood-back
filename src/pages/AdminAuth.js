@@ -16,7 +16,7 @@ const AdminAuth = () => {
     console.log('post');
     API.post('/auth/login', { email: data.email.value, password: data.password.value })
       .then(res => {
-        console.log(res.data.token);
+        console.log(res.data);
         setToken(res.data.token);
         setLoading(false);
         history.push('/');
@@ -25,6 +25,7 @@ const AdminAuth = () => {
         console.log(err);
       });
   };
+  console.log('render');
   return (
     <main className='login-page'>
       <img className='login-logo' src={logo} alt='healthymood logo' />
@@ -37,12 +38,6 @@ const AdminAuth = () => {
         <div className='form-group'>
           <label htmlFor='password'>Mot de passe</label>
           <input type='password' name='password' id='password' required placeholder='Mot de passe sécurisé' />
-          <div className='remember-forget-container'>
-            <input className='remember-checkbox' type='checkbox' checked='checked' name='remember' />
-            <label className='remember-label' htmlFor='remember'>
-              Se souvenir de moi
-            </label>
-          </div>
         </div>
         <button className='btn' type='submit' disabled={!!loading}>Connexion</button>
       </form>

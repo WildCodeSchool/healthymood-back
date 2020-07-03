@@ -93,6 +93,7 @@ const App = () => {
                   <PrivateRoute exact path='/mon-profil'>
                     <AdminProfil />
                   </PrivateRoute>
+                  <PrivateRoute exact path='/*' />
                 </Content>
               </Layout>
             </Layout>

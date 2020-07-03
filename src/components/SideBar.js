@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import '../Styles/SideBar.css';
 import logo from '../images/healthymood-logo.png';
-import smallLogo from '../images/healthymood-small.png';
+import smallLogo from '../images/hm-logo-small.png';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -59,7 +59,7 @@ const SideBar = () => {
 
         <SubMenu key='sub3' icon={<BookOutlined />} title='Catégories'>
           <Menu.Item key='5'>
-            <Link to='/article_categories'>Catégories articles</Link>
+            <Link to='/categories-articles'>Catégories articles</Link>
           </Menu.Item>
           <Menu.Item key='6'>
             <Link to='/recipe_categories'>Catégories recettes</Link>
