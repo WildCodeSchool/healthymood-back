@@ -62,7 +62,6 @@ function Users () {
   }
   return (
     <>
-      <h1> Gestion des Utilisateurs</h1>
       <div>
         <form className='form-inline' onSubmit={SaveUser}>
           <div style={{ margin: '10px' }}><h3>Admin</h3></div>

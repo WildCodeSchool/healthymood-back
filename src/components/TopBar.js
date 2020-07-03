@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Layout, Breadcrumb, Avatar, Dropdown, Menu } from 'antd';
+import { Layout, Avatar, Dropdown, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import avatar from '../images/Luffy-One-Piece.png';
@@ -37,10 +37,6 @@ const TopBar = () => {
         </Dropdown>
         ,
       </Header>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-
-      </Breadcrumb>
     </>
   );
 };
