@@ -4,7 +4,7 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients () {
+function Ingredients() {
   const initialForm = ({ name: '', is_allergen: false });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
@@ -30,7 +30,7 @@ function Ingredients () {
     );
   }
   if (!ingredientsToShow) return 'Chargement...';
-  function Renderlist () {
+  function Renderlist() {
     return (
       <table className='render-list'>
         <thead>
@@ -61,10 +61,11 @@ function Ingredients () {
   }
   return (
     <>
-      <div>
+      <div className="form-top">
         <form className='form-inline' onSubmit={SaveIngredients}>
 
           <input
+            className='input-form-all'
             type='text'
             required
             name='name'

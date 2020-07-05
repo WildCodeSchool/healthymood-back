@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import produce from 'immer';
 
-export default function useFormData (initialValues = {}) {
+export default function useFormData(initialValues = {}) {
   const [fields, setFields] = useState(initialValues);
-  const changeField = (key, value) => {
-    setFields(produce(fields, draft => {
-      draft[key] = value;
-    }));
+  const changeField = (name, value) => {
+    setFields({ ...fields, [name]: value });
   };
   const handleFieldChange = (event) => {
     const target = event.target;
@@ -18,7 +15,6 @@ export default function useFormData (initialValues = {}) {
   return {
     setFields,
     fields,
-    changeField,
     handleFieldChange
   };
 }

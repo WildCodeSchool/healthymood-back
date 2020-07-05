@@ -30,6 +30,8 @@ function CategoryRecipes () {
   if (!CatRecipeToShow) return 'Loading...';
   function Renderlist () {
     return (
+      <>
+        <h2>Carégorie de Recettes</h2>
       <table className='render-list'>
         <thead>
           <tr>
@@ -51,11 +53,12 @@ function CategoryRecipes () {
           })}
         </tbody>
       </table>
+      </>
     );
   }
   return (
     <>
-      <div>
+      <div className="form-top">
         <form className='form-inline' onSubmit={SaveCatRecipe}>
 
           <input

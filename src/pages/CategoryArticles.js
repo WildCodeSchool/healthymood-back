@@ -34,6 +34,8 @@ function CategoryArticles () {
   if (!categoryArticlesToShow) return 'Chargement...';
   function Renderlist () {
     return (
+      <>
+      <h2>Carégorie d'articles</h2>
       <table className='render-list'>
         <thead>
           <tr>
@@ -56,11 +58,12 @@ function CategoryArticles () {
           })}
         </tbody>
       </table>
+      </>
     );
   }
   return (
     <>
-      <div>
+      <div className="form-top">
         <form className='form-inline' onSubmit={SaveCategoryArticles}>
 
           <input

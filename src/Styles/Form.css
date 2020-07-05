@@ -14,6 +14,13 @@
 .form-inline label {
   margin: 5px 10px 5px 0;
 }
+.form-top{
+  padding-top: 20px;
+}
+.first-tr{
+  font-size: 18px;
+  font-weight: 600;
+}
 
 .input-form-all{
   vertical-align: middle;

@@ -58,7 +58,7 @@ function Dishes () {
   return (
     <>
 
-      <div>
+      <div className="form-top">
         <form className='form-inline' onSubmit={SaveDishes}>
 
           <input

@@ -59,7 +59,7 @@ const SideBar = () => {
 
         <SubMenu key='sub3' icon={<BookOutlined />} title='Catégories'>
           <Menu.Item key='5'>
-            <Link to='/categories-articles'>Catégories articles</Link>
+            <Link to='/article_categories'>Catégories articles</Link>
           </Menu.Item>
           <Menu.Item key='6'>
             <Link to='/recipe_categories'>Catégories recettes</Link>
