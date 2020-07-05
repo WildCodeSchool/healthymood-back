@@ -27,7 +27,7 @@ function CategoryRecipes () {
       </div>
     );
   }
-  if (!CatRecipeToShow) return 'Loading...';
+  if (!CatRecipeToShow) return 'Chargement...';
   function Renderlist () {
     return (
       <>
@@ -68,7 +68,7 @@ function CategoryRecipes () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder='Nouvel Catégorie de recette '
+            placeholder='Nouvelle Catégorie de recette '
             value={fields.name}
             onChange={handleFieldChange}
           />
@@ -78,7 +78,7 @@ function CategoryRecipes () {
             onClick={SaveCatRecipe}
             disabled={newResourceIsSaving || fields.name === ''}
           >
-            Save
+            Enregistrer
           </button>
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la Catégorie Recette</p>

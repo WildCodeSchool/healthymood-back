@@ -36,6 +36,7 @@ function Ingredients () {
         <thead>
           <tr>
             <td>Nom</td>
+            <td>Calories / 100gr</td>
             <td>Allergène</td>
             <td>Actions</td>
           </tr>
@@ -45,6 +46,7 @@ function Ingredients () {
             return (
               <tr key={t.id}>
                 <td>{t.name}</td>
+                <td>{t.calories}</td>
                 <td>
                   {t.is_allergen ? 'oui' : 'non'}
                 </td>
@@ -67,7 +69,6 @@ function Ingredients () {
           <input
             className='input-form-all'
             type='text'
-            required
             name='name'
             id='name'
             minLength='3'
@@ -75,6 +76,18 @@ function Ingredients () {
             placeholder='Nouvel ingredient'
             value={fields.name}
             onChange={handleFieldChange}
+            required
+          />
+          <input
+            type='text'
+            name='calories'
+            id='calories'
+            minLength='1'
+            maxLength='20'
+            placeholder='Calories / 100gr'
+            value={fields.calories}
+            onChange={handleFieldChange}
+            required
           />
           <label>Allergene ?</label>
           <input
@@ -88,7 +101,6 @@ function Ingredients () {
 
           <button
             className='form-button'
-            onClick={SaveIngredients}
             disabled={newResourceIsSaving}
           >
             Enregistrer

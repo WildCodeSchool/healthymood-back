@@ -73,13 +73,12 @@ function Meals () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-
           <button
             className='form-button'
             onClick={SaveMeal}
             disabled={newResourceIsSaving || fields.name === ''}
           >
-            Save
+          Enregistrer
           </button>
           {newResourceSaveError && (
             <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de repas.</p>
