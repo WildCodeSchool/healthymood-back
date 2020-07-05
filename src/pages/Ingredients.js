@@ -36,6 +36,7 @@ function Ingredients () {
         <thead>
           <tr>
             <td>Nom</td>
+            <td>Calories / 100gr</td>
             <td>Allergène</td>
             <td>Actions</td>
           </tr>
@@ -45,6 +46,7 @@ function Ingredients () {
             return (
               <tr key={t.id}>
                 <td>{t.name}</td>
+                <td>{t.calories}</td>
                 <td>
                   {t.is_allergen ? 'oui' : 'non'}
                 </td>
@@ -73,6 +75,17 @@ function Ingredients () {
             maxLength='20'
             placeholder='Nouvel ingredient'
             value={fields.name}
+            onChange={handleFieldChange}
+          />
+          <input
+            type='text'
+            required
+            name='calories'
+            id='calories'
+            minLength='3'
+            maxLength='20'
+            placeholder='Calories / 100gr'
+            value={fields.calories}
             onChange={handleFieldChange}
           />
           <label>Allergene ?</label>

@@ -15,6 +15,10 @@
   margin: 10px;
 }
 
+#calories {
+  margin: 10px;
+}
+
 .input-form-all{
   vertical-align: middle;
   margin: 5px 10px 5px 0;
@@ -56,7 +60,8 @@ th {
 td, th { 
   padding: 10px; 
   border: 1px solid #ccc; 
-  text-align: center; 
+  text-align: center;
+  width: 20%;
 }
 .render-list td:nth-child(1){
   text-align: left;
