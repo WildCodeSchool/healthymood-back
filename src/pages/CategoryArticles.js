@@ -79,7 +79,7 @@ function CategoryArticles () {
             onClick={SaveCategoryArticles}
             disabled={newResourceIsSaving || fields.name === ''}
           >
-            Save
+            Enregistrer
           </button>
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
