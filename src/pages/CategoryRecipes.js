@@ -32,33 +32,33 @@ function CategoryRecipes () {
     return (
       <>
         <h2>Carégorie de Recettes</h2>
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {CatRecipeToShow.map(c => {
-            return (
-              <tr key={c.id}>
-                <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {CatRecipeToShow.map(c => {
+              return (
+                <tr key={c.id}>
+                  <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </>
     );
   }
   return (
     <>
-      <div className="form-top">
+      <div className='form-top'>
         <form className='form-inline' onSubmit={SaveCatRecipe}>
 
           <input

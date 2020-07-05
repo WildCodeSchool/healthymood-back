@@ -59,7 +59,7 @@ function Meals () {
   }
   return (
     <>
-      <div className="form-top">
+      <div className='form-top'>
         <form className='form-inline' onSubmit={SaveMeal}>
 
           <input

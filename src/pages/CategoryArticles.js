@@ -35,35 +35,35 @@ function CategoryArticles () {
   function Renderlist () {
     return (
       <>
-      <h2>Carégorie d'articles</h2>
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
+        <h2>Carégorie d'articles</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
 
-          {categoryArticlesToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteCategoryArticles(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            {categoryArticlesToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteCategoryArticles(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </>
     );
   }
   return (
     <>
-      <div className="form-top">
+      <div className='form-top'>
         <form className='form-inline' onSubmit={SaveCategoryArticles}>
 
           <input

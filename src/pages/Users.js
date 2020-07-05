@@ -5,23 +5,22 @@ import { EditOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 import '../Styles/Users.css';
 
-function Users() {
+function Users () {
   const initialForm = ({ is_admin: false, blocked: false });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceSaveError, collection: UsersToShow, fetchCollectionError: fetchError } = useResourceCollection('/users');
 
-  const [isVisible, setIsvisible] = useState(false)
+  const [isVisible, setIsvisible] = useState(false);
 
   const SaveUser = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
     setFields({ is_admin: false, blocked: false });
-    setIsvisible(!isVisible)
+    setIsvisible(!isVisible);
   };
   const fillForm = async user => {
-    setIsvisible(true)
+    setIsvisible(true);
     setFields(user);
-
   };
   if (fetchError) {
     return (
@@ -31,7 +30,7 @@ function Users() {
     );
   }
   if (!UsersToShow) return 'Chargement...';
-  function RenderList() {
+  function RenderList () {
     return (
       <>
 
@@ -39,7 +38,7 @@ function Users() {
 
         <table className='Render-list'>
           <thead>
-            <tr className="first-tr">
+            <tr className='first-tr'>
               <td>Nom</td>
               <td>Pseudo</td>
               <td>Adresse de messagerie</td>
@@ -72,7 +71,7 @@ function Users() {
     <>
 
       {isVisible &&
-        <div className="form-top">
+        <div className='form-top'>
           <form className='form-inline' onSubmit={SaveUser}>
             <div style={{ margin: '10px' }}><h3>Admin</h3></div>
             <label className='switch'>
@@ -108,13 +107,12 @@ function Users() {
               onClick={SaveUser}
             >
               Enregistrer
-          </button>
+            </button>
             {newResourceSaveError && (
               <p className='errorText'>Une erreur a la récuperation des Utilisateurs</p>
             )}
           </form>
-        </div>
-      }
+        </div>}
       {RenderList()}
     </>
   );

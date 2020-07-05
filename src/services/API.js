@@ -6,7 +6,6 @@ const API = axios.create({ baseURL });
 
 export const defaultFetcher = (relativeUrl, ...options) => API.get(relativeUrl, ...options).then(res => res.data);
 
-
 const placeTokenInRequestHeaders = req => {
   const token = window.localStorage.getItem('authToken');
   if (token) {
