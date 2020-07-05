@@ -5,18 +5,26 @@
   background-color: gainsboro;
   padding: 10px;
 }
+.render-list > thead > tr > td {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+}
 
 .form-inline label {
   margin: 5px 10px 5px 0;
 }
 
-.form-inline input {
+.input-form-all{
   vertical-align: middle;
   margin: 5px 10px 5px 0;
   padding: 10px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
+
+  width: 15%;
+
 }
 
 .form-button {
@@ -59,12 +67,12 @@ td, th {
   color: #1a8ffb;
 }
 
-  .delete-icon {
-    font-size: 24px;
-    color: #ee5253;
-  }
+.delete-icon {
+  font-size: 24px;
+  color: #ee5253;
+}
 
-  @media 
+@media 
   only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 1024px)  {
 

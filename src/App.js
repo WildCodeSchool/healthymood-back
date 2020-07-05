@@ -56,20 +56,20 @@ const App = () => {
               <SideBar />
               <Layout className='site-layout'>
                 <TopBar />
-                <Content style={{ margin: '0 16px' }}>
+                <Content>
                   <PrivateRoute exact path='/'>
                     <Home />
                   </PrivateRoute>
                   <PrivateRoute exact path='/articles'>
                     <Articles />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/recettes'>
+                  <PrivateRoute exact path='/recipes'>
                     <Recipes />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/categories-articles'>
+                  <PrivateRoute exact path='/article_categories'>
                     <CategoryArticles />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/categories-recettes'>
+                  <PrivateRoute exact path='/recipe_categories'>
                     <CategoryRecipes />
                   </PrivateRoute>
                   <PrivateRoute exact path='/ingredients'>
@@ -78,7 +78,7 @@ const App = () => {
                   <PrivateRoute exact path='/dish_types'>
                     <Dishes />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/types-repas'>
+                  <PrivateRoute exact path='/meal_types'>
                     <Meals />
                   </PrivateRoute>
                   <PrivateRoute exact path='/diet'>
@@ -87,12 +87,13 @@ const App = () => {
                   <PrivateRoute exact path='/pages'>
                     <Pages />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/utilisateurs'>
+                  <PrivateRoute exact path='/users'>
                     <Users />
                   </PrivateRoute>
                   <PrivateRoute exact path='/mon-profil'>
                     <AdminProfil />
                   </PrivateRoute>
+                  <PrivateRoute exact path='/*' />
                 </Content>
               </Layout>
             </Layout>

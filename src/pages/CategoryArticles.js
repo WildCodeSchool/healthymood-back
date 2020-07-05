@@ -42,6 +42,7 @@ function CategoryArticles () {
           </tr>
         </thead>
         <tbody>
+
           {categoryArticlesToShow.map(t => {
             return (
               <tr key={t.id}>
@@ -59,9 +60,11 @@ function CategoryArticles () {
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveCategoryArticles}>
-        <div>
+      <div>
+        <form className='form-inline' onSubmit={SaveCategoryArticles}>
+
           <input
+            className='input-form-all'
             required
             name='name'
             id='name'
@@ -71,21 +74,22 @@ function CategoryArticles () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-        </div>
-        <button
-          className='form-button'
-          onClick={SaveCategoryArticles}
-          disabled={newResourceIsSaving || fields.name === ''}
-        >
-          Save
-        </button>
-        {newResourceSaveError && (
-          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde de la catégorie d'articles.</p>
-        )}
-      </form>
+          <button
+            className='form-button'
+            onClick={SaveCategoryArticles}
+            disabled={newResourceIsSaving || fields.name === ''}
+          >
+            Save
+          </button>
+          {newResourceSaveError && (
+            <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
+          )}
+
+        </form>
+      </div>
+
       {Renderlist()}
     </>
-
   );
 }
 
