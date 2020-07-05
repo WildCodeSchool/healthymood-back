@@ -68,7 +68,6 @@ function Ingredients () {
 
           <input
             type='text'
-            required
             name='name'
             id='name'
             minLength='3'
@@ -76,17 +75,18 @@ function Ingredients () {
             placeholder='Nouvel ingredient'
             value={fields.name}
             onChange={handleFieldChange}
+            required
           />
           <input
             type='text'
-            required
             name='calories'
             id='calories'
-            minLength='3'
+            minLength='1'
             maxLength='20'
             placeholder='Calories / 100gr'
             value={fields.calories}
             onChange={handleFieldChange}
+            required
           />
           <label>Allergene ?</label>
           <input
@@ -100,7 +100,6 @@ function Ingredients () {
 
           <button
             className='form-button'
-            onClick={SaveIngredients}
             disabled={newResourceIsSaving}
           >
             Enregistrer
