@@ -4,8 +4,8 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients () {
-  const initialForm = ({ name: '', is_allergen: false });
+function Ingredients() {
+  const initialForm = ({ name: '', is_allergen: false, calories: 0 });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
 
@@ -30,35 +30,38 @@ function Ingredients () {
     );
   }
   if (!ingredientsToShow) return 'Chargement...';
-  function Renderlist () {
+  function Renderlist() {
     return (
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Calories / 100gr</td>
-            <td>Allergène</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {ingredientsToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>{t.calories}</td>
-                <td>
-                  {t.is_allergen ? 'oui' : 'non'}
-                </td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteIngredients(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <>
+        <h2>Ingrédients</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Calories / 100gr</td>
+              <td>Allergène</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {ingredientsToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>{t.calories}</td>
+                  <td>
+                    {t.is_allergen ? 'oui' : 'non'}
+                  </td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteIngredients(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
   }
   return (
@@ -79,26 +82,26 @@ function Ingredients () {
             required
           />
           <input
-            type='text'
+            className='input-form-all'
+            type='number'
             name='calories'
             id='calories'
             minLength='1'
             maxLength='20'
-            placeholder='Calories / 100gr'
             value={fields.calories}
+            placeholder='Calories / 100gr'
             onChange={handleFieldChange}
             required
           />
           <label>Allergene ?</label>
           <input
-            style={{ margin: '10px' }}
+            className='input-form-all'
             type='checkbox'
             id='is_allergen'
             name='is_allergen'
             checked={fields.is_allergen}
             onChange={handleFieldChange}
           />
-
           <button
             className='form-button'
             disabled={newResourceIsSaving}

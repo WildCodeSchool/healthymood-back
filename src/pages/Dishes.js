@@ -32,6 +32,8 @@ function Dishes () {
   if (!dishesToShow) return 'Chargement...';
   function Renderlist () {
     return (
+      <>
+        <h2 >Types de plats</h2>
       <table className='render-list'>
         <thead>
           <tr>
@@ -53,6 +55,7 @@ function Dishes () {
           })}
         </tbody>
       </table>
+      </>
     );
   }
   return (

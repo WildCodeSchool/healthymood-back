@@ -34,6 +34,8 @@ function Diets () {
   if (!dietToShow) return 'Chargement...';
   function Renderlist () {
     return (
+      <>
+        <h2>Régimes</h2>
       <table className='render-list'>
         <thead>
           <tr>
@@ -55,6 +57,7 @@ function Diets () {
           })}
         </tbody>
       </table>
+      </>
     );
   }
   return (

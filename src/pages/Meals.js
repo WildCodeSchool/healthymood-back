@@ -34,6 +34,8 @@ function Meals () {
   if (!mealsToShow) return 'Chargement...';
   function Renderlist () {
     return (
+      <>
+        <h2>Types de repas</h2>
       <table className='render-list'>
         <thead>
           <tr>
@@ -55,6 +57,7 @@ function Meals () {
           })}
         </tbody>
       </table>
+      </>
     );
   }
   return (
