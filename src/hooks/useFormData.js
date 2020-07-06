@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import produce from 'immer';
 
-export default function useFormData (initialValues = {}) {
+export default function useFormData(initialValues = {}) {
   const [fields, setFields] = useState(initialValues);
   const changeField = (key, value) => {
     setFields(produce(fields, draft => {

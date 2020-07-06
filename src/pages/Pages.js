@@ -41,7 +41,6 @@ const Pages = () => {
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => history.push(`/pages/edit/${p.id}`)} />
                   <DeleteOutlined className='delete-icon' />
-
                 </td>
               </tr>
             );
