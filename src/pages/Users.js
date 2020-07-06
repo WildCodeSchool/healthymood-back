@@ -5,7 +5,7 @@ import { EditOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 import '../Styles/Users.css';
 
-function Users() {
+function Users () {
   const initialForm = ({ is_admin: false, blocked: false });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceSaveError, collection: UsersToShow, fetchCollectionError: fetchError } = useResourceCollection('/users');
@@ -30,11 +30,11 @@ function Users() {
     );
   }
   if (!UsersToShow) return 'Chargement...';
-  function RenderList() {
+  function RenderList () {
     return (
       <>
 
-        <h2 style={{ marginTop: "20px" }}>Utilisateurs</h2>
+        <h2 style={{ marginTop: '20px' }}>Utilisateurs</h2>
 
         <table className='Render-list'>
           <thead>
