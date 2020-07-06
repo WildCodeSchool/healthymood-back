@@ -15,9 +15,6 @@
   margin: 10px;
 }
 
-#calories {
-  margin: 10px;
-}
 .form-top{
   padding-top: 20px;
 }
@@ -33,9 +30,7 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
-
   width: 15%;
-
 }
 
 .form-button {
