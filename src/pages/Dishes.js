@@ -33,28 +33,28 @@ function Dishes () {
   function Renderlist () {
     return (
       <>
-        <h2 >Types de plats</h2>
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {dishesToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteDishes(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        <h2>Types de plats</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {dishesToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteDishes(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </>
     );
   }

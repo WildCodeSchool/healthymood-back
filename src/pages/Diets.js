@@ -36,27 +36,27 @@ function Diets () {
     return (
       <>
         <h2>Régimes</h2>
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {dietToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteDiets(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {dietToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteDiets(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </>
     );
   }
