@@ -4,7 +4,8 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 function CategoryRecipes () {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
+  const initialform ={ name: '' }
+  const { fields, setFields, handleFieldChange } = useFormData( initialform);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: CatRecipeToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
 
   const DeleteTask = async (task) => {
@@ -14,8 +15,12 @@ function CategoryRecipes () {
   };
   const SaveCatRecipe = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
-    setFields({ name: '' });
+    if (fields.name === '')  {
+      alert('Veuillez remplir les champs requis')
+    } else {
+      saveResource(fields, { optimistic: true });
+      setFields(initialform);
+    }
   };
   const fillForm = async cat => {
     setFields(cat);
@@ -31,7 +36,7 @@ function CategoryRecipes () {
   function Renderlist () {
     return (
       <>
-        <h2>Carégorie de Recettes</h2>
+        <h2>Catégorie de Recettes</h2>
         <table className='render-list'>
           <thead>
             <tr>
@@ -60,7 +65,6 @@ function CategoryRecipes () {
     <>
       <div className='form-top'>
         <form className='form-inline' onSubmit={SaveCatRecipe}>
-
           <input
             className='input-form-all'
             required

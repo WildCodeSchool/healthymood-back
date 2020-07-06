@@ -18,8 +18,14 @@ function Meals () {
   };
   const SaveMeal = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
-    setFields(initialForm);
+    
+    if(fields.name === ''){
+      alert('Veuillez remplir le champs')
+    }else{
+      saveResource(fields, { optimistic: true });
+      setFields(initialForm);
+    }
+    
   };
   const fillForm = async meal => {
     setFields(meal);
@@ -78,6 +84,7 @@ function Meals () {
           />
           <button
             className='form-button'
+            type='submit'
             onClick={SaveMeal}
             disabled={newResourceIsSaving || fields.name === ''}
           >

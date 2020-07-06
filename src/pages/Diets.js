@@ -18,8 +18,12 @@ function Diets () {
   };
   const SaveDiets = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
-    setFields(initialForm);
+    if (fields.name === '') {
+      alert('Veuillez remplir les champs requis')
+    } else {
+      saveResource(fields, { optimistic: true });
+      setFields(initialForm);
+    }
   };
   const fillForm = async diet => {
     setFields(diet);
@@ -66,7 +70,6 @@ function Diets () {
         <form className='form-inline' onSubmit={SaveDiets}>
           <input
             className='input-form-all'
-            required
             name='name'
             id='name'
             minLength='3'
@@ -74,9 +77,11 @@ function Diets () {
             placeholder='Nouveau type de régime'
             value={fields.name}
             onChange={handleFieldChange}
+            required
           />
 
           <button
+            type="submit"
             className='form-button'
             onClick={SaveDiets}
             disabled={newResourceIsSaving}
