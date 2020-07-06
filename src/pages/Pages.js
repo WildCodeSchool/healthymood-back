@@ -35,7 +35,7 @@ const AddPage = () => {
       .finally(() => {
         setState({ ...state, loading: false });
       });
-  }, []);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     toastr(state.success, state.showToast, state.message);
