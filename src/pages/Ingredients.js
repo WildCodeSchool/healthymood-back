@@ -5,7 +5,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function Ingredients () {
-  const initialForm = ({ name: '', is_allergen: false });
+  const initialForm = ({ name: '', is_allergen: false, calories: 0 });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
 
@@ -32,41 +32,45 @@ function Ingredients () {
   if (!ingredientsToShow) return 'Chargement...';
   function Renderlist () {
     return (
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Allergène</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {ingredientsToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>
-                  {t.is_allergen ? 'oui' : 'non'}
-                </td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteIngredients(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <>
+        <h2>Ingrédients</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Calories / 100gr</td>
+              <td>Allergène</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {ingredientsToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>{t.calories}</td>
+                  <td>
+                    {t.is_allergen ? 'oui' : 'non'}
+                  </td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteIngredients(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
   }
   return (
     <>
-      <div>
+      <div className='form-top'>
         <form className='form-inline' onSubmit={SaveIngredients}>
-
           <input
+            className='input-form-all'
             type='text'
-            required
             name='name'
             id='name'
             minLength='3'
@@ -74,20 +78,30 @@ function Ingredients () {
             placeholder='Nouvel ingredient'
             value={fields.name}
             onChange={handleFieldChange}
+            required
+          />
+          <input
+            className='input-form-all'
+            type='number'
+            name='calories'
+            minLength='1'
+            maxLength='20'
+            placeholder='Calories / 100gr'
+            onChange={handleFieldChange}
+            required
           />
           <label>Allergene ?</label>
           <input
-            style={{ margin: '10px' }}
+            className='input-form-all'
             type='checkbox'
             id='is_allergen'
             name='is_allergen'
             checked={fields.is_allergen}
             onChange={handleFieldChange}
           />
-
           <button
+            type='submit'
             className='form-button'
-            onClick={SaveIngredients}
             disabled={newResourceIsSaving}
           >
             Enregistrer

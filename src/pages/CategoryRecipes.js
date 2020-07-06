@@ -4,7 +4,8 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 function CategoryRecipes () {
-  const { fields, setFields, handleFieldChange } = useFormData({ name: '' });
+  const initialform = { name: '' };
+  const { fields, setFields, handleFieldChange } = useFormData(initialform);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: CatRecipeToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
 
   const DeleteTask = async (task) => {
@@ -15,7 +16,7 @@ function CategoryRecipes () {
   const SaveCatRecipe = async (event) => {
     event.preventDefault();
     saveResource(fields, { optimistic: true });
-    setFields({ name: '' });
+    setFields(initialform);
   };
   const fillForm = async cat => {
     setFields(cat);
@@ -27,37 +28,39 @@ function CategoryRecipes () {
       </div>
     );
   }
-  if (!CatRecipeToShow) return 'Loading...';
+  if (!CatRecipeToShow) return 'Chargement...';
   function Renderlist () {
     return (
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {CatRecipeToShow.map(c => {
-            return (
-              <tr key={c.id}>
-                <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <>
+        <h2>Catégorie de Recettes</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {CatRecipeToShow.map(c => {
+              return (
+                <tr key={c.id}>
+                  <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
   }
   return (
     <>
-      <div>
+      <div className='form-top'>
         <form className='form-inline' onSubmit={SaveCatRecipe}>
-
           <input
             className='input-form-all'
             required
@@ -65,7 +68,7 @@ function CategoryRecipes () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder='Nouvel Catégorie de recette '
+            placeholder='Nouvelle Catégorie de recette '
             value={fields.name}
             onChange={handleFieldChange}
           />
@@ -75,7 +78,7 @@ function CategoryRecipes () {
             onClick={SaveCatRecipe}
             disabled={newResourceIsSaving || fields.name === ''}
           >
-            Save
+            Enregistrer
           </button>
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la Catégorie Recette</p>

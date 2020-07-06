@@ -18,8 +18,12 @@ function Diets () {
   };
   const SaveDiets = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
-    setFields(initialForm);
+    if (fields.name === '') {
+      alert('Veuillez remplir les champs requis'); // eslint-disable-line
+    } else {
+      saveResource(fields, { optimistic: true });
+      setFields(initialForm);
+    }
   };
   const fillForm = async diet => {
     setFields(diet);
@@ -34,36 +38,38 @@ function Diets () {
   if (!dietToShow) return 'Chargement...';
   function Renderlist () {
     return (
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {dietToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteDiets(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <>
+        <h2>Régimes</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {dietToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteDiets(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
   }
   return (
     <>
-      <div>
+      <div className='form-top'>
         <form className='form-inline' onSubmit={SaveDiets}>
           <input
             className='input-form-all'
-            required
             name='name'
             id='name'
             minLength='3'
@@ -71,9 +77,11 @@ function Diets () {
             placeholder='Nouveau type de régime'
             value={fields.name}
             onChange={handleFieldChange}
+            required
           />
 
           <button
+            type='submit'
             className='form-button'
             onClick={SaveDiets}
             disabled={newResourceIsSaving}

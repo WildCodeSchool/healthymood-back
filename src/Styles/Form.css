@@ -12,7 +12,15 @@
 }
 
 .form-inline label {
-  margin: 5px 10px 5px 0;
+  margin: 10px;
+}
+
+.form-top{
+  padding-top: 20px;
+}
+.first-tr{
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .input-form-all{
@@ -22,9 +30,7 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
-
   width: 15%;
-
 }
 
 .form-button {
@@ -56,7 +62,8 @@ th {
 td, th { 
   padding: 10px; 
   border: 1px solid #ccc; 
-  text-align: center; 
+  text-align: center;
+  width: 20%;
 }
 .render-list td:nth-child(1){
   text-align: left;
