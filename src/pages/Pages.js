@@ -2,29 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../Styles/Editor.css';
 import API from '../services/API';
-import { ToastContainer, toast } from 'react-toastify';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Pages = () => {
   const history = useHistory();
   const [pages, setPages] = useState([]);
-  const [state, setState] = useState({
-    loading: false,
-    showToast: false,
-    message: null,
-    success: false
-  });
-
-  const toastr = (success, show, message) => {
-    if (show) {
-      if (success) {
-        return toast.success(message);
-      } else {
-        return toast.error(message);
-      }
-    }
-  };
 
   useEffect(() => {
     API.get('/generic_pages')
@@ -33,28 +16,11 @@ const Pages = () => {
       })
       .catch(err => {
         console.log(err);
-      })
-      .finally(() => {
-        setState({ ...state, loading: false });
       });
   }, []); // eslint-disable-line
 
-  useEffect(() => {
-    toastr(state.success, state.showToast, state.message);
-  }, [state]);
-
-  console.log(pages);
-
   return (
     <>
-      <ToastContainer
-        position='top-right'
-        autoclose={5000}
-        closeOnClick
-        pauseOnHover
-        draggable
-        progress={undefined}
-      />
       <Link to='/pages/edit/new'>Ajouter</Link>
       <table className='render-list'>
         <thead>

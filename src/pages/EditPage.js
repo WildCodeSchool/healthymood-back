@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import EditorComponent from '../components/EditorComponent';
 import useEditor from '../hooks/useEditor';
@@ -10,6 +10,7 @@ const EditPage = () => {
   const { id } = useParams();
   const history = useHistory();
   let formData;
+  const [editPage, setEditPage] = useState([]);
   const [content, handleEditorChange] = useEditor();
 
   const handleSubmit = (e) => {
@@ -33,7 +34,10 @@ const EditPage = () => {
 
   useEffect(() => {
     if (id !== 'new') {
-      // faire la requête à l'api pour récupérer la page en fonction de l'id
+      API.get('/generic_pages/:id')
+        .then(res => {
+          setEditPage(console.log(res.data));
+        });
     }
   }, []);
 

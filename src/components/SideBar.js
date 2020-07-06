@@ -77,7 +77,7 @@ const SideBar = () => {
         <Menu.Item key='10' icon={<FormOutlined />}>
           <Link to='/diet'>Tous les Régimes</Link>
         </Menu.Item>
-        <Menu.Item key='11'>
+        <Menu.Item key='11' icon={<CopyOutlined />}>
           <Link to='/pages'>Nos pages</Link>
         </Menu.Item>
         <Menu.Item key='12' icon={<TeamOutlined />}>
