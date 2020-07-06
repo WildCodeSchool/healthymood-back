@@ -9,6 +9,14 @@ const Pages = () => {
   const history = useHistory();
   const [pages, setPages] = useState([]);
 
+  const DeletePage = () => {
+    // TODO : Récupérer ce putain de current id
+    API.delete(`/generic_pages/${id}`)
+      .then(res => {
+        console.log(res);
+      });
+  };
+
   useEffect(() => {
     API.get('/generic_pages')
       .then(res => {
@@ -40,7 +48,7 @@ const Pages = () => {
                 </td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => history.push(`/pages/edit/${p.id}`)} />
-                  <DeleteOutlined className='delete-icon' />
+                  <DeleteOutlined className='delete-icon' onClick={() => DeletePage(p.id)} />
                 </td>
               </tr>
             );
