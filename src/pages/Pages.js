@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import '../Styles/Editor.css';
 import API from '../services/API';
 import { ToastContainer, toast } from 'react-toastify';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AddPage = () => {
+const Pages = () => {
+  const history = useHistory();
   const [pages, setPages] = useState([]);
   const [state, setState] = useState({
     loading: false,
@@ -53,6 +55,7 @@ const AddPage = () => {
         draggable
         progress={undefined}
       />
+      <Link to='/pages/edit/new'>Ajouter</Link>
       <table className='render-list'>
         <thead>
           <tr>
@@ -70,7 +73,7 @@ const AddPage = () => {
                   {p.published === 0 ? 'Non' : 'Oui'}
                 </td>
                 <td>
-                  <EditOutlined className='edit-icon' />
+                  <EditOutlined className='edit-icon' onClick={() => history.push(`/pages/edit/${p.id}`)} />
                   <DeleteOutlined className='delete-icon' />
 
                 </td>
@@ -83,4 +86,4 @@ const AddPage = () => {
   );
 };
 
-export default AddPage;
+export default Pages;

@@ -77,18 +77,13 @@ const SideBar = () => {
         <Menu.Item key='10' icon={<FormOutlined />}>
           <Link to='/diet'>Tous les Régimes</Link>
         </Menu.Item>
-        <SubMenu key='sub4' icon={<CopyOutlined />} title='Pages'>
-          <Menu.Item key='11'>
-            <Link to='/pages'>Nos pages</Link>
-          </Menu.Item>
-          <Menu.Item key='12'>
-            <Link to='/pages/ajouter'>Ajouter</Link>
-          </Menu.Item>
-        </SubMenu>
-        <Menu.Item key='13' icon={<TeamOutlined />}>
+        <Menu.Item key='11'>
+          <Link to='/pages'>Nos pages</Link>
+        </Menu.Item>
+        <Menu.Item key='12' icon={<TeamOutlined />}>
           <Link to='/utilisateurs'>Gérer les utilisateurs</Link>
         </Menu.Item>
-        <Menu.Item key='14' icon={<UserOutlined />}>
+        <Menu.Item key='13' icon={<UserOutlined />}>
           <Link to='/mon-profil'>Mon Profil</Link>
         </Menu.Item>
       </Menu>

@@ -21,7 +21,7 @@ import Dishes from './pages/Dishes';
 import Meals from './pages/Meals';
 import Diets from './pages/Diets';
 import Pages from './pages/Pages';
-import AddPages from './pages/AddPage';
+import EditPage from './pages/EditPage';
 import Users from './pages/Users';
 import AdminProfil from './pages/AdminProfil';
 import AdminAuth from './pages/AdminAuth';
@@ -88,8 +88,8 @@ const App = () => {
                   <PrivateRoute exact path='/pages'>
                     <Pages />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/pages/ajouter'>
-                    <AddPages />
+                  <PrivateRoute exact path='/pages/edit/:id'>
+                    <EditPage />
                   </PrivateRoute>
                   <PrivateRoute exact path='/users'>
                     <Users />
