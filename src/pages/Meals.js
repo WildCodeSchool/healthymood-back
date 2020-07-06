@@ -18,14 +18,8 @@ function Meals () {
   };
   const SaveMeal = async (event) => {
     event.preventDefault();
-    
-    if(fields.name === ''){
-      alert('Veuillez remplir le champs')
-    }else{
-      saveResource(fields, { optimistic: true });
-      setFields(initialForm);
-    }
-    
+    saveResource(fields, { optimistic: true });
+    setFields(initialForm);
   };
   const fillForm = async meal => {
     setFields(meal);

@@ -4,8 +4,8 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 function CategoryRecipes () {
-  const initialform ={ name: '' }
-  const { fields, setFields, handleFieldChange } = useFormData( initialform);
+  const initialform = { name: '' };
+  const { fields, setFields, handleFieldChange } = useFormData(initialform);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: CatRecipeToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
 
   const DeleteTask = async (task) => {
@@ -15,12 +15,8 @@ function CategoryRecipes () {
   };
   const SaveCatRecipe = async (event) => {
     event.preventDefault();
-    if (fields.name === '')  {
-      alert('Veuillez remplir les champs requis')
-    } else {
-      saveResource(fields, { optimistic: true });
-      setFields(initialform);
-    }
+    saveResource(fields, { optimistic: true });
+    setFields(initialform);
   };
   const fillForm = async cat => {
     setFields(cat);

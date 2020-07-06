@@ -4,7 +4,7 @@ import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
-function Ingredients() {
+function Ingredients () {
   const initialForm = ({ name: '', is_allergen: false, calories: 0 });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
@@ -16,12 +16,8 @@ function Ingredients() {
   };
   const SaveIngredients = async (event) => {
     event.preventDefault();
-    if (fields.name === '') {
-      alert('Veuillez remplir les champs requis')
-    } else {
-      saveResource(fields, { optimistic: true });
-      setFields(initialForm);
-    }
+    saveResource(fields, { optimistic: true });
+    setFields(initialForm);
   };
   const fillForm = async ingredient => {
     setFields(ingredient);
@@ -34,7 +30,7 @@ function Ingredients() {
     );
   }
   if (!ingredientsToShow) return 'Chargement...';
-  function Renderlist() {
+  function Renderlist () {
     return (
       <>
         <h2>Ingrédients</h2>

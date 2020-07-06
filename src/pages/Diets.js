@@ -19,7 +19,7 @@ function Diets () {
   const SaveDiets = async (event) => {
     event.preventDefault();
     if (fields.name === '') {
-      alert('Veuillez remplir les champs requis')
+      alert('Veuillez remplir les champs requis'); // eslint-disable-line
     } else {
       saveResource(fields, { optimistic: true });
       setFields(initialForm);
@@ -81,7 +81,7 @@ function Diets () {
           />
 
           <button
-            type="submit"
+            type='submit'
             className='form-button'
             onClick={SaveDiets}
             disabled={newResourceIsSaving}

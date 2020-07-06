@@ -18,12 +18,8 @@ function CategoryArticles () {
   };
   const SaveCategoryArticles = async (event) => {
     event.preventDefault();
-    if (fields.name === '') {
-      alert('Veuillez remplir les champs requis')
-    } else {
-      saveResource(fields, { optimistic: true });
-      setFields(initialForm);
-    }
+    saveResource(fields, { optimistic: true });
+    setFields(initialForm);
   };
   const fillForm = async categoryArticles => {
     setFields(categoryArticles);
