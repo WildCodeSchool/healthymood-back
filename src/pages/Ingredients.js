@@ -85,10 +85,8 @@ function Ingredients() {
             className='input-form-all'
             type='number'
             name='calories'
-            id='calories'
             minLength='1'
             maxLength='20'
-            value={fields.calories}
             placeholder='Calories / 100gr'
             onChange={handleFieldChange}
             required
