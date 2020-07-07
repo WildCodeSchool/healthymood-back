@@ -9,42 +9,59 @@ const EditPage = () => {
   const { id } = useParams();
   const history = useHistory();
   // let formData;
-  // const [editPage, setEditPage] = useState([]);
+  const [editMode, setEditMode] = useState([]);
   const [content, setContent] = useState([]);
   const [data, setData] = useState([]);
 
-  function handleChange (event) {
+  function handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setData({ ...data, [name]: value });
-  }
-  function handleChangeEditor (content) {
-    setContent({ ...data, content });
-  }
+  };
+
+  const handleChangeEditor = (content) => {
+    setData({ ...data, content });
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
-    setContent(content);
-    console.log(content);
-  };
-  // API.post('/generic_pages', formData)
-  //   .then(res => {
-  //     history.push('/pages');
-  //   })
-  //   .catch(err => {
-  //     console.warn(err);
-  //   });
 
-  /* useEffect(() => {
-    if (id !== 'new') {
-      API.get('/generic_pages/:id')
+    if (editMode) {
+      API.patch(`/generic_pages/${id}`, data) // TODO : Régler cette erreur 500
         .then(res => {
-          setEditPage(console.log(res.data));
+          history.push('/pages');
+          console.log(res.data.data);
+        })
+        .catch(err => {
+          console.warn(err);
+        });
+
+    } else {
+      API.post('/generic_pages', data)
+        .then(res => {
+          history.push('/pages');
+          console.log(res.data.data);
+        })
+        .catch(err => {
+          console.warn(err);
         });
     }
-  }, []);
-*/
+  };
+
+  useEffect(() => {
+    if (parseInt(id) !== 'new') {
+      API.get(`/generic_pages/${id}`)
+        .then(res => {
+          setEditMode(true);
+          setData({ ...res.data.data });
+        })
+        .catch(err => {
+          console.warn(err);
+        });
+    }
+  }, [id]);
+
   return (
     <>
       <main className='main-form-container'>
@@ -52,6 +69,7 @@ const EditPage = () => {
           <input
             type='text'
             name='title'
+            value={data.title}
             placeholder='Ajouter un titre'
             onChange={(e) => handleChange(e)}
             required
@@ -61,6 +79,7 @@ const EditPage = () => {
           <input
             type='text'
             name='slug'
+            value={data.slug}
             placeholder='Ajouter un slug'
             onChange={(e) => handleChange(e)}
             required
@@ -68,7 +87,7 @@ const EditPage = () => {
           />
           <Editor
             apiKey={process.env.REACT_APP_API_KEY}
-            value={content}
+            value={data.content}
             initialValue=''
             init={{
               height: 500,
@@ -83,23 +102,19 @@ const EditPage = () => {
               autosave_restore_when_empty: true,
               toolbar:
                 'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
-
             }}
             onEditorChange={handleChangeEditor}
-
           />
-          <label className='hide-label' htmlFor='content'>contenu</label>
-          <textarea className='hidden' name='content' value={content.content} />
           <label htmlFor='published'>
             Publier ?
-          </label>
+        </label>
           <input
             type='checkbox'
             name='published'
-            value={data.value}
+            checked={data.published}
             onChange={(e) => handleChange(e)}
           />
-          <button type='submit' className='btn'>Ajouter</button>
+          <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
         </form>
       </main>
     </>
