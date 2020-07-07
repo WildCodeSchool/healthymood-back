@@ -12,11 +12,8 @@ const Pages = () => {
   const handleDelete = (id) => {
     API.delete(`/generic_pages/${id}`)
       .then(res => {
-        console.log(res);
-        const currentPage = pages.filter(p => p.id === id);
-        const newPages = pages.slice();
-        newPages.splice(pages.indexOf(currentPage), 1);
-        setPages(newPages);
+        const currentPage = pages.filter(p => p.id !== id);
+        setPages(currentPage);
       })
       .catch(err => {
         console.warn(err);
@@ -40,7 +37,6 @@ const Pages = () => {
         <thead>
           <tr>
             <td>Titre</td>
-            <td>Slug</td>
             <td>Publié</td>
             <td>Actions</td>
           </tr>

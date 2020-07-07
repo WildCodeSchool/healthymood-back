@@ -8,10 +8,14 @@ import '../Styles/EditorForm.css';
 const EditPage = () => {
   const { id } = useParams();
   const history = useHistory();
-  // let formData;
-  const [editMode, setEditMode] = useState([]);
-  const [content, setContent] = useState([]);
-  const [data, setData] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [data, setData] = useState({
+    title: '',
+    slug: '',
+    content: '',
+    published: false,
+    user_id: 24
+  });
 
   function handleChange(event) {
     const target = event.target;
@@ -60,7 +64,7 @@ const EditPage = () => {
           console.warn(err);
         });
     }
-  }, [id]);
+  }, []);
 
   return (
     <>
