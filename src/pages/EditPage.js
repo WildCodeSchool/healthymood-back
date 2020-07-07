@@ -17,7 +17,7 @@ const EditPage = () => {
     user_id: 24
   });
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -40,7 +40,6 @@ const EditPage = () => {
         .catch(err => {
           console.warn(err);
         });
-
     } else {
       API.post('/generic_pages', data)
         .then(res => {
@@ -111,7 +110,7 @@ const EditPage = () => {
           />
           <label htmlFor='published'>
             Publier ?
-        </label>
+          </label>
           <input
             type='checkbox'
             name='published'
