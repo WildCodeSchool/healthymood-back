@@ -9,17 +9,17 @@ const EditPage = () => {
   const { id } = useParams();
   const history = useHistory();
   // let formData;
-  //const [editPage, setEditPage] = useState([]);
+  // const [editPage, setEditPage] = useState([]);
   const [content, setContent] = useState([]);
   const [data, setData] = useState([]);
 
-  function handleChange(event) {
+  function handleChange (event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setData({ ...data, [name]: value });
   }
-  function handleChangeEditor(content) {
+  function handleChangeEditor (content) {
     setContent({ ...data, content });
   }
 
@@ -36,8 +36,7 @@ const EditPage = () => {
   //     console.warn(err);
   //   });
 
-
-  /*useEffect(() => {
+  /* useEffect(() => {
     if (id !== 'new') {
       API.get('/generic_pages/:id')
         .then(res => {
@@ -70,7 +69,7 @@ const EditPage = () => {
           <Editor
             apiKey={process.env.REACT_APP_API_KEY}
             value={content}
-            initialValue=""
+            initialValue=''
             init={{
               height: 500,
               autosave_interval: '5s',
@@ -88,13 +87,12 @@ const EditPage = () => {
             }}
             onEditorChange={handleChangeEditor}
 
-
           />
           <label className='hide-label' htmlFor='content'>contenu</label>
           <textarea className='hidden' name='content' value={content.content} />
           <label htmlFor='published'>
             Publier ?
-        </label>
+          </label>
           <input
             type='checkbox'
             name='published'
