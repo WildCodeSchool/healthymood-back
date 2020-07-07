@@ -4,7 +4,8 @@ console.log(baseURL);
 
 const API = axios.create({ baseURL });
 
-export const defaultFetcher = (relativeUrl, ...options) => API.get(relativeUrl, ...options).then(res => res.data);
+export const defaultFetcher = (relativeUrl, ...options) =>
+  API.get(relativeUrl, ...options).then((res) => res.data);
 
 const placeTokenInRequestHeaders = req => {
   const token = window.localStorage.getItem('authToken');
