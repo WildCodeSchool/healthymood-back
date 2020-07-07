@@ -13,6 +13,10 @@ const Pages = () => {
     API.delete(`/generic_pages/${id}`)
       .then(res => {
         console.log(res);
+        const currentPage = pages.filter(p => p.id === id);
+        const newPages = pages.slice();
+        newPages.splice(pages.indexOf(currentPage), 1);
+        setPages(newPages);
       })
       .catch(err => {
         console.warn(err);
