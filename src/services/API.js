@@ -4,10 +4,10 @@ console.log(baseURL);
 
 const API = axios.create({ baseURL });
 
-export const defaultFetcher = (relativeUrl, ...options) => API.get(relativeUrl, ...options).then(res => res.data);
+export const defaultFetcher = (relativeUrl, ...options) =>
+  API.get(relativeUrl, ...options).then((res) => res.data);
 
-/*
-const placeTokenInRequestHeaders = req => {
+const placeTokenInRequestHeaders = (req) => {
   const token = window.localStorage.getItem('authToken');
   if (token) {
     req.headers.Authorization = `Bearer ${token}`;
@@ -15,6 +15,6 @@ const placeTokenInRequestHeaders = req => {
   return req;
 };
 
-API.interceptors.request.use(placeTokenInRequestHeaders); */
+API.interceptors.request.use(placeTokenInRequestHeaders);
 
 export default API;

@@ -14,7 +14,6 @@ const EditPage = () => {
     slug: '',
     content: '',
     published: false,
-    user_id: 24
   });
 
   const handleChange = (event) => {
@@ -28,24 +27,24 @@ const EditPage = () => {
     setData({ ...data, content });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (editMode) {
-      API.patch(`/generic_pages/${id}`, data) // TODO : Régler cette erreur 500
-        .then(res => {
+      API.put(`/generic_pages/${id}`, data) // TODO : Régler cette erreur 500
+        .then((res) => {
           history.push('/pages');
           console.log(res.data.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(err);
         });
     } else {
       API.post('/generic_pages', data)
-        .then(res => {
+        .then((res) => {
           history.push('/pages');
           console.log(res.data.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(err);
         });
     }
@@ -54,11 +53,11 @@ const EditPage = () => {
   useEffect(() => {
     if (parseInt(id) !== 'new') {
       API.get(`/generic_pages/${id}`)
-        .then(res => {
+        .then((res) => {
           setEditMode(true);
           setData({ ...res.data.data });
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(err);
         });
     }
@@ -77,7 +76,9 @@ const EditPage = () => {
             required
           />
 
-          <label className='hide-label' htmlFor='slug'>slug</label>
+          <label className='hide-label' htmlFor='slug'>
+            slug
+          </label>
           <input
             type='text'
             name='slug'
@@ -85,7 +86,6 @@ const EditPage = () => {
             placeholder='Ajouter un slug'
             onChange={(e) => handleChange(e)}
             required
-
           />
           <Editor
             apiKey={process.env.REACT_APP_API_KEY}
@@ -98,27 +98,25 @@ const EditPage = () => {
                 'advlist autolink lists link image charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',
                 'insertdatetime media table paste code help wordcount',
-                'autosave'
+                'autosave',
               ],
               autosave_retention: '30m',
               autosave_restore_when_empty: true,
               toolbar:
-                'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
-
+                'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help',
             }}
             onEditorChange={handleChangeEditor}
-
           />
-          <label htmlFor='published'>
-            Publier ?
-          </label>
+          <label htmlFor='published'>Publier ?</label>
           <input
             type='checkbox'
             name='published'
             checked={data.published}
             onChange={(e) => handleChange(e)}
           />
-          <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+          <button type='submit' className='btn'>
+            {editMode ? 'Modifier' : 'Ajouter'}
+          </button>
         </form>
       </main>
     </>
