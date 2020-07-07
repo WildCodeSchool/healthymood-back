@@ -14,7 +14,7 @@ const EditPage = () => {
     slug: '',
     content: '',
     published: false,
-    user_id: 25
+    user_id: 24
   });
 
   const handleChange = (event) => {
