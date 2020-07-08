@@ -11,14 +11,17 @@ const Pages = () => {
   const [pages, setPages] = useState([]);
 
   const handleDelete = (id) => {
-    API.delete(`/generic_pages/${id}`)
-      .then(res => {
-        const currentPage = pages.filter(p => p.id !== id);
-        setPages(currentPage);
-      })
-      .catch(err => {
-        console.warn(err);
-      });
+
+    if (window.confirm('Êtes vous sûr de vouloir supprimer cette Page ?')) {
+      API.delete(`/generic_pages/${id}`)
+        .then(res => {
+          const currentPage = pages.filter(p => p.id !== id);
+          setPages(currentPage);
+        })
+        .catch(err => {
+          console.warn(err);
+        });
+    }
   };
 
   useEffect(() => {

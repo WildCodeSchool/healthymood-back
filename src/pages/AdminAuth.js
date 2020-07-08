@@ -13,10 +13,8 @@ const AdminAuth = () => {
     e.preventDefault();
     setLoading(true);
     const data = e.target;
-    console.log('post');
     API.post('/auth/login', { email: data.email.value, password: data.password.value })
       .then(res => {
-        console.log(res.data);
         setToken(res.data.token);
         setLoading(false);
         history.push('/');
@@ -25,7 +23,6 @@ const AdminAuth = () => {
         console.log(err);
       });
   };
-  console.log('render');
   return (
     <main className='login-page'>
       <img className='login-logo' src={logo} alt='healthymood logo' />

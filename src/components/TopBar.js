@@ -35,9 +35,7 @@ const TopBar = () => {
             <Avatar src={avatar} />
           </span>
         </Dropdown>
-
       </Header>
-
     </>
   );
 };
