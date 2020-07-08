@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Layout, Breadcrumb, Avatar, Dropdown, Menu } from 'antd';
-import { useLocation, Link } from 'react-router-dom';
+import { Layout, Avatar, Dropdown, Menu } from 'antd';
+import { Link } from 'react-router-dom';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import avatar from '../images/Luffy-One-Piece.png';
 import '../Styles/TopBar.css';
@@ -9,7 +9,6 @@ import AuthContext from '../context/authContext';
 const { Header } = Layout;
 
 const TopBar = () => {
-  const location = useLocation().pathname.substr(1);
   const setTokenInLocalStorage = useContext(AuthContext).setToken;
   const menu = (
     <Menu>

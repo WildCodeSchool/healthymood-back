@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import '../Styles/Editor.css';
 import '../Styles/Form.css';
 import API from '../services/API';
-import { Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'react-toastify/dist/ReactToastify.css';
 
