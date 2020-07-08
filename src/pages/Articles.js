@@ -1,12 +1,12 @@
 import React from 'react';
 import '../Styles/Editor.css';
-import EditorComponent from '../components/EditorComponent';
+
 
 const Articles = () => {
   return (
-    <>
-      <EditorComponent />
-    </>
+    <div>
+      <h1>Liste de tous les articles</h1>
+    </div>
   );
 };
 export default Articles;

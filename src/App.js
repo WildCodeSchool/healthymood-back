@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
+import AuthContext from './context/authContext';
+
 import { Layout } from 'antd';
 import './Styles/App.css';
 import SideBar from './components/SideBar';
@@ -23,41 +26,85 @@ import Pages from './pages/Pages';
 import AddPage from './pages/AddPage';
 import Users from './pages/Users';
 import AdminProfil from './pages/AdminProfil';
+import AdminAuth from './pages/AdminAuth';
 
 const { Content } = Layout;
 
-function App () {
+const PrivateRoute = ({ children, ...rest }) => {
+  const { token } = useContext(AuthContext);
   return (
-    <div className='App'>
-      <Router>
-        <Layout style={{ minHeight: '100vh' }}>
-          <SideBar />
-          <Layout className='site-layout'>
-            <TopBar />
-            <Content style={{ margin: '0 16px' }}>
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/articles' component={Articles} />
-                <Route exact path='/articles/ajouter' component={AddArticle} />
-                <Route exact path='/recettes' component={Recipes} />
-                <Route exact path='/recettes/ajouter' component={AddRecipe} />
-                <Route exact path='/categories-articles' component={CategoryArticles} />
-                <Route exact path='/categories-recettes' component={CategoryRecipes} />
-                <Route exact path='/ingredients' component={Ingredients} />
-                <Route exact path='/types-plats' component={Dishes} />
-                <Route exact path='/types-repas' component={Meals} />
-                <Route exact path='/regimes' component={Diets} />
-                <Route exact path='/pages' component={Pages} />
-                <Route exact path='/pages/ajouter' component={AddPage} />
-                <Route exact path='/utilisateurs' component={Users} />
-                <Route exact path='/mon-profil' component={AdminProfil} />
-              </Switch>
-            </Content>
-          </Layout>
-        </Layout>
-      </Router>
-    </div>
+    <Route
+      {...rest}
+      render={({ location }) =>
+        token ? children : <Redirect to={{ pathname: '/login', state: { from: location } }} />}
+    />
   );
-}
+};
+
+const App = () => {
+  const [token, setToken] = useState(window.localStorage.getItem('authToken'));
+  const setTokenInLocalStorage = (token) => {
+    window.localStorage.setItem('authToken', token);
+    setToken(token);
+  };
+  return (
+    <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage }}>
+      <div className='App'>
+        <Router>
+          <Switch>
+            <Route exact path='/login'>
+              <AdminAuth />
+            </Route>
+            <Layout style={{ minHeight: '100vh' }}>
+              <SideBar />
+              <Layout className='site-layout'>
+                <TopBar />
+                <Content>
+                  <PrivateRoute exact path='/'>
+                    <Home />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/articles'>
+                    <Articles />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/recipes'>
+                    <Recipes />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/article_categories'>
+                    <CategoryArticles />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/recipe_categories'>
+                    <CategoryRecipes />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/ingredients'>
+                    <Ingredients />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/dish_types'>
+                    <Dishes />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/meal_types'>
+                    <Meals />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/diet'>
+                    <Diets />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/pages'>
+                    <Pages />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/users'>
+                    <Users />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/mon-profil'>
+                    <AdminProfil />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/*' />
+                </Content>
+              </Layout>
+            </Layout>
+          </Switch>
+        </Router>
+      </div>
+    </AuthContext.Provider>
+  );
+};
 
 export default App;

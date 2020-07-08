@@ -61,10 +61,9 @@ const Recipes = () => {
     }
   ];
   return (
-    <>
+    <div>
       <h1>Liste de tous les articles</h1>
-      <Table columns={columns} dataSource={data} />
-    </>
+    </div>
   );
 };
 
