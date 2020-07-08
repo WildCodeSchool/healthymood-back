@@ -36,12 +36,9 @@ const TopBar = () => {
             <Avatar src={avatar} />
           </span>
         </Dropdown>
-        ,
+
       </Header>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-        <Breadcrumb.Item>{location}</Breadcrumb.Item>
-      </Breadcrumb>
+
     </>
   );
 };

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import '../Styles/Editor.css';
+import '../Styles/Form.css';
 import API from '../services/API';
+import { Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -32,11 +34,18 @@ const Pages = () => {
 
   return (
     <>
-      <Link to='/pages/edit/new'>Ajouter</Link>
+      <div style={{ paddingTop: '20px' }}>
+        <Link to='/pages/edit/new'>
+          <button className='form-button'>Ajouter</button>
+        </Link>
+      </div>
+
+      <br />
       <table className='render-list'>
         <thead>
           <tr>
             <td>Titre</td>
+            <td>Slug</td>
             <td>Publié</td>
             <td>Actions</td>
           </tr>
@@ -46,6 +55,7 @@ const Pages = () => {
             return (
               <tr key={p.id}>
                 <td>{p.title}</td>
+                <td>{p.slug}</td>
                 <td>
                   {p.published === 0 ? 'Non' : 'Oui'}
                 </td>
@@ -58,6 +68,7 @@ const Pages = () => {
           })}
         </tbody>
       </table>
+
     </>
   );
 };
