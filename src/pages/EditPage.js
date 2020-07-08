@@ -31,7 +31,7 @@ const EditPage = () => {
     }
   }, []);
 
-  function handleChange (event) {
+  function handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -42,25 +42,23 @@ const EditPage = () => {
     setData({ ...data, content });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     if (editMode) {
       API.patch(`/generic_pages/${id}`, data)
         .then(res => {
           history.push('/pages');
-          console.log(res.data.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(err);
         });
     } else {
       API.post('/generic_pages', data)
-        .then(res => {
+        .then((res) => {
           history.push('/pages');
-          console.log(res.data.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(err);
         });
     }

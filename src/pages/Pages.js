@@ -11,7 +11,6 @@ const Pages = () => {
   const [pages, setPages] = useState([]);
 
   const handleDelete = (id) => {
-
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Page ?')) {
       API.delete(`/generic_pages/${id}`)
         .then(res => {
