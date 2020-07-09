@@ -1,3 +1,10 @@
+.main-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
 .editor-form {
   display: flex;
   flex-direction: column;
@@ -6,6 +13,16 @@
 }
 
 .editor-form input {
-  width: 62.5vw;
-  margin: 0px 0px 10px 0px;
+  margin: 10px;
+  width: 100%;
+}
+
+.div-top-editor{
+  width: 100%;
+  display: flex;
+}
+.div-bottom-editor{
+width: 30%;
+padding: 20px;
+
 }

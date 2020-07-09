@@ -13,9 +13,8 @@ import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';
 import Home from './pages/Home';
 import Articles from './pages/Articles';
-import AddArticle from './pages/AddArticle';
+import EditArticle from './pages/EditArticle';
 import Recipes from './pages/Recipes';
-import AddRecipe from './pages/AddRecipe';
 import CategoryArticles from './pages/CategoryArticles';
 import CategoryRecipes from './pages/CategoryRecipes';
 import Ingredients from './pages/Ingredients';
@@ -23,7 +22,7 @@ import Dishes from './pages/Dishes';
 import Meals from './pages/Meals';
 import Diets from './pages/Diets';
 import Pages from './pages/Pages';
-import AddPage from './pages/AddPage';
+import EditPage from './pages/EditPage';
 import Users from './pages/Users';
 import AdminProfil from './pages/AdminProfil';
 import AdminAuth from './pages/AdminAuth';
@@ -66,6 +65,9 @@ const App = () => {
                   <PrivateRoute exact path='/articles'>
                     <Articles />
                   </PrivateRoute>
+                  <PrivateRoute exact path='/articles/edit/:id'>
+                    <EditArticle />
+                  </PrivateRoute>
                   <PrivateRoute exact path='/recipes'>
                     <Recipes />
                   </PrivateRoute>
@@ -89,6 +91,9 @@ const App = () => {
                   </PrivateRoute>
                   <PrivateRoute exact path='/pages'>
                     <Pages />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/pages/edit/:id'>
+                    <EditPage />
                   </PrivateRoute>
                   <PrivateRoute exact path='/users'>
                     <Users />
