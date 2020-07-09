@@ -5,7 +5,7 @@ import '../Styles/Form.css';
 import API from '../services/API';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'react-toastify/dist/ReactToastify.css';
-import moment from 'moment'
+import moment from 'moment';
 
 const Recipes = () => {
     const history = useHistory();
@@ -60,7 +60,7 @@ const Recipes = () => {
                                 <td>{r.name}</td>
                                 <td>{r.slug}</td>
                                 <td>{r.published}</td>
-                                <td>{moment.unix(r.created_at).format('MMMMDDYYYY')}</td>
+                                <td>Crée le : {moment(r.created_at).format('DD/MM/YYYY')}</td>
                                 <td>
                                     <EditOutlined className='edit-icon' onClick={() => history.push(`/recipes/edit/${r.id}`)} />
                                     <DeleteOutlined className='delete-icon' onClick={() => handleDelete(r.id)} />

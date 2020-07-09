@@ -11,7 +11,7 @@ const EditArticle = () => {
   const history = useHistory();
   const editMode = id !== 'new';
 
-  const date = new Date('ddmmyy');
+  const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
     title: '',
     slug: '',
@@ -33,7 +33,7 @@ const EditArticle = () => {
     }
   }, []);
 
-  function handleChange (event) {
+  function handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

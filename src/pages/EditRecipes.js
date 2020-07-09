@@ -11,7 +11,7 @@ const EditRecipes = () => {
     const history = useHistory();
     const editMode = id !== 'new';
 
-    let date = new Date('ddmmyy')
+    const date = new Date().toISOString().slice(0, 10);
     const [data, setData] = useState({
         name: '',
         slug: '',
@@ -27,7 +27,7 @@ const EditRecipes = () => {
             API.get(`/recipes/${id}`)
                 .then(res => {
                     setData(res.data.data);
-                    console.log(data)
+                    console.log(data);
                 })
                 .catch(err => {
                     console.log(err);
@@ -40,7 +40,7 @@ const EditRecipes = () => {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         setData({ ...data, [name]: value });
-    }
+    };
 
     const handleChangeEditor = (content) => {
         setData({ ...data, content });
