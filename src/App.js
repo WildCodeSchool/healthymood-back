@@ -13,6 +13,7 @@ import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';
 import Home from './pages/Home';
 import Articles from './pages/Articles';
+import EditArticle from './pages/EditArticle';
 import Recipes from './pages/Recipes';
 import CategoryArticles from './pages/CategoryArticles';
 import CategoryRecipes from './pages/CategoryRecipes';
@@ -63,6 +64,9 @@ const App = () => {
                   </PrivateRoute>
                   <PrivateRoute exact path='/articles'>
                     <Articles />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/articles/edit/:id'>
+                    <EditArticle />
                   </PrivateRoute>
                   <PrivateRoute exact path='/recipes'>
                     <Recipes />
