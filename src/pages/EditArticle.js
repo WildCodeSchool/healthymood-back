@@ -6,24 +6,26 @@ import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import { random } from 'lodash';
 
-const EditPage = () => {
+const EditArticle = () => {
   const { id } = useParams();
   const history = useHistory();
   const editMode = id !== 'new';
 
+  const date = new Date('ddmmyy');
   const [data, setData] = useState({
     title: '',
     slug: '',
     content: '',
-    published: false,
+    created_at: date,
     user_id: random(1, 50)
   });
 
   useEffect(() => {
     if (editMode) {
-      API.get(`/generic_pages/${id}`)
+      API.get(`/articles/${id}`)
         .then(res => {
           setData(res.data.data);
+          console.log(data);
         })
         .catch(err => {
           console.log(err);
@@ -46,17 +48,17 @@ const EditPage = () => {
     event.preventDefault();
 
     if (editMode) {
-      API.patch(`/generic_pages/${id}`, data)
+      API.patch(`/articles/${id}`, data)
         .then(res => {
-          history.push('/pages');
+          history.push('/articles');
         })
         .catch((err) => {
           console.warn(err);
         });
     } else {
-      API.post('/generic_pages', data)
+      API.post('/articles', data)
         .then((res) => {
-          history.push('/pages');
+          history.push('/articles');
         })
         .catch((err) => {
           console.warn(err);
@@ -109,16 +111,7 @@ const EditPage = () => {
             }}
             onEditorChange={handleChangeEditor}
           />
-          <div className='div-bottom-editor'>
-            <label htmlFor='published'>Publier </label>
-            <input
-              style={{ width: '30px' }}
-              type='checkbox'
-              name='published'
-              checked={data.published}
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
+
           <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
         </form>
       </main>
@@ -126,4 +119,4 @@ const EditPage = () => {
   );
 };
 
-export default EditPage;
+export default EditArticle;
