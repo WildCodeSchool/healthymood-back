@@ -77,14 +77,9 @@ const SideBar = () => {
         <Menu.Item key='10' icon={<FormOutlined />}>
           <NavLink to='/diet'>Tous les Régimes</NavLink>
         </Menu.Item>
-        <SubMenu key='sub4' icon={<CopyOutlined />} title='Pages'>
-          <Menu.Item key='11'>
-            <NavLink to='/pages'>Nos pages</NavLink>
-          </Menu.Item>
-          <Menu.Item key='12'>
-            <NavLink to='/pages/ajouter'>Ajouter</NavLink>
-          </Menu.Item>
-        </SubMenu>
+        <Menu.Item key='11' icon={<CopyOutlined />}>
+          <NavLink to='/pages'>Pages</NavLink>
+        </Menu.Item>
         <Menu.Item key='13' icon={<TeamOutlined />}>
           <NavLink to='/users'>Gérer les utilisateurs</NavLink>
         </Menu.Item>
