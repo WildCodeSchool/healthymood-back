@@ -58,7 +58,7 @@ const Articles = () => {
               <tr key={a.id}>
                 <td>{a.title}</td>
                 <td>{a.slug}</td>
-                <td>Crée le : {moment.unix(a.created_at).format('MMMMDDYYYY')}</td>
+                <td>Crée le : {moment(a.created_at).format('DD/MM/YYYY')}</td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => history.push(`/articles/edit/${a.id}`)} />
                   <DeleteOutlined className='delete-icon' onClick={() => handleDelete(a.id)} />

@@ -15,6 +15,7 @@ import Home from './pages/Home';
 import Articles from './pages/Articles';
 import EditArticle from './pages/EditArticle';
 import Recipes from './pages/Recipes';
+import EditRecipes from './pages/EditRecipes';
 import CategoryArticles from './pages/CategoryArticles';
 import CategoryRecipes from './pages/CategoryRecipes';
 import Ingredients from './pages/Ingredients';
@@ -70,6 +71,9 @@ const App = () => {
                   </PrivateRoute>
                   <PrivateRoute exact path='/recipes'>
                     <Recipes />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/recipes/edit/:id'>
+                    <EditRecipes />
                   </PrivateRoute>
                   <PrivateRoute exact path='/article_categories'>
                     <CategoryArticles />

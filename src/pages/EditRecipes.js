@@ -6,26 +6,27 @@ import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import { random } from 'lodash';
 
-const EditArticle = () => {
+const EditRecipes = () => {
   const { id } = useParams();
   const history = useHistory();
   const editMode = id !== 'new';
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
-    title: '',
+    name: '',
     slug: '',
     content: '',
+    budget: null,
+    published: false,
     created_at: date,
     user_id: random(1, 50)
   });
 
   useEffect(() => {
     if (editMode) {
-      API.get(`/articles/${id}`)
+      API.get(`/recipes/${id}`)
         .then(res => {
           setData(res.data.data);
-          console.log(data);
         })
         .catch(err => {
           console.log(err);
@@ -33,12 +34,12 @@ const EditArticle = () => {
     }
   }, []);
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setData({ ...data, [name]: value });
-  }
+  };
 
   const handleChangeEditor = (content) => {
     setData({ ...data, content });
@@ -48,17 +49,17 @@ const EditArticle = () => {
     event.preventDefault();
 
     if (editMode) {
-      API.patch(`/articles/${id}`, data)
+      API.patch(`/recipes/${id}`, data)
         .then(res => {
-          history.push('/articles');
+          history.push('/recipes');
         })
         .catch((err) => {
           console.warn(err);
         });
     } else {
-      API.post('/articles', data)
+      API.post('/recipes', data)
         .then((res) => {
-          history.push('/articles');
+          history.push('/recipes');
         })
         .catch((err) => {
           console.warn(err);
@@ -73,10 +74,10 @@ const EditArticle = () => {
           <div className='div-top-editor'>
             <input
               type='text'
-              name='title'
+              name='name'
               minLength='3'
               maxLength='20'
-              value={data.title}
+              value={data.name}
               placeholder='Ajouter un titre'
               onChange={(e) => handleChange(e)}
               required
@@ -85,11 +86,24 @@ const EditArticle = () => {
             <input
               type='text'
               name='slug'
+              minLength='3'
+              maxLength='20'
               value={data.slug}
               placeholder='Ajouter un slug'
               onChange={(e) => handleChange(e)}
               required
             />
+            <input
+              type='number'
+              name='budget'
+              minLength='1'
+              maxLength='20'
+              value={data.budget}
+              placeholder='Budget €'
+              onChange={(e) => handleChange(e)}
+              required
+            />
+
           </div>
           <Editor
             apiKey={process.env.REACT_APP_API_KEY}
@@ -111,7 +125,16 @@ const EditArticle = () => {
             }}
             onEditorChange={handleChangeEditor}
           />
-
+          <div className='div-bottom-editor'>
+            <label htmlFor='published'>Publier </label>
+            <input
+              style={{ width: '30px' }}
+              type='checkbox'
+              name='published'
+              checked={data.published}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
           <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
         </form>
       </main>
@@ -119,4 +142,4 @@ const EditArticle = () => {
   );
 };
 
-export default EditArticle;
+export default EditRecipes;
