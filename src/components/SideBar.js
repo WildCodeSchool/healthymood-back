@@ -46,7 +46,7 @@ const SideBar = () => {
         </SubMenu>
         <SubMenu key='sub2' icon={<FormOutlined />} title='Recettes'>
           <Menu.Item key='3'>
-            <NavLink to='/recettes'>Nos recettes</NavLink>
+            <NavLink to='/recipes'>Nos recettes</NavLink>
           </Menu.Item>
           <Menu.Item key='4'>
             <NavLink to='/recettes/ajouter'>Ajouter</NavLink>
