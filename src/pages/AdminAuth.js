@@ -13,10 +13,8 @@ const AdminAuth = () => {
     e.preventDefault();
     setLoading(true);
     const data = e.target;
-    console.log('post');
     API.post('/auth/login', { email: data.email.value, password: data.password.value })
       .then(res => {
-        console.log(res.data.token);
         setToken(res.data.token);
         setLoading(false);
         history.push('/');

@@ -1,0 +1,28 @@
+.main-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.editor-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-form input {
+  margin: 10px;
+  width: 100%;
+}
+
+.div-top-editor{
+  width: 100%;
+  display: flex;
+}
+.div-bottom-editor{
+width: 30%;
+padding: 20px;
+
+}

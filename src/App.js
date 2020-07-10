@@ -21,6 +21,7 @@ import Dishes from './pages/Dishes';
 import Meals from './pages/Meals';
 import Diets from './pages/Diets';
 import Pages from './pages/Pages';
+import EditPage from './pages/EditPage';
 import Users from './pages/Users';
 import AdminProfil from './pages/AdminProfil';
 import AdminAuth from './pages/AdminAuth';
@@ -33,16 +34,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     <Route
       {...rest}
       render={({ location }) =>
-        token ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: location }
-            }}
-          />
-      )}
+        token ? children : <Redirect to={{ pathname: '/login', state: { from: location } }} />}
     />
   );
 };
@@ -65,43 +57,47 @@ const App = () => {
               <SideBar />
               <Layout className='site-layout'>
                 <TopBar />
-                <Content style={{ margin: '0 16px' }}>
+                <Content>
                   <PrivateRoute exact path='/'>
                     <Home />
                   </PrivateRoute>
                   <PrivateRoute exact path='/articles'>
                     <Articles />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/recettes'>
+                  <PrivateRoute exact path='/recipes'>
                     <Recipes />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/categories-articles'>
+                  <PrivateRoute exact path='/article_categories'>
                     <CategoryArticles />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/categories-recettes'>
+                  <PrivateRoute exact path='/recipe_categories'>
                     <CategoryRecipes />
                   </PrivateRoute>
                   <PrivateRoute exact path='/ingredients'>
                     <Ingredients />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/types-plats'>
+                  <PrivateRoute exact path='/dish_types'>
                     <Dishes />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/types-repas'>
+                  <PrivateRoute exact path='/meal_types'>
                     <Meals />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/regimes'>
+                  <PrivateRoute exact path='/diet'>
                     <Diets />
                   </PrivateRoute>
                   <PrivateRoute exact path='/pages'>
                     <Pages />
                   </PrivateRoute>
-                  <PrivateRoute exact path='/utilisateurs'>
+                  <PrivateRoute exact path='/pages/edit/:id'>
+                    <EditPage />
+                  </PrivateRoute>
+                  <PrivateRoute exact path='/users'>
                     <Users />
                   </PrivateRoute>
                   <PrivateRoute exact path='/mon-profil'>
                     <AdminProfil />
                   </PrivateRoute>
+                  <PrivateRoute exact path='/*' />
                 </Content>
               </Layout>
             </Layout>
