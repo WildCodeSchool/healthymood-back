@@ -2,12 +2,27 @@ import React from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+// import { useHistory } from 'react-router-dom';
+// import ReactPaginate from 'react-paginate';
 import '../Styles/Form.css';
 
 function Ingredients () {
   const initialForm = ({ name: '', is_allergen: false, calories: 0 });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
+  // console.log(ingredientsToShow);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [pageCount, setPageCount] = useState(2);
+  // const history = useHistory();
+
+  // const handlePageClick = (e) => {
+  //   const newPageNumber = e.label;
+  //   // const offset = selectedPage * 10;
+
+  //   setCurrentPage(newPageNumber);
+  //   history.push(`/ingredients?per_page=10&page=${newPageNumber}`);
+  //   setCurrentPage();
+  // };
 
   const DeleteIngredients = async (ingredient) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cet ingrédient ?')) {
@@ -61,6 +76,19 @@ function Ingredients () {
             })}
           </tbody>
         </table>
+        {/* <ReactPaginate
+          previousLabel='Précédent'
+          nextLabel='Suiva'
+          breakLabel='...'
+          breakClassName='break-me'
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName='pagination'
+          subContainerClassName='pages pagination'
+          activeClassName='active'
+        /> */}
       </>
     );
   }
