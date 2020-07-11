@@ -86,6 +86,7 @@ function Ingredients () {
             name='calories'
             minLength='1'
             maxLength='20'
+            value={fields.calories}
             placeholder='Calories / 100gr'
             onChange={handleFieldChange}
             required
