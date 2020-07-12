@@ -3,6 +3,7 @@ import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
+
 function CategoryRecipes () {
   const initialform = { name: '' };
   const { fields, setFields, handleFieldChange } = useFormData(initialform);

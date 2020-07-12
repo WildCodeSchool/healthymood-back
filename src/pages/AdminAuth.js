@@ -23,7 +23,6 @@ const AdminAuth = () => {
         console.log(err);
       });
   };
-
   return (
     <main className='login-page'>
       <img className='login-logo' src={logo} alt='healthymood logo' />
