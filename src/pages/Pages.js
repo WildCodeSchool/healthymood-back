@@ -56,7 +56,7 @@ const Pages = () => {
             return (
               <tr key={p.id}>
                 <td>{p.title}</td>
-                <td>{p.slug}</td>
+                <td>/{p.slug}</td>
                 <td>{p.published === 0 ? 'Non' : 'Oui'} </td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => history.push(`/pages/edit/${p.id}`)} />

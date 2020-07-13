@@ -18,8 +18,7 @@ const EditRecipes = () => {
     content: '',
     budget: null,
     published: false,
-    created_at: date,
-    user_id: random(1, 50)
+    created_at: date
   });
 
   useEffect(() => {

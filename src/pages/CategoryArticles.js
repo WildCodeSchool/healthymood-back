@@ -35,7 +35,7 @@ function CategoryArticles () {
   function Renderlist () {
     return (
       <>
-        <h2>Carégorie d'articles</h2>
+        <h2>Catégorie d'articles</h2>
         <table className='render-list'>
           <thead>
             <tr>
@@ -73,7 +73,7 @@ function CategoryArticles () {
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder="Nouvelle catégorie d'article"
+            placeholder="Nouvelle Catégorie d'article"
             value={fields.name}
             onChange={handleFieldChange}
           />
