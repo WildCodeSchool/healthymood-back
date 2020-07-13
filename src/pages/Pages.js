@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import '../Styles/Editor.css';
+import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import API from '../services/API';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
