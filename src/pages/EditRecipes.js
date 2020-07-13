@@ -4,7 +4,6 @@ import { Editor } from '@tinymce/tinymce-react';
 import API from '../services/API';
 import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
-import { random } from 'lodash';
 
 const EditRecipes = () => {
   const { id } = useParams();
@@ -18,8 +17,7 @@ const EditRecipes = () => {
     content: '',
     budget: null,
     published: false,
-    created_at: date,
-    user_id: random(1, 50)
+    created_at: date
   });
 
   useEffect(() => {
@@ -32,7 +30,7 @@ const EditRecipes = () => {
           console.log(err);
         });
     }
-  }, []);
+  }, []); // eslint-disable-line
 
   const handleChange = (event) => {
     const target = event.target;
