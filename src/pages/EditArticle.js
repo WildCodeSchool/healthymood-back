@@ -4,7 +4,6 @@ import { Editor } from '@tinymce/tinymce-react';
 import API from '../services/API';
 import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
-import { random } from 'lodash';
 
 const EditArticle = () => {
   const { id } = useParams();
@@ -16,8 +15,7 @@ const EditArticle = () => {
     title: '',
     slug: '',
     content: '',
-    created_at: date,
-    user_id: random(1, 50)
+    created_at: date
   });
 
   useEffect(() => {
