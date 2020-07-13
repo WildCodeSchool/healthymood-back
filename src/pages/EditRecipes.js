@@ -17,14 +17,33 @@ const EditRecipes = () => {
     content: '',
     budget: null,
     published: false,
-    created_at: date
+    created_at: date,
+    image: ''
   });
+
+  const uploadImage = (e) => {
+    e.preventDefault();
+
+    const image = e.target.files[0];
+    const formData = new FormData();
+    formData.append('picture', image);
+    API.post('/recipes/uploads', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(res => res.data)
+      .then(tab => {
+        setData({ ...data, image: tab });
+      })
+  }
 
   useEffect(() => {
     if (editMode) {
       API.get(`/recipes/${id}`)
         .then(res => {
           setData(res.data.data);
+          console.log(res.data)
         })
         .catch(err => {
           console.log(err);
@@ -102,7 +121,19 @@ const EditRecipes = () => {
               required
             />
 
+            <br>
+
+            </br>
+            <input
+              name='picture'
+              required
+              accept="image/*"
+              id="picture"
+              type="file"
+              onChange={e => uploadImage(e)}
+            />
           </div>
+
           <Editor
             apiKey={process.env.REACT_APP_API_KEY}
             value={data.content}

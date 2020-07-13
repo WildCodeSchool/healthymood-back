@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import '../Styles/Editor.css';
+import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import API from '../services/API';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -10,6 +10,7 @@ import moment from 'moment';
 const Recipes = () => {
   const history = useHistory();
   const [recipes, setRecipes] = useState([]);
+  const URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Recette ?')) {
@@ -48,6 +49,7 @@ const Recipes = () => {
           <tr>
             <td>Titre</td>
             <td>Slug</td>
+            <td>Image principale</td>
             <td>Date</td>
             <td>Publié</td>
             <td>Actions</td>
@@ -58,7 +60,8 @@ const Recipes = () => {
             return (
               <tr key={r.id}>
                 <td>{r.name}</td>
-                <td>{r.slug}</td>
+                <td>/{r.slug}</td>
+                <td><img src={URL + '/' + r.image} className="img-uploaded" /></td>
                 <td>Crée le : {moment(r.created_at).format('DD/MM/YYYY')}</td>
                 <td>{r.published === 0 ? 'Non' : 'Oui'}</td>
                 <td>
