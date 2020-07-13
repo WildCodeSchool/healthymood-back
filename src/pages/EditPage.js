@@ -4,7 +4,6 @@ import { Editor } from '@tinymce/tinymce-react';
 import API from '../services/API';
 import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
-import { random } from 'lodash';
 
 const EditPage = () => {
   const { id } = useParams();
@@ -15,8 +14,7 @@ const EditPage = () => {
     title: '',
     slug: '',
     content: '',
-    published: false,
-    user_id: random(1, 50)
+    published: false
   });
 
   useEffect(() => {
@@ -29,14 +27,14 @@ const EditPage = () => {
           console.log(err);
         });
     }
-  }, []);
+  }, []); // eslint-disable-line
 
-  function handleChange (event) {
+  const handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setData({ ...data, [name]: value });
-  }
+  };
 
   const handleChangeEditor = (content) => {
     setData({ ...data, content });
@@ -68,8 +66,9 @@ const EditPage = () => {
     <>
       <main className='main-form-container'>
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-          <div className='div-top-editor'>
+          <div className='editor-form-input-container'>
             <input
+              className='editor-form-input'
               type='text'
               name='title'
               minLength='3'
@@ -81,6 +80,7 @@ const EditPage = () => {
             />
             <label className='hide-label' htmlFor='slug'>slug</label>
             <input
+              className='editor-form-input'
               type='text'
               name='slug'
               value={data.slug}
@@ -109,7 +109,7 @@ const EditPage = () => {
             }}
             onEditorChange={handleChangeEditor}
           />
-          <div className='div-bottom-editor'>
+          <div className='editor-bottom-container'>
             <label htmlFor='published'>Publier </label>
             <input
               style={{ width: '30px' }}
@@ -118,8 +118,8 @@ const EditPage = () => {
               checked={data.published}
               onChange={(e) => handleChange(e)}
             />
+            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
           </div>
-          <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
         </form>
       </main>
     </>
