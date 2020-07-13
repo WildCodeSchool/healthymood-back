@@ -14,7 +14,6 @@ import logo from '../images/healthymood-logo.png';
 import smallLogo from '../images/hm-logo-small.png';
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
