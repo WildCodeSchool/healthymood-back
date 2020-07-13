@@ -33,12 +33,12 @@ const EditArticle = () => {
     }
   }, []); // eslint-disable-line
 
-  function handleChange (event) {
+  const handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setData({ ...data, [name]: value });
-  }
+  };
 
   const handleChangeEditor = (content) => {
     setData({ ...data, content });
