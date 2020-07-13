@@ -8,7 +8,7 @@ function Ingredients() {
   const initialForm = ({ name: '', is_allergen: false, calories: 0 });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
-
+  const text = 'Calories / 100gr'
   const DeleteIngredients = async (ingredient) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cet ingrédient ?')) {
       deleteResource(ingredient.id, { optimistic: true });

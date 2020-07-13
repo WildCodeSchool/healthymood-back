@@ -71,7 +71,7 @@ const SideBar = () => {
         </Menu.Item>
 
         <Menu.Item key='/pages' icon={<CopyOutlined />}>
-          <NavLink to='/pages'>Pages</NavLink>
+          <NavLink to='/pages'>Nos pages</NavLink>
         </Menu.Item>
 
         <Menu.Item key='/users' icon={<TeamOutlined />}>
