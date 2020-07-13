@@ -12,7 +12,7 @@ const Articles = () => {
   const [articles, setArticles] = useState([]);
 
   const handleDelete = (id) => {
-    if (window.confirm('Êtes vous sûr de vouloir supprimer cette Page ?')) {
+    if (window.confirm('Êtes vous sûr de vouloir supprimer cette Article ?')) {
       API.delete(`/articles/${id}`)
         .then(res => {
           const currentArticle = articles.filter(p => p.id !== id);
