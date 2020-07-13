@@ -68,8 +68,9 @@ const EditArticle = () => {
     <>
       <main className='main-form-container'>
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-          <div className='div-top-editor'>
+          <div className='editor-form-input-container'>
             <input
+              className='editor-form-input'
               type='text'
               name='title'
               minLength='3'
@@ -81,6 +82,7 @@ const EditArticle = () => {
             />
             <label className='hide-label' htmlFor='slug'>slug</label>
             <input
+              className='editor-form-input'
               type='text'
               name='slug'
               value={data.slug}
@@ -109,8 +111,9 @@ const EditArticle = () => {
             }}
             onEditorChange={handleChangeEditor}
           />
-
-          <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+          <div className='editor-bottom-container'>
+            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+          </div>
         </form>
       </main>
     </>
