@@ -120,7 +120,6 @@ const EditRecipes = () => {
               onChange={(e) => handleChange(e)}
               required
             />
-
             <br>
 
             </br>

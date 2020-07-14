@@ -61,7 +61,9 @@ const Recipes = () => {
               <tr key={r.id}>
                 <td>{r.name}</td>
                 <td>/{r.slug}</td>
-                <td><img src={URL + '/' + r.image} className="img-uploaded" /></td>
+                <td>
+                  <img src={URL + '/' + r.image} alt='recette' className='img-uploaded' />
+                </td>
                 <td>Crée le : {moment(r.created_at).format('DD/MM/YYYY')}</td>
                 <td>{r.published === 0 ? 'Non' : 'Oui'}</td>
                 <td>
