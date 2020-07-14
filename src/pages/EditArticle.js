@@ -15,8 +15,26 @@ const EditArticle = () => {
     title: '',
     slug: '',
     content: '',
-    created_at: date
+    created_at: date,
+    image: ''
   });
+
+  const uploadImage = (e) => {
+    e.preventDefault();
+
+    const image = e.target.files[0];
+    const formData = new FormData(); // eslint-disable-line
+    formData.append('picture', image);
+    API.post('/articles/uploads', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(res => res.data)
+      .then(tab => {
+        setData({ ...data, image: tab });
+      });
+  };
 
   useEffect(() => {
     if (editMode) {
@@ -82,13 +100,22 @@ const EditArticle = () => {
             />
             <label className='hide-label' htmlFor='slug'>slug</label>
             <input
-              className='editor-form-input'
+              className='editor-form-input input-custom-margin'
               type='text'
               name='slug'
               value={data.slug}
               placeholder='Ajouter un slug'
               onChange={(e) => handleChange(e)}
               required
+            />
+            <input
+              className='editor-form-input'
+              name='picture'
+              required
+              accept='image/*'
+              id='picture'
+              type='file'
+              onChange={e => uploadImage(e)}
             />
           </div>
           <Editor
