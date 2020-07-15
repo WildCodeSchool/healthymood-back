@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.img-uploaded{
+  height: 60px;
+}
+
 main.ant-layout-content {
   overflow-y: auto;
 }
