@@ -10,7 +10,6 @@ import moment from 'moment';
 const Recipes = () => {
   const history = useHistory();
   const [recipes, setRecipes] = useState([]);
-  const URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Recette ?')) {
@@ -62,7 +61,7 @@ const Recipes = () => {
                 <td>{r.name}</td>
                 <td>/{r.slug}</td>
                 <td>
-                  <img src={URL + '/' + r.image} alt='recette' className='img-uploaded' />
+                  <img src={r.image} alt='recette' className='img-uploaded' />
                 </td>
                 <td>Crée le : {moment(r.created_at).format('DD/MM/YYYY')}</td>
                 <td>{r.published === 0 ? 'Non' : 'Oui'}</td>

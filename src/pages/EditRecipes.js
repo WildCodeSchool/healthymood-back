@@ -25,7 +25,7 @@ const EditRecipes = () => {
     e.preventDefault();
 
     const image = e.target.files[0];
-    const formData = new FormData();
+    const formData = new FormData(); // eslint-disable-line
     formData.append('picture', image);
     API.post('/recipes/uploads', formData, {
       headers: {
@@ -35,15 +35,15 @@ const EditRecipes = () => {
       .then(res => res.data)
       .then(tab => {
         setData({ ...data, image: tab });
-      })
-  }
+      });
+  };
 
   useEffect(() => {
     if (editMode) {
       API.get(`/recipes/${id}`)
         .then(res => {
           setData(res.data.data);
-          console.log(res.data)
+          console.log(res.data);
         })
         .catch(err => {
           console.log(err);
@@ -88,8 +88,9 @@ const EditRecipes = () => {
     <>
       <main className='main-form-container'>
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-          <div className='div-top-editor'>
+          <div className='editor-form-input-container'>
             <input
+              className='editor-form-input'
               type='text'
               name='name'
               minLength='3'
@@ -101,6 +102,7 @@ const EditRecipes = () => {
             />
             <label className='hide-label' htmlFor='slug'>slug</label>
             <input
+              className='editor-form-input input-custom-margin'
               type='text'
               name='slug'
               minLength='3'
@@ -111,6 +113,7 @@ const EditRecipes = () => {
               required
             />
             <input
+              className='editor-form-input input-custom-margin'
               type='number'
               name='budget'
               minLength='1'
@@ -120,15 +123,14 @@ const EditRecipes = () => {
               onChange={(e) => handleChange(e)}
               required
             />
-            <br>
-
-            </br>
+            {data.image && <img src={data.image} alt='' />}
             <input
+              className='editor-form-input'
               name='picture'
               required
-              accept="image/*"
-              id="picture"
-              type="file"
+              accept='image/*'
+              id='picture'
+              type='file'
               onChange={e => uploadImage(e)}
             />
           </div>
@@ -153,7 +155,7 @@ const EditRecipes = () => {
             }}
             onEditorChange={handleChangeEditor}
           />
-          <div className='div-bottom-editor'>
+          <div className='editor-bottom-container'>
             <label htmlFor='published'>Publier </label>
             <input
               style={{ width: '30px' }}
