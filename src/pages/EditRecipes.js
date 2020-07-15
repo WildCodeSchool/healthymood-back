@@ -194,7 +194,6 @@ const EditRecipes = () => {
 
           <aside className='aside'>
             <div className='upload-img'>
-              {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
               <input
                 className='editor-form-input'
                 name='picture'
@@ -203,6 +202,9 @@ const EditRecipes = () => {
                 type='file'
                 onChange={e => uploadImage(e)}
               />
+              <div>
+                {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
+              </div>
             </div>
 
             <div className='tag-select'>
