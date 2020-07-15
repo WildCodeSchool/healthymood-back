@@ -108,6 +108,7 @@ const EditArticle = () => {
               onChange={(e) => handleChange(e)}
               required
             />
+            {data.image && <img src={data.image} alt='' />}
             <input
               className='editor-form-input'
               name='picture'

@@ -9,7 +9,6 @@ import moment from 'moment';
 const Articles = () => {
   const history = useHistory();
   const [articles, setArticles] = useState([]);
-  const URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Article ?')) {
@@ -59,7 +58,7 @@ const Articles = () => {
               <tr key={a.id}>
                 <td>{a.title}</td>
                 <td>{a.slug}</td>
-                <td><img src={URL + '/' + a.image} alt='article' className='img-uploaded' /></td>
+                <td><img src={a.image} alt='article' className='img-uploaded' /></td>
                 <td>Crée le : {moment(a.created_at).format('DD/MM/YYYY')}</td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => history.push(`/articles/edit/${a.id}`)} />
