@@ -164,8 +164,8 @@ const EditRecipes = () => {
               checked={data.published}
               onChange={(e) => handleChange(e)}
             />
+            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
           </div>
-          <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
         </form>
       </main>
     </>
