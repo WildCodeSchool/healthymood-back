@@ -24,7 +24,7 @@ const EditRecipes = () => {
     created_at: date,
     image: ''
   });
-  /*--------------------------*/
+
   const getResourceCollection = async (url) => {
     let data = [];
     try {
@@ -35,7 +35,7 @@ const EditRecipes = () => {
     }
     return data;
   };
-  /*--------------------------*/
+
   const uploadImage = (e) => {
     e.preventDefault();
     const image = e.target.files[0];
@@ -57,34 +57,33 @@ const EditRecipes = () => {
       API.get(`/recipes/${id}`)
         .then(res => {
           setData({ ...res.data.data });
-          setChosenIngredients(res.data.data.ingredients.map(tagToOption))
+          setChosenIngredients(res.data.data.ingredients.map(tagToOption));
 
-          console.log(res.data.data)
+          console.log(res.data.data);
         })
         .catch(err => {
           console.log(err);
         });
     }
   }, []); // eslint-disable-line
-  /*--------------------------*/
+
   const handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setData({ ...data, [name]: value });
   };
-  /*--------------------------*/
+
   const handleChangeEditor = (content) => {
     setData({ ...data, content });
   };
-  /*--------------------------*/
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (editMode) {
       API.patch(`/recipes/${id}`, ({ ...data, ingredients: chosenIngredients }))
         .then(res => {
           history.push('/recipes');
-
         })
         .catch((err) => {
           console.warn(err);
@@ -93,14 +92,13 @@ const EditRecipes = () => {
       API.post('/recipes', ({ ...data, ingredients: chosenIngredients }))
         .then((res) => {
           history.push('/recipes');
-
         })
         .catch((err) => {
           console.warn(err);
         });
     }
   };
-  /*--------------------------*/
+
   const populateInputs = (allIngredients) => {
     const query = queryString.parse({ arrayFormat: 'bracket' });
     const { ingredients } = query; // eslint-disable-line
@@ -108,7 +106,7 @@ const EditRecipes = () => {
       setChosenIngredients(allIngredients.filter(ingredient => ingredients.includes(ingredient.value.toString())));
     }
   };
-  /*--------------------------*/
+
   useEffect(() => {
     Promise.all([getAllIngredients()])
       .then(([allIngredients]) => {
@@ -124,8 +122,6 @@ const EditRecipes = () => {
         return options;
       });
   };
-
-
 
   return (
     <>
@@ -179,7 +175,7 @@ const EditRecipes = () => {
               initialValue=''
               init={{
                 height: 500,
-                width: "100%",
+                width: '100%',
                 autosave_interval: '5s',
                 plugins: [
                   'advlist autolink lists link image charmap print preview anchor',
@@ -196,8 +192,6 @@ const EditRecipes = () => {
             />
           </div>
 
-
-
           <aside className='aside'>
             <div className='upload-img'>
               {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
@@ -211,7 +205,7 @@ const EditRecipes = () => {
               />
             </div>
 
-            <div className='tag-select' >
+            <div className='tag-select'>
               <TagSelect
                 options={allIngredients}
                 name='tag-select'
