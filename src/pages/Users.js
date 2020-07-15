@@ -1,16 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
+import { Link } from 'react-router-dom';
+import API from '../services/API';
 import '../Styles/Users.css';
 
 function Users () {
   const initialForm = ({ is_admin: false, blocked: false });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceSaveError, collection: UsersToShow, fetchCollectionError: fetchError } = useResourceCollection('/users');
-
   const [isVisible, setIsvisible] = useState(false);
+
+  const [users, setUsers] = useState([UsersToShow]);
+  const [totalUsers, setTotalUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const usersPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const pageNumbers = [];
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      const res = await API.get('/users?per_page=' + usersPerPage + '&page=' + currentPage);
+      setUsers(res.data.data);
+      setTotalUsers(res.data.total);
+      setLoading(false);
+    };
+    fetchUsers();
+  }, [currentPage, UsersToShow]);
+
+  for (let i = 1; i <= Math.ceil(totalUsers / usersPerPage); i++) { pageNumbers.push(i); }
+  if (loading) { return <h2>Loading...</h2>; }
 
   const SaveUser = async (event) => {
     event.preventDefault();
@@ -48,7 +71,7 @@ function Users () {
             </tr>
           </thead>
           <tbody>
-            {UsersToShow.map(u => {
+            {users.map(u => {
               return (
                 <tr key={u.id}>
                   <td>{u.firstname}</td>
@@ -64,6 +87,11 @@ function Users () {
             })}
           </tbody>
         </table>
+        <nav>
+          <ul className='pagination'>
+            {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+          </ul>
+        </nav>
       </>
     );
   }

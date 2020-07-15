@@ -16,7 +16,7 @@ function Ingredients () {
   const [ingredients, setIngredients] = useState([ingredientsToShow]);
   const [totalIngredients, setTotalIngredients] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [ingredientsPerPage] = useState(2);
+  const ingredientsPerPage = 2;
   const [currentPage, setCurrentPage] = useState(1);
   const paginate = pageNumber => {
     history.push(`/ingredients?page=${pageNumber}`);
@@ -95,12 +95,12 @@ function Ingredients () {
               );
             })}
           </tbody>
-          <nav>
-            <ul className='pagination'>
-              {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
-            </ul>
-          </nav>
         </table>
+        <nav>
+          <ul className='pagination'>
+            {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+          </ul>
+        </nav>
       </>
     );
   }

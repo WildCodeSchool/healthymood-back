@@ -86,7 +86,7 @@ td, th {
   padding-left: 0;
   list-style: none;
   border-radius: .25rem;
-  margin: auto;
+  margin: 10px;
 }
 
 .page-link {
@@ -97,8 +97,15 @@ td, th {
   line-height: 1.25;
   color: var(--blue);
   text-decoration: none;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  color: #1890ff;
+}
+
+.page-link:hover {
+  background-color: #1890ff;
+  color: white;
 }
 
 @media 

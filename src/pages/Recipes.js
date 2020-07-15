@@ -10,6 +10,12 @@ import moment from 'moment';
 const Recipes = () => {
   const history = useHistory();
   const [recipes, setRecipes] = useState([]);
+  const [totalRecipes, setTotalRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const recipesPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const pageNumbers = [];
 
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Recette ?')) {
@@ -33,6 +39,20 @@ const Recipes = () => {
         console.log(err);
       });
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      setLoading(true);
+      const res = await API.get('/recipes?per_page=' + recipesPerPage + '&page=' + currentPage);
+      setRecipes(res.data.data);
+      setTotalRecipes(res.data.total);
+      setLoading(false);
+    };
+    fetchRecipes();
+  }, [currentPage]);
+
+  for (let i = 1; i <= Math.ceil(totalRecipes / recipesPerPage); i++) { pageNumbers.push(i); }
+  if (loading) { return <h2>Loading...</h2>; }
 
   return (
     <>
@@ -70,7 +90,11 @@ const Recipes = () => {
           })}
         </tbody>
       </table>
-
+      <nav>
+        <ul className='pagination'>
+          {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+        </ul>
+      </nav>
     </>
   );
 };
