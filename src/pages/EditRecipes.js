@@ -58,7 +58,6 @@ const EditRecipes = () => {
         .then(res => {
           setData({ ...res.data.data });
           setChosenIngredients(res.data.data.ingredients.map(tagToOption))
-
           console.log(res.data.data)
         })
         .catch(err => {
