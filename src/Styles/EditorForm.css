@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding:40px 30px 30px 30px;
 }
 
 .editor-container {
@@ -13,20 +13,17 @@
 
 .editor-form {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .editor-form-input-container {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  width: 80%;
 }
 
 .editor-form-input {
   margin: 10px 0px;
-  width: 49%;
 }
 
 .editor-title {
@@ -48,4 +45,13 @@
 
 .input-custom-margin {
   margin: 10px 10px
+}
+
+.aside{
+  width: 20%;
+}
+.editor-group{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
