@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import '../Styles/Editor.css';
+import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import API from '../services/API';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 
 const Articles = () => {
@@ -48,6 +47,7 @@ const Articles = () => {
           <tr>
             <td>Titre</td>
             <td>Slug</td>
+            <td>Image Principale</td>
             <td>Date</td>
             <td>Actions</td>
           </tr>
@@ -58,6 +58,7 @@ const Articles = () => {
               <tr key={a.id}>
                 <td>{a.title}</td>
                 <td>{a.slug}</td>
+                <td><img src={a.image} alt='article' className='img-uploaded' /></td>
                 <td>Crée le : {moment(a.created_at).format('DD/MM/YYYY')}</td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => history.push(`/articles/edit/${a.id}`)} />
