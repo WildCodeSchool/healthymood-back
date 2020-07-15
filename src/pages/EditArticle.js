@@ -4,7 +4,6 @@ import { Editor } from '@tinymce/tinymce-react';
 import API from '../services/API';
 import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
-import { random } from 'lodash';
 
 const EditArticle = () => {
   const { id } = useParams();
@@ -17,8 +16,25 @@ const EditArticle = () => {
     slug: '',
     content: '',
     created_at: date,
-    user_id: random(1, 50)
+    image: ''
   });
+
+  const uploadImage = (e) => {
+    e.preventDefault();
+
+    const image = e.target.files[0];
+    const formData = new FormData(); // eslint-disable-line
+    formData.append('picture', image);
+    API.post('/articles/uploads', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(res => res.data)
+      .then(tab => {
+        setData({ ...data, image: tab });
+      });
+  };
 
   useEffect(() => {
     if (editMode) {
@@ -70,8 +86,9 @@ const EditArticle = () => {
     <>
       <main className='main-form-container'>
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-          <div className='div-top-editor'>
+          <div className='editor-form-input-container'>
             <input
+              className='editor-form-input'
               type='text'
               name='title'
               minLength='3'
@@ -83,12 +100,23 @@ const EditArticle = () => {
             />
             <label className='hide-label' htmlFor='slug'>slug</label>
             <input
+              className='editor-form-input input-custom-margin'
               type='text'
               name='slug'
               value={data.slug}
               placeholder='Ajouter un slug'
               onChange={(e) => handleChange(e)}
               required
+            />
+            {data.image && <img src={data.image} alt='' />}
+            <input
+              className='editor-form-input'
+              name='picture'
+              required
+              accept='image/*'
+              id='picture'
+              type='file'
+              onChange={e => uploadImage(e)}
             />
           </div>
           <Editor
@@ -111,8 +139,9 @@ const EditArticle = () => {
             }}
             onEditorChange={handleChangeEditor}
           />
-
-          <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+          <div className='editor-bottom-container'>
+            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+          </div>
         </form>
       </main>
     </>
