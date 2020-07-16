@@ -69,8 +69,9 @@ const EditRecipes = () => {
     <>
       <main className='main-form-container'>
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-          <div className='div-top-editor'>
+          <div className='editor-form-input-container'>
             <input
+              className='editor-form-input'
               type='text'
               name='name'
               minLength='3'
@@ -82,6 +83,7 @@ const EditRecipes = () => {
             />
             <label className='hide-label' htmlFor='slug'>slug</label>
             <input
+              className='editor-form-input input-custom-margin'
               type='text'
               name='slug'
               minLength='3'
@@ -92,6 +94,7 @@ const EditRecipes = () => {
               required
             />
             <input
+              className='editor-form-input'
               type='number'
               name='budget'
               minLength='1'
@@ -123,7 +126,7 @@ const EditRecipes = () => {
             }}
             onEditorChange={handleChangeEditor}
           />
-          <div className='div-bottom-editor'>
+          <div className='editor-bottom-container'>
             <label htmlFor='published'>Publier </label>
             <input
               style={{ width: '30px' }}
@@ -132,8 +135,8 @@ const EditRecipes = () => {
               checked={data.published}
               onChange={(e) => handleChange(e)}
             />
+            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
           </div>
-          <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
         </form>
       </main>
     </>
