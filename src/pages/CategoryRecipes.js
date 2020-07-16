@@ -27,15 +27,12 @@ function CategoryRecipes () {
   };
 
   const uploadImage = (e) => {
-    console.log('uploadFunction');
     e.preventDefault();
     const image = e.target.files[0];
     const formData = new FormData(); // eslint-disable-line
     formData.append('picture', image);
-    console.log(formData);
     saveResource(fields);
     setFields(initialform);
-    console.log(fields);
   };
 
   if (fetchError) {
