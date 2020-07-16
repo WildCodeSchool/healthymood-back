@@ -41,6 +41,7 @@ function CategoryRecipes () {
       .then(res => res.data)
       .then(tab => {
         setFields({ ...fields, image: tab });
+        console.log(tab);
       });
   };
 
@@ -52,7 +53,6 @@ function CategoryRecipes () {
     );
   }
   if (!CatRecipeToShow) return 'Chargement...';
-  console.log(CatRecipeToShow);
   function Renderlist () {
     return (
       <>
