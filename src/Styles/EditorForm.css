@@ -39,18 +39,33 @@
 }
 
 .editor-bottom-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   padding: 20px;
 }
-
+.editor-bottom-container button.btn {
+  width:100%;
+  transition: all 0.15s ease-in-out;
+}
+.editor-bottom-container button.publish {
+  background-color:#008D36;
+}
+.editor-bottom-container {
+  display:flex;
+  flex-direction:column;
+}
+.label-input-container {
+  display:flex;
+  align-items:center;
+  margin-bottom:20px;
+}
 .aside{
   width: 20%;
   background-color: white;
   border-radius: 5px;
-  padding: 20px
+  padding: 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
 .editor-group{
@@ -60,6 +75,26 @@
   background-color: white;
   border-radius: 5px;
   padding: 20px
+}
+
+.upload-img-container {
+  border: solid 1px lightgray;
+  border-radius: 5px;
+  cursor:pointer;
+  padding: 10px;
+}
+
+.upload-img-container .editor-form-input {
+  margin-bottom: 0;
+}
+
+.img-preview-container {
+  width: 100%;
+  padding: 10px;
+}
+
+.img-preview {
+  width: 150px;
 }
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {

@@ -5,7 +5,9 @@ import API from '../services/API';
 import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import TagSelect from '../components/TagSelect';
+import SingleSelect from '../components/SingleSelect';
 import queryString from 'query-string';
+import ImagePlaceholder from '../images/image_placeholder.png';
 
 const EditRecipes = () => {
   const { id } = useParams();
@@ -20,6 +22,8 @@ const EditRecipes = () => {
   const [allMealTypes, setAllMealTypes] = useState([]);
   const [chosenDishTypes, setChosenDishTypes] = useState([]);
   const [allDishTypes, setAllDishTypes] = useState([]);
+  const [chosenRecipeCategory, setChosenRecipeCategory] = useState(null);
+  const [allRecipeCategories, setAllRecipeCategories] = useState([]);
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
@@ -27,9 +31,10 @@ const EditRecipes = () => {
     slug: '',
     content: '',
     budget: null,
-    published: false,
+    published: true,
     created_at: date,
-    image: ''
+    image: '',
+    intro: ''
   });
 
   const getResourceCollection = async (url) => {
@@ -57,6 +62,15 @@ const EditRecipes = () => {
       .then(tags => {
         const options = tags.map(tagToOption);
         setAllIngredients(options);
+        return options;
+      });
+  };
+
+  const getAllRecipeCategories = () => {
+    return getResourceCollection('recipe_categories')
+      .then(tags => {
+        const options = tags.map(tagToOption);
+        setAllRecipeCategories(options);
         return options;
       });
   };
@@ -93,9 +107,9 @@ const EditRecipes = () => {
         setData({ ...data, image: tab });
       });
   };
-  const populateInputs = (allMealTypes, allIngredients, allDiets, allDishTypes) => {
+  const populateInputs = (allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories) => {
     const query = queryString.parse({ arrayFormat: 'bracket' });
-    const { meal_types, ingredients, diets, dish_types } = query; // eslint-disable-line
+    const { meal_types, ingredients, diets, dish_types, recipe_categories } = query; // eslint-disable-line
     if (meal_types) { // eslint-disable-line
       setChosenMealTypes(allMealTypes.filter(mealType => meal_types.includes(mealType.value.toString())));
     }
@@ -108,13 +122,21 @@ const EditRecipes = () => {
     if (dish_types) {
       setChosenDishTypes(allDishTypes.filter(dish => dish_types.includes(dish.value.toString())));
     }
+    if (recipe_categories) {
+      setChosenRecipeCategory(allRecipeCategories.find(recipe => recipe_categories.includes(recipe.value.toString())));
+    }
   };
-  useEffect(() => {
-    Promise.all([getAllMealTypes(), getAllIngredients(), getAllDiets(), getAllDishs()])
-      .then(([allMealTypes, allIngredients, allDiets, allDishTypes]) => {
-        populateInputs(allMealTypes, allIngredients, allDiets, allDishTypes);
-      });
-  }, []) // eslint-disable-line
+  // eslint-disable-line
+
+  // const deleteImage = (id, data) => {
+  //   if (editMode) {
+  //     API.delete(`/recipes/uploads/${id}`, data)
+  //       .then(res => {
+  //         const currentImage = data.filter(d => d.image !== data.image);
+  //         setData(currentImage);
+  //       });
+  //   }
+  // };
 
   useEffect(() => {
     if (editMode) {
@@ -123,7 +145,10 @@ const EditRecipes = () => {
           setData({ ...res.data.data });
           setChosenIngredients(res.data.data.ingredients.map(tagToOption));
           setChosenDishTypes(res.data.data.dish_types.map(tagToOption));
-          console.log(data)
+          setChosenMealTypes(res.data.data.mealType.map(tagToOption));
+          setChosenDiets(res.data.data.diets.map(tagToOption));
+          setChosenRecipeCategory(res.data.data.category ? { label: res.data.data.category.name, value: res.data.data.category.id } : null);
+          console.log(res.data.data)
         })
         .catch(err => {
           console.log(err);
@@ -146,7 +171,7 @@ const EditRecipes = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (editMode) {
-      API.patch(`/recipes/${id}`, ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes }))
+      API.patch(`/recipes/${id}`, ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes, meal_types: chosenMealTypes, diets: chosenDiets, recipe_category: chosenRecipeCategory }))
         .then(res => {
           history.push('/recipes');
         })
@@ -154,7 +179,7 @@ const EditRecipes = () => {
           console.warn(err);
         });
     } else {
-      API.post('/recipes', ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes }))
+      API.post('/recipes', ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes, meal_types: chosenMealTypes, diets: chosenDiets, recipe_category: chosenRecipeCategory }))
         .then((res) => {
           history.push('/recipes');
         })
@@ -163,7 +188,12 @@ const EditRecipes = () => {
         });
     }
   };
-
+  useEffect(() => {
+    Promise.all([getAllMealTypes(), getAllIngredients(), getAllDiets(), getAllDishs(), getAllRecipeCategories()])
+      .then(([allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories]) => {
+        populateInputs(allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories);
+      });
+  }, [])
 
   return (
     <>
@@ -186,7 +216,7 @@ const EditRecipes = () => {
 
               <label className='hide-label' htmlFor='slug'>slug</label>
               <input
-                className='editor-form-input input-custom-margin'
+                className='editor-form-input'
                 type='text'
                 name='slug'
                 minLength='3'
@@ -196,7 +226,6 @@ const EditRecipes = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
-
               <input
                 className='editor-form-input'
                 type='number'
@@ -235,7 +264,7 @@ const EditRecipes = () => {
           </div>
 
           <aside className='aside'>
-            <div className='upload-img'>
+            <div className='upload-img-container'>
               <input
                 className='editor-form-input'
                 name='picture'
@@ -244,8 +273,8 @@ const EditRecipes = () => {
                 type='file'
                 onChange={e => uploadImage(e)}
               />
-              <div>
-                {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
+              <div className='img-preview-container'>
+                {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
               </div>
             </div>
 
@@ -289,21 +318,31 @@ const EditRecipes = () => {
                 }}
                 placeholder='Types de Plat'
               />
+              <br></br>
+              <SingleSelect
+                className='tag-select'
+                options={allRecipeCategories}
+                value={chosenRecipeCategory}
+                onChange={(newValues) => {
+                  setChosenRecipeCategory(newValues);
+                }}
+                placeholder='Types de Catégorie'
+              />
+            </div>
+            <div className='editor-bottom-container'>
+              <div className='label-input-container'>
+                <input
+                  style={{ width: '30px' }}
+                  type='checkbox'
+                  name='published'
+                  checked={data.published}
+                  onChange={(e) => handleChange(e)}
+                />
+                <label htmlFor='published'>Publier </label>
+              </div>
+              <button type='submit' className={data.published ? 'btn publish' : 'btn'}>{editMode ? 'Modifier' : data.published ? 'Publier' : 'Sauvegarder'}</button>
             </div>
           </aside>
-
-          <div className='editor-bottom-container'>
-            <label htmlFor='published'>Publier </label>
-            <input
-              style={{ width: '30px' }}
-              type='checkbox'
-              name='published'
-              checked={data.published}
-              onChange={(e) => handleChange(e)}
-            />
-            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
-          </div>
-
         </form>
       </main>
     </>

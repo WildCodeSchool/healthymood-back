@@ -1,7 +1,6 @@
 import React from 'react';
 import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
-// import MultiSelect from "react-multi-select-component";
 
 const animatedComponents = makeAnimated();
 
@@ -11,7 +10,7 @@ const NoOptionsMessage = props => {
   );
 };
 
-export default function TagSelect (props) {
+export default function TagSelect(props) {
   return (
     <Select
       {...props}
