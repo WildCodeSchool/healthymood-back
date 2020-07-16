@@ -118,10 +118,10 @@ const EditRecipes = () => {
     if (diets) {
       setChosenDiets(allDiets.filter(diet => diets.includes(diet.value.toString())));
     }
-    if (dish_types) {
+    if (dish_types) { // eslint-disable-line
       setChosenDishTypes(allDishTypes.filter(dish => dish_types.includes(dish.value.toString())));
     }
-    if (recipe_categories) {
+    if (recipe_categories) { // eslint-disable-line
       setChosenRecipeCategory(allRecipeCategories.find(recipe => recipe_categories.includes(recipe.value.toString())));
     }
   };
