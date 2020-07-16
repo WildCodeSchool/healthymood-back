@@ -43,7 +43,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    API.get('/pages/?per_page=3&page=1&sort_by=created_at')
+    API.get('/generic_pages/?per_page=3&page=1&sort_by=created_at')
       .then(res => {
         setPages([...res.data.data]);
       })
@@ -67,7 +67,7 @@ const Home = () => {
               </div>
             );
           })}
-          <Link className='dashboard-all-link' to='/articles/'>
+          <Link className='dashboard-all-link' to='/recipes/'>
             <span>Toutes les recettes</span>
           </Link>
         </div>
@@ -99,7 +99,7 @@ const Home = () => {
               </div>
             );
           })}
-          <Link className='dashboard-all-link' to='/articles/'>
+          <Link className='dashboard-all-link' to='/pages/'>
             <span>Toutes les pages</span>
           </Link>
         </div>

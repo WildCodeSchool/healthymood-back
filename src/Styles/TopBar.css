@@ -4,7 +4,8 @@ header.ant-layout-header.site-layout-background {
   justify-content: space-between;
   align-items: center;
 }
-span.ant-avatar.ant-avatar-circle.ant-avatar-image {
+span.ant-dropdown-toggler.ant-dropdown-trigger, 
+span.ant-dropdown-toggler.ant-dropdown-trigger.ant-dropdown-open {
   margin-right: 48px;
 }
 .hello {
