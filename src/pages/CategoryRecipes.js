@@ -2,10 +2,14 @@ import React from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import API from '../services/API';
 import '../Styles/Form.css';
 
 function CategoryRecipes () {
-  const initialform = { name: '' };
+  const initialform = {
+    name: '',
+    image: ''
+  };
   const { fields, setFields, handleFieldChange } = useFormData(initialform);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: CatRecipeToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
 
@@ -22,6 +26,25 @@ function CategoryRecipes () {
   const fillForm = async cat => {
     setFields(cat);
   };
+
+  const uploadImage = (e) => {
+    e.preventDefault();
+
+    const image = e.target.files[0];
+    const formData = new FormData(); // eslint-disable-line
+    formData.append('picture', image);
+    API.post('/recipes/uploads', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(res => res.data)
+      .then(tab => {
+        setFields({ ...fields, image: tab });
+        console.log(tab);
+      });
+  };
+
   if (fetchError) {
     return (
       <div>
@@ -38,6 +61,7 @@ function CategoryRecipes () {
           <thead>
             <tr>
               <td>Nom</td>
+              <td>Image</td>
               <td>Actions</td>
             </tr>
           </thead>
@@ -46,6 +70,7 @@ function CategoryRecipes () {
               return (
                 <tr key={c.id}>
                   <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
+                  <td>{c.image}</td>
                   <td>
                     <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
                     <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
@@ -73,7 +98,16 @@ function CategoryRecipes () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-
+          <input
+            className='editor-form-input'
+            name='picture'
+            required
+            accept='image/*'
+            id='picture'
+            type='file'
+            onChange={e => uploadImage(e)}
+          />
+          <img src={fields.image} alt={fields.image} />
           <button
             className='form-button'
             onClick={SaveCatRecipe}

@@ -4,11 +4,18 @@
 <head>
   <meta charset="utf-8" />
   <link rel="shortcut icon" type="image/png" href="https://www.healthymood.fr/wp-content/uploads/favicone.png">
-  <!--https://www.healthymood.fr/wp-content/uploads/favicone.png -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" href="https://www.healthymood.fr/wp-content/uploads/favicone.png" type="image/x-icon">
   <meta name="description" content="Back-end healthymood" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <script>
+    (function (w, d, s, g, js, fjs) {
+      g = w.gapi || (w.gapi = {}); g.analytics = { q: [], ready: function (cb) { this.q.push(cb) } };
+      js = d.createElement(s); fjs = d.getElementsByTagName(s)[0];
+      js.src = 'https://apis.google.com/js/platform.js';
+      fjs.parentNode.insertBefore(js, fjs); js.onload = function () { g.load('analytics') };
+    }(window, document, 'script'));
+  </script>
   <title>Healthymood Back-Office</title>
 </head>
 

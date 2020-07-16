@@ -14,11 +14,11 @@ const Recipes = () => {
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Recette ?')) {
       API.delete(`/recipes/${id}`)
-        .then((res) => {
-          const currentRecipe = recipes.filter((r) => r.id !== id);
+        .then(res => {
+          const currentRecipe = recipes.filter(r => r.id !== id);
           setRecipes(currentRecipe);
         })
-        .catch((err) => {
+        .catch(err => {
           console.warn(err);
         });
     }
@@ -26,10 +26,10 @@ const Recipes = () => {
 
   useEffect(() => {
     API.get('/recipes')
-      .then((res) => {
+      .then(res => {
         setRecipes(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }, []); // eslint-disable-line
@@ -48,34 +48,33 @@ const Recipes = () => {
           <tr>
             <td>Titre</td>
             <td>Slug</td>
+            <td>Image principale</td>
             <td>Date</td>
             <td>Publié</td>
             <td>Actions</td>
           </tr>
         </thead>
         <tbody>
-          {recipes.map((r) => {
+          {recipes.map(r => {
             return (
               <tr key={r.id}>
                 <td>{r.name}</td>
-                <td>{r.slug}</td>
+                <td>/{r.slug}</td>
+                <td>
+                  <img src={r.image} alt='recette' className='img-uploaded' />
+                </td>
                 <td>Crée le : {moment(r.created_at).format('DD/MM/YYYY')}</td>
                 <td>{r.published === 0 ? 'Non' : 'Oui'}</td>
                 <td>
-                  <EditOutlined
-                    className='edit-icon'
-                    onClick={() => history.push(`/recipes/edit/${r.id}`)}
-                  />
-                  <DeleteOutlined
-                    className='delete-icon'
-                    onClick={() => handleDelete(r.id)}
-                  />
+                  <EditOutlined className='edit-icon' onClick={() => history.push(`/recipes/edit/${r.id}`)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => handleDelete(r.id)} />
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+
     </>
   );
 };

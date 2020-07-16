@@ -13,11 +13,11 @@ const Pages = () => {
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Page ?')) {
       API.delete(`/generic_pages/${id}`)
-        .then((res) => {
-          const currentPage = pages.filter((p) => p.id !== id);
+        .then(res => {
+          const currentPage = pages.filter(p => p.id !== id);
           setPages(currentPage);
         })
-        .catch((err) => {
+        .catch(err => {
           console.warn(err);
         });
     }
@@ -25,14 +25,13 @@ const Pages = () => {
 
   useEffect(() => {
     API.get('/generic_pages')
-      .then((res) => {
+      .then(res => {
         setPages(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }, []); // eslint-disable-line
-  console.log(pages);
 
   return (
     <>
@@ -49,33 +48,26 @@ const Pages = () => {
             <td>Titre</td>
             <td>Slug</td>
             <td>Publié</td>
-            <td>Visible dans le footer</td>
             <td>Actions</td>
           </tr>
         </thead>
         <tbody>
-          {pages.map((p) => {
+          {pages.map(p => {
             return (
               <tr key={p.id}>
                 <td>{p.title}</td>
                 <td>/{p.slug}</td>
                 <td>{p.published === 0 ? 'Non' : 'Oui'} </td>
-                <td>{p.display_in_footer === 0 ? 'Non' : 'Oui'}</td>
                 <td>
-                  <EditOutlined
-                    className='edit-icon'
-                    onClick={() => history.push(`/pages/edit/${p.id}`)}
-                  />
-                  <DeleteOutlined
-                    className='delete-icon'
-                    onClick={() => handleDelete(p.id)}
-                  />
+                  <EditOutlined className='edit-icon' onClick={() => history.push(`/pages/edit/${p.id}`)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => handleDelete(p.id)} />
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+
     </>
   );
 };

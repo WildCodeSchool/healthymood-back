@@ -14,17 +14,16 @@ const EditPage = () => {
     title: '',
     slug: '',
     content: '',
-    display_in_footer: false,
     published: false
   });
 
   useEffect(() => {
     if (editMode) {
       API.get(`/generic_pages/${id}`)
-        .then((res) => {
+        .then(res => {
           setData(res.data.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     }
@@ -46,7 +45,7 @@ const EditPage = () => {
 
     if (editMode) {
       API.patch(`/generic_pages/${id}`, data)
-        .then((res) => {
+        .then(res => {
           history.push('/pages');
         })
         .catch((err) => {
@@ -79,9 +78,7 @@ const EditPage = () => {
               onChange={(e) => handleChange(e)}
               required
             />
-            <label className='hide-label' htmlFor='slug'>
-              slug
-            </label>
+            <label className='hide-label' htmlFor='slug'>slug</label>
             <input
               className='editor-form-input'
               type='text'
@@ -113,14 +110,6 @@ const EditPage = () => {
             onEditorChange={handleChangeEditor}
           />
           <div className='editor-bottom-container'>
-            <label htmlFor='published'>Visible dans le footer ? </label>
-            <input
-              style={{ width: '30px' }}
-              type='checkbox'
-              name='display_in_footer'
-              checked={data.display_in_footer}
-              onChange={(e) => handleChange(e)}
-            />
             <label htmlFor='published'>Publier </label>
             <input
               style={{ width: '30px' }}
@@ -129,9 +118,7 @@ const EditPage = () => {
               checked={data.published}
               onChange={(e) => handleChange(e)}
             />
-            <button type='submit' className='btn'>
-              {editMode ? 'Modifier' : 'Ajouter'}
-            </button>
+            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
           </div>
         </form>
       </main>

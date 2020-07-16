@@ -27,6 +27,7 @@ const TopBar = () => {
   return (
     <>
       <Header className='site-layout-background header' style={{ padding: 0 }}>
+        <span className='hello'>Bonjour Geoffroy</span>
         <Dropdown overlay={menu} trigger={['click']} placement='bottomLeft'>
           <span
             className='ant-dropdown-toggler'

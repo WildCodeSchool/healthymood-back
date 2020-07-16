@@ -48,13 +48,57 @@ input {
   border-radius: 5px;
 }
 
-input[type='text']:hover, input[type='search']:hover, input[type='email']:hover, input[type='password']:hover {
+input[type='file'] {
+  color: transparent;
+  border: none;
+}
+
+input[type='file']::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type='file']::before {
+  display: inline-block;
+  content: 'Ajouter une image';
+  width: 100%;
+  background: #1890ff;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  color: white;
+  text-align: center;
+}
+
+input[type='file']:hover::before {
+  background: #0D7AE0
+}
+
+input[type='file']:focus {
+  outline: none;
+}
+
+input[type='text']:hover,
+input[type='search']:hover,
+input[type='email']:hover,
+input[type='password']:hover,
+input[type='select']:hover,
+input[type='number']:hover {
   border: solid 1px;
   border-color: #0D7AE0;
   transition: ease-in 200ms
 }
 
-input[type='text']:focus, input[type='search']:focus, input[type='email']:focus, input[type='password']:focus, input[type='checkbox']:focus {
+input[type='text']:focus,
+input[type='search']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+input[type='checkbox']:focus,
+input[type='select']:focus,
+input[type='number']:focus {
   border-color: #40a9ff;
   border-right-width: 1px;
   outline: 0;
@@ -66,11 +110,12 @@ input[type='checkbox'] {
   height: 18px;
 }
 
-input[type='checkbox']:hover {
+input[type='checkbox']:hover,
+input[type='select']:hover {
   cursor: pointer;
 }
 
-.hide-label {
+.hide-label, .hidden {
   display: none;
 }
 

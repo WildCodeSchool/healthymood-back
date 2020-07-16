@@ -13,11 +13,11 @@ const Articles = () => {
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Article ?')) {
       API.delete(`/articles/${id}`)
-        .then((res) => {
-          const currentArticle = articles.filter((p) => p.id !== id);
+        .then(res => {
+          const currentArticle = articles.filter(p => p.id !== id);
           setArticles(currentArticle);
         })
-        .catch((err) => {
+        .catch(err => {
           console.warn(err);
         });
     }
@@ -25,10 +25,10 @@ const Articles = () => {
 
   useEffect(() => {
     API.get('/articles')
-      .then((res) => {
+      .then(res => {
         setArticles(res.data.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }, []); // eslint-disable-line
@@ -53,30 +53,23 @@ const Articles = () => {
           </tr>
         </thead>
         <tbody>
-          {articles.map((a) => {
+          {articles.map(a => {
             return (
               <tr key={a.id}>
                 <td>{a.title}</td>
                 <td>{a.slug}</td>
-                <td>
-                  <img src={a.image} alt='article' className='img-uploaded' />
-                </td>
+                <td><img src={a.image} alt='article' className='img-uploaded' /></td>
                 <td>Crée le : {moment(a.created_at).format('DD/MM/YYYY')}</td>
                 <td>
-                  <EditOutlined
-                    className='edit-icon'
-                    onClick={() => history.push(`/articles/edit/${a.id}`)}
-                  />
-                  <DeleteOutlined
-                    className='delete-icon'
-                    onClick={() => handleDelete(a.id)}
-                  />
+                  <EditOutlined className='edit-icon' onClick={() => history.push(`/articles/edit/${a.id}`)} />
+                  <DeleteOutlined className='delete-icon' onClick={() => handleDelete(a.id)} />
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+
     </>
   );
 };
