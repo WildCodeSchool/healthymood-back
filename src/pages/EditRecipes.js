@@ -83,7 +83,6 @@ const EditRecipes = () => {
     });
   };
 
-
   const getAllDishs = () => {
     return getResourceCollection('dish_types').then(tags => {
       const options = tags.map(tagToOption);
@@ -138,14 +137,13 @@ const EditRecipes = () => {
           setChosenMealTypes(res.data.data.mealType.map(tagToOption));
           setChosenDiets(res.data.data.diets.map(tagToOption));
           setChosenRecipeCategory(res.data.data.category ? { label: res.data.data.category.name, value: res.data.data.category.id } : null);
-          console.log(res.data.data)
+          console.log(res.data.data);
         })
         .catch(err => {
           console.log(err);
         });
     }
   }, []); // eslint-disable-line
-
 
   const handleChange = (event) => {
     const target = event.target;
@@ -183,7 +181,7 @@ const EditRecipes = () => {
       .then(([allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories]) => {
         populateInputs(allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories);
       });
-  }, [])
+  }, []);
 
   return (
     <>
@@ -278,7 +276,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Ingrédients'
               />
-              <br></br>
+              <br />
               <TagSelect
                 options={allDiets}
                 value={chosenDiets}
@@ -288,7 +286,7 @@ const EditRecipes = () => {
                 placeholder='Régime spéciaux'
                 className='tag-select'
               />
-              <br></br>
+              <br />
               <TagSelect
                 className='tag-select'
                 options={allMealTypes}
@@ -298,7 +296,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Types de repas'
               />
-              <br></br>
+              <br />
               <TagSelect
                 className='tag-select'
                 options={allDishTypes}
@@ -308,7 +306,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Types de Plat'
               />
-              <br></br>
+              <br />
               <SingleSelect
                 className='tag-select'
                 options={allRecipeCategories}
