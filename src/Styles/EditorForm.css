@@ -1,0 +1,51 @@
+.main-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.editor-container {
+  display: flex;
+  width: 1200px;
+  margin: auto;
+}
+
+.editor-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-form-input-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.editor-form-input {
+  margin: 10px 0px;
+  width: 49%;
+}
+
+.editor-title {
+  margin-bottom: 20px;
+}
+
+.editor-button {
+  margin-top: 20px;
+  align-self: flex-end;
+}
+
+.editor-bottom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.input-custom-margin {
+  margin: 10px 10px
+}

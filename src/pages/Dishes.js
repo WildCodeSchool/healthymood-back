@@ -5,9 +5,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function Dishes () {
-  const initialForm = ({
-    name: ''
-  });
+  const initialForm = ({ name: '' });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: dishesToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/dish_types');
 
@@ -34,34 +32,40 @@ function Dishes () {
   if (!dishesToShow) return 'Chargement...';
   function Renderlist () {
     return (
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {dishesToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteDishes(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <>
+        <h2>Types de plats</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {dishesToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteDishes(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveDishes}>
-        <div>
+
+      <div className='form-top'>
+        <form className='form-inline' onSubmit={SaveDishes}>
+
           <input
+            className='input-form-all'
             required
             name='name'
             id='name'
@@ -71,18 +75,19 @@ function Dishes () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-        </div>
-        <button
-          className='form-button'
-          onClick={SaveDishes}
-          disabled={newResourceIsSaving || fields.name === ''}
-        >
+
+          <button
+            className='form-button'
+            onClick={SaveDishes}
+            disabled={newResourceIsSaving || fields.name === ''}
+          >
           Enregistrer
-        </button>
-        {newResourceSaveError && (
-          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de plat.</p>
-        )}
-      </form>
+          </button>
+          {newResourceSaveError && (
+            <p className='errorText'>Une erreur s'est produite lors de la sauvegarde du type de plat.</p>
+          )}
+        </form>
+      </div>
       {Renderlist()}
     </>
 

@@ -10,7 +10,15 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}  
+}
+
+.img-uploaded{
+  height: 60px;
+}
+
+main.ant-layout-content {
+  overflow-y: auto;
+}
 
 .btn {
   padding: 10px 20px;
@@ -32,6 +40,12 @@ code {
 
 input {
   box-sizing: border-box;
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 input[type='text']:hover, input[type='search']:hover, input[type='email']:hover, input[type='password']:hover {
@@ -57,5 +71,9 @@ input[type='checkbox']:hover {
 }
 
 .hide-label {
+  display: none;
+}
+
+.hidden {
   display: none;
 }

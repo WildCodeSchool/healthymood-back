@@ -34,58 +34,65 @@ function CategoryArticles () {
   if (!categoryArticlesToShow) return 'Chargement...';
   function Renderlist () {
     return (
-      <table className='render-list'>
-        <thead>
-          <tr>
-            <td>Nom</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {categoryArticlesToShow.map(t => {
-            return (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>
-                  <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => DeleteCategoryArticles(t)} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <>
+        <h2>Catégorie d'articles</h2>
+        <table className='render-list'>
+          <thead>
+            <tr>
+              <td>Nom</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+
+            {categoryArticlesToShow.map(t => {
+              return (
+                <tr key={t.id}>
+                  <td>{t.name}</td>
+                  <td>
+                    <EditOutlined className='edit-icon' onClick={() => fillForm(t)} />
+                    <DeleteOutlined className='delete-icon' onClick={() => DeleteCategoryArticles(t)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
   }
   return (
     <>
-      <form className='form-inline' onSubmit={SaveCategoryArticles}>
-        <div>
+      <div className='form-top'>
+        <form className='form-inline' onSubmit={SaveCategoryArticles}>
+
           <input
+            className='input-form-all'
             required
             name='name'
             id='name'
             minLength='3'
             maxLength='20'
-            placeholder="Nouvelle catégorie d'article"
+            placeholder="Nouvelle Catégorie d'article"
             value={fields.name}
             onChange={handleFieldChange}
           />
-        </div>
-        <button
-          className='form-button'
-          onClick={SaveCategoryArticles}
-          disabled={newResourceIsSaving || fields.name === ''}
-        >
-          Save
-        </button>
-        {newResourceSaveError && (
-          <p className='errorText'>Une erreur s'est produite lors de la sauvegarde de la catégorie d'articles.</p>
-        )}
-      </form>
+          <button
+            className='form-button'
+            onClick={SaveCategoryArticles}
+            disabled={newResourceIsSaving || fields.name === ''}
+          >
+            Enregistrer
+          </button>
+          {newResourceSaveError && (
+            <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
+          )}
+
+        </form>
+      </div>
+
       {Renderlist()}
     </>
-
   );
 }
 
