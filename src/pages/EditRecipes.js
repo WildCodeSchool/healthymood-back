@@ -11,8 +11,15 @@ const EditRecipes = () => {
   const { id } = useParams();
   const history = useHistory();
   const editMode = id !== 'new';
+
   const [allIngredients, setAllIngredients] = useState([]);
   const [chosenIngredients, setChosenIngredients] = useState([]);
+  const [allDiets, setAllDiets] = useState([]);
+  const [chosenDiets, setChosenDiets] = useState([]);
+  const [chosenMealTypes, setChosenMealTypes] = useState([]);
+  const [allMealTypes, setAllMealTypes] = useState([]);
+  const [chosenDishTypes, setChosenDishTypes] = useState([]);
+  const [allDishTypes, setAllDishTypes] = useState([]);
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
@@ -24,7 +31,7 @@ const EditRecipes = () => {
     created_at: date,
     image: ''
   });
-  /*--------------------------*/
+
   const getResourceCollection = async (url) => {
     let data = [];
     try {
@@ -35,7 +42,42 @@ const EditRecipes = () => {
     }
     return data;
   };
-  /*--------------------------*/
+  const tagToOption = tag => ({ value: tag.id, label: tag.name });
+
+  const getAllMealTypes = () => {
+    return getResourceCollection('meal_types').then(tags => {
+      const options = tags.map(tagToOption);
+      setAllMealTypes(options);
+      return options;
+    });
+  };
+
+  const getAllIngredients = () => {
+    return getResourceCollection('ingredients')
+      .then(tags => {
+        const options = tags.map(tagToOption);
+        setAllIngredients(options);
+        return options;
+      });
+  };
+
+  const getAllDiets = () => {
+    return getResourceCollection('diet').then(tags => {
+      const options = tags.map(tagToOption);
+      setAllDiets(options);
+      return options;
+    });
+  };
+
+
+  const getAllDishs = () => {
+    return getResourceCollection('dish_types').then(tags => {
+      const options = tags.map(tagToOption);
+      setAllDishTypes(options);
+      return options;
+    });
+  };
+
   const uploadImage = (e) => {
     e.preventDefault();
     const image = e.target.files[0];
@@ -51,79 +93,76 @@ const EditRecipes = () => {
         setData({ ...data, image: tab });
       });
   };
+  const populateInputs = (allMealTypes, allIngredients, allDiets, allDishTypes) => {
+    const query = queryString.parse({ arrayFormat: 'bracket' });
+    const { meal_types, ingredients, diets, dish_types } = query; // eslint-disable-line
+    if (meal_types) { // eslint-disable-line
+      setChosenMealTypes(allMealTypes.filter(mealType => meal_types.includes(mealType.value.toString())));
+    }
+    if (ingredients) {
+      setChosenIngredients(allIngredients.filter(ingredient => ingredients.includes(ingredient.value.toString())));
+    }
+    if (diets) {
+      setChosenDiets(allDiets.filter(diet => diets.includes(diet.value.toString())));
+    }
+    if (dish_types) {
+      setChosenDishTypes(allDishTypes.filter(dish => dish_types.includes(dish.value.toString())));
+    }
+  };
+  useEffect(() => {
+    Promise.all([getAllMealTypes(), getAllIngredients(), getAllDiets(), getAllDishs()])
+      .then(([allMealTypes, allIngredients, allDiets, allDishTypes]) => {
+        populateInputs(allMealTypes, allIngredients, allDiets, allDishTypes);
+      });
+  }, []) // eslint-disable-line
 
   useEffect(() => {
     if (editMode) {
       API.get(`/recipes/${id}`)
         .then(res => {
           setData({ ...res.data.data });
-          setChosenIngredients(res.data.data.ingredients.map(tagToOption))
-          console.log(res.data.data)
+          setChosenIngredients(res.data.data.ingredients.map(tagToOption));
+          setChosenDishTypes(res.data.data.dish_types.map(tagToOption));
+          console.log(data)
         })
         .catch(err => {
           console.log(err);
         });
     }
   }, []); // eslint-disable-line
-  /*--------------------------*/
+
+
   const handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     setData({ ...data, [name]: value });
   };
-  /*--------------------------*/
+
   const handleChangeEditor = (content) => {
     setData({ ...data, content });
   };
-  /*--------------------------*/
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (editMode) {
-      API.patch(`/recipes/${id}`, ({ ...data, ingredients: chosenIngredients }))
+      API.patch(`/recipes/${id}`, ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes }))
         .then(res => {
           history.push('/recipes');
-
         })
         .catch((err) => {
           console.warn(err);
         });
     } else {
-      API.post('/recipes', ({ ...data, ingredients: chosenIngredients }))
+      API.post('/recipes', ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes }))
         .then((res) => {
           history.push('/recipes');
-
         })
         .catch((err) => {
           console.warn(err);
         });
     }
   };
-  /*--------------------------*/
-  const populateInputs = (allIngredients) => {
-    const query = queryString.parse({ arrayFormat: 'bracket' });
-    const { ingredients } = query; // eslint-disable-line
-    if (ingredients) {
-      setChosenIngredients(allIngredients.filter(ingredient => ingredients.includes(ingredient.value.toString())));
-    }
-  };
-  /*--------------------------*/
-  useEffect(() => {
-    Promise.all([getAllIngredients()])
-      .then(([allIngredients]) => {
-        populateInputs(allIngredients);
-      });
-  }, []) // eslint-disable-line
-  const tagToOption = tag => ({ value: tag.id, label: tag.name });
-  const getAllIngredients = () => {
-    return getResourceCollection('ingredients')
-      .then(tags => {
-        const options = tags.map(tagToOption);
-        setAllIngredients(options);
-        return options;
-      });
-  };
-
 
 
   return (
@@ -178,7 +217,7 @@ const EditRecipes = () => {
               initialValue=''
               init={{
                 height: 500,
-                width: "100%",
+                width: '100%',
                 autosave_interval: '5s',
                 plugins: [
                   'advlist autolink lists link image charmap print preview anchor',
@@ -195,11 +234,8 @@ const EditRecipes = () => {
             />
           </div>
 
-
-
           <aside className='aside'>
             <div className='upload-img'>
-              {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
               <input
                 className='editor-form-input'
                 name='picture'
@@ -208,9 +244,12 @@ const EditRecipes = () => {
                 type='file'
                 onChange={e => uploadImage(e)}
               />
+              <div>
+                {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
+              </div>
             </div>
 
-            <div className='tag-select' >
+            <div className='tag-select'>
               <TagSelect
                 options={allIngredients}
                 name='tag-select'
@@ -220,8 +259,37 @@ const EditRecipes = () => {
                 }}
                 placeholder='Ingrédients'
               />
+              <br></br>
+              <TagSelect
+                options={allDiets}
+                value={chosenDiets}
+                onChange={(newValues) => {
+                  setChosenDiets(newValues);
+                }}
+                placeholder='Régime spéciaux'
+                className='tag-select'
+              />
+              <br></br>
+              <TagSelect
+                className='tag-select'
+                options={allMealTypes}
+                value={chosenMealTypes}
+                onChange={(newValues) => {
+                  setChosenMealTypes(newValues);
+                }}
+                placeholder='Types de repas'
+              />
+              <br></br>
+              <TagSelect
+                className='tag-select'
+                options={allDishTypes}
+                value={chosenDishTypes}
+                onChange={(newValues) => {
+                  setChosenDishTypes(newValues);
+                }}
+                placeholder='Types de Plat'
+              />
             </div>
-
           </aside>
 
           <div className='editor-bottom-container'>

@@ -1,8 +1,8 @@
 .main-form-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding:40px 30px 30px 30px;
+  padding: 30px 30px 30px 30px;
+  height: 100%
 }
 
 .editor-container {
@@ -15,15 +15,18 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .editor-form-input-container {
   display: flex;
-  width: 80%;
+  flex-direction: column;
+  width: 100%;
 }
 
 .editor-form-input {
-  margin: 10px 0px;
+  margin: 0px 0px 20px 0px;
+  width: 100%;
 }
 
 .editor-title {
@@ -40,18 +43,37 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 10px;
-}
-
-.input-custom-margin {
-  margin: 10px 10px
+  padding: 20px;
 }
 
 .aside{
   width: 20%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px
 }
+
 .editor-group{
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 78.5%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  .editor-form-input-container input, .editor-group, .aside {
+    width: 100%;
+  }
+
+  .editor-form-input-container input {
+    margin: 0px 0px 10px 0px;
+  }
+
+  .editor-group {
+    margin: 0px
+  }
+
 }

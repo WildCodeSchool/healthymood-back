@@ -5,7 +5,10 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import '../Styles/Form.css';
 
 function CategoryRecipes () {
-  const initialform = { name: '' };
+  const initialform = {
+    name: '',
+    image: ''
+  };
   const { fields, setFields, handleFieldChange } = useFormData(initialform);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: CatRecipeToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/recipe_categories');
 
@@ -22,6 +25,19 @@ function CategoryRecipes () {
   const fillForm = async cat => {
     setFields(cat);
   };
+
+  const uploadImage = (e) => {
+    console.log('uploadFunction');
+    e.preventDefault();
+    const image = e.target.files[0];
+    const formData = new FormData(); // eslint-disable-line
+    formData.append('picture', image);
+    console.log(formData);
+    saveResource(fields);
+    setFields(initialform);
+    console.log(fields);
+  };
+
   if (fetchError) {
     return (
       <div>
@@ -38,6 +54,7 @@ function CategoryRecipes () {
           <thead>
             <tr>
               <td>Nom</td>
+              <td>Image</td>
               <td>Actions</td>
             </tr>
           </thead>
@@ -46,6 +63,7 @@ function CategoryRecipes () {
               return (
                 <tr key={c.id}>
                   <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
+                  <td>{c.image}</td>
                   <td>
                     <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
                     <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
@@ -73,7 +91,16 @@ function CategoryRecipes () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-
+          {fields.image && <img src={fields.image} alt='' />}
+          <input
+            className='editor-form-input'
+            name='picture'
+            required
+            accept='image/*'
+            id='picture'
+            type='file'
+            onChange={e => uploadImage(e)}
+          />
           <button
             className='form-button'
             onClick={SaveCatRecipe}
