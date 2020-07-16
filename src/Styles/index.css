@@ -50,7 +50,7 @@ input {
 
 input[type='file'] {
   color: transparent;
-  padding: 20px
+  border: none;
 }
 
 input[type='file']::-webkit-file-upload-button {

@@ -6,6 +6,7 @@ import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import TagSelect from '../components/TagSelect';
 import queryString from 'query-string';
+import ImagePlaceholder from '../images/image_placeholder.png';
 
 const EditRecipes = () => {
   const { id } = useParams();
@@ -20,9 +21,10 @@ const EditRecipes = () => {
     slug: '',
     content: '',
     budget: null,
-    published: false,
+    published: true,
     created_at: date,
-    image: ''
+    image: '',
+    intro: ''
   });
 
   const getResourceCollection = async (url) => {
@@ -51,6 +53,16 @@ const EditRecipes = () => {
         setData({ ...data, image: tab });
       });
   };
+
+  // const deleteImage = (id, data) => {
+  //   if (editMode) {
+  //     API.delete(`/recipes/uploads/${id}`, data)
+  //       .then(res => {
+  //         const currentImage = data.filter(d => d.image !== data.image);
+  //         setData(currentImage);
+  //       });
+  //   }
+  // };
 
   useEffect(() => {
     if (editMode) {
@@ -144,7 +156,7 @@ const EditRecipes = () => {
 
               <label className='hide-label' htmlFor='slug'>slug</label>
               <input
-                className='editor-form-input input-custom-margin'
+                className='editor-form-input'
                 type='text'
                 name='slug'
                 minLength='3'
@@ -154,7 +166,6 @@ const EditRecipes = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
-
               <input
                 className='editor-form-input'
                 type='number'
@@ -193,7 +204,7 @@ const EditRecipes = () => {
           </div>
 
           <aside className='aside'>
-            <div className='upload-img'>
+            <div className='upload-img-container'>
               <input
                 className='editor-form-input'
                 name='picture'
@@ -202,8 +213,8 @@ const EditRecipes = () => {
                 type='file'
                 onChange={e => uploadImage(e)}
               />
-              <div>
-                {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
+              <div className='img-preview-container'>
+                {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
               </div>
             </div>
 
@@ -218,21 +229,20 @@ const EditRecipes = () => {
                 placeholder='Ingrédients'
               />
             </div>
-
+            <div className='editor-bottom-container'>
+              <div className='label-input-container'>
+                <input
+                  style={{ width: '30px' }}
+                  type='checkbox'
+                  name='published'
+                  checked={data.published}
+                  onChange={(e) => handleChange(e)}
+                />
+                <label htmlFor='published'>Publier </label>
+              </div>
+              <button type='submit' className={data.published ? 'btn publish' : 'btn'}>{editMode ? 'Modifier' : data.published ? 'Publier' : 'Sauvegarder'}</button>
+            </div>
           </aside>
-
-          <div className='editor-bottom-container'>
-            <label htmlFor='published'>Publier </label>
-            <input
-              style={{ width: '30px' }}
-              type='checkbox'
-              name='published'
-              checked={data.published}
-              onChange={(e) => handleChange(e)}
-            />
-            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
-          </div>
-
         </form>
       </main>
     </>

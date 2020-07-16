@@ -1,10 +1,110 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import API from '../services/API';
+import '../Styles/Home.css';
 
 const Home = () => {
+  // const [user, setUser] = useState('');
+  const [articles, setArticles] = useState([]);
+  const [recipes, setRecipes] = useState([]);
+  const [pages, setPages] = useState([]);
+  // const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const id = 1;
+    API.get(`/users/${id}`)
+      .then(res => {
+        // setUser({ ...res.data.data });
+        // setIsLoaded(true);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    API.get('/articles/?per_page=3&page=1&sort_by=created_at')
+      .then(res => {
+        setArticles([...res.data.data]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    API.get('/recipes/?per_page=3&page=1&sort_by=created_at')
+      .then(res => {
+        setRecipes([...res.data.data]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    API.get('/pages/?per_page=3&page=1&sort_by=created_at')
+      .then(res => {
+        setPages([...res.data.data]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <>
-      <h1>Acceuil</h1>
-    </>
+    <div className='dashboard-main-main'>
+      <div className='dashboard-main-container'>
+        <div className='dashboard-container dashboard-articles-container'>
+          <h2>Recettes</h2>
+          {recipes.map(r => {
+            return (
+              <div key={r.name} className='single-article'>
+                <h3>{r.name.length >= 18 ? `${r.name.slice(0, 15)}...` : r.name}</h3>
+                <Link to={`/recipes/edit/${r.id}`}>
+                  <span>Modifier</span>
+                </Link>
+              </div>
+            );
+          })}
+          <Link className='dashboard-all-link' to='/articles/'>
+            <span>Toutes les recettes</span>
+          </Link>
+        </div>
+        <div className='dashboard-container'>
+          <h2>Articles</h2>
+          {articles.map(a => {
+            return (
+              <div key={a.title} className='single-article'>
+                <h3>{a.title}</h3>
+                <Link to={`/articles/edit/${a.id}`}>
+                  <span>Modifier</span>
+                </Link>
+              </div>
+            );
+          })}
+          <Link className='dashboard-all-link' to='/articles/'>
+            <span>Tous les articles</span>
+          </Link>
+        </div>
+        <div className='dashboard-container dashboard-articles-container'>
+          <h2>Pages</h2>
+          {pages.map(p => {
+            return (
+              <div key={p.title} className='single-article'>
+                <h3>{p.title}</h3>
+                <Link to={`/pages/edit/${p.id}`}>
+                  <span>Modifier</span>
+                </Link>
+              </div>
+            );
+          })}
+          <Link className='dashboard-all-link' to='/articles/'>
+            <span>Toutes les pages</span>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 };
 
