@@ -76,7 +76,7 @@ const Home = () => {
           {articles.map(a => {
             return (
               <div key={a.title} className='single-article'>
-                <h3>{a.title}</h3>
+                <h3>{a.title.length >= 18 ? `${a.title.slice(0, 15)}...` : a.title}</h3>
                 <Link to={`/articles/edit/${a.id}`}>
                   <span>Modifier</span>
                 </Link>
@@ -92,7 +92,7 @@ const Home = () => {
           {pages.map(p => {
             return (
               <div key={p.title} className='single-article'>
-                <h3>{p.title}</h3>
+                <h3>{p.title.length >= 18 ? `${p.title.slice(0, 15)}...` : p.title}</h3>
                 <Link to={`/pages/edit/${p.id}`}>
                   <span>Modifier</span>
                 </Link>

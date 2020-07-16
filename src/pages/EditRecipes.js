@@ -128,16 +128,6 @@ const EditRecipes = () => {
   };
   // eslint-disable-line
 
-  // const deleteImage = (id, data) => {
-  //   if (editMode) {
-  //     API.delete(`/recipes/uploads/${id}`, data)
-  //       .then(res => {
-  //         const currentImage = data.filter(d => d.image !== data.image);
-  //         setData(currentImage);
-  //       });
-  //   }
-  // };
-
   useEffect(() => {
     if (editMode) {
       API.get(`/recipes/${id}`)
