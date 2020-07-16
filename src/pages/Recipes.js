@@ -48,6 +48,7 @@ const Recipes = () => {
           <tr>
             <td>Titre</td>
             <td>Slug</td>
+            <td>Image principale</td>
             <td>Date</td>
             <td>Publié</td>
             <td>Actions</td>
@@ -58,7 +59,10 @@ const Recipes = () => {
             return (
               <tr key={r.id}>
                 <td>{r.name}</td>
-                <td>{r.slug}</td>
+                <td>/{r.slug}</td>
+                <td>
+                  <img src={r.image} alt='recette' className='img-uploaded' />
+                </td>
                 <td>Crée le : {moment(r.created_at).format('DD/MM/YYYY')}</td>
                 <td>{r.published === 0 ? 'Non' : 'Oui'}</td>
                 <td>
