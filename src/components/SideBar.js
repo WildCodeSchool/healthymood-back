@@ -5,7 +5,6 @@ import {
   BookOutlined,
   FormOutlined,
   TeamOutlined,
-  UserOutlined,
   BarChartOutlined,
   CopyOutlined
 } from '@ant-design/icons';
@@ -75,10 +74,6 @@ const SideBar = () => {
 
         <Menu.Item key='/users' icon={<TeamOutlined />}>
           <NavLink to='/users'>Gérer les utilisateurs</NavLink>
-        </Menu.Item>
-
-        <Menu.Item key='/mon-profil' icon={<UserOutlined />}>
-          <NavLink to='/mon-profil'>Mon Profil</NavLink>
         </Menu.Item>
 
       </Menu>

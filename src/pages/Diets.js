@@ -73,7 +73,6 @@ function Diets () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouveau type de régime'
             value={fields.name}
             onChange={handleFieldChange}

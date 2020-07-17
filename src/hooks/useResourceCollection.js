@@ -27,7 +27,6 @@ export default function useResourceCollection (collectionRelativeUrl) {
       mutate(async collectionItems => {
         return produce(collectionItems, draft => {
           const localResourceIndex = findIndex(draft, { id });
-          console.log(localResourceIndex);
           if (localResourceIndex === -1) {
             reject(new Error('index not found'));
           } else {
