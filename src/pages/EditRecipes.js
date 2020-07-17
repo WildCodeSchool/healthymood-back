@@ -212,6 +212,17 @@ const EditRecipes = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
+              <label className='hide-label' htmlFor='intro'>intro</label>
+              <input
+                className='editor-form-input'
+                type='text'
+                name='intro'
+                minLength='3'
+                value={data.intro}
+                placeholder='Ajouter une introduction'
+                onChange={(e) => handleChange(e)}
+                required
+              />
               <input
                 className='editor-form-input'
                 type='number'

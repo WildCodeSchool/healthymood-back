@@ -11,7 +11,7 @@ const { Header } = Layout;
 const TopBar = () => {
   const setTokenInLocalStorage = useContext(AuthContext).setToken;
   const token = useContext(AuthContext).token;
-  const currentUser = token ? JWTDecode(token) : {}
+  const currentUser = token ? JWTDecode(token) : {};
   console.log(currentUser);
   const menu = (
     <Menu>
