@@ -59,7 +59,7 @@ const Recipes = () => {
             return (
               <tr key={r.id}>
                 <td>{r.name}</td>
-                <td>/{r.slug}</td>
+                <td>{r.slug}</td>
                 <td>
                   <img src={r.image} alt='recette' className='img-uploaded' />
                 </td>
