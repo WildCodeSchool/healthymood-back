@@ -181,7 +181,7 @@ const EditRecipes = () => {
       .then(([allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories]) => {
         populateInputs(allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories);
       });
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>
@@ -195,7 +195,6 @@ const EditRecipes = () => {
                 type='text'
                 name='name'
                 minLength='3'
-                maxLength='20'
                 value={data.name}
                 placeholder='Ajouter un titre'
                 onChange={(e) => handleChange(e)}
@@ -208,7 +207,6 @@ const EditRecipes = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                maxLength='20'
                 value={data.slug}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
@@ -218,14 +216,12 @@ const EditRecipes = () => {
                 className='editor-form-input'
                 type='number'
                 name='budget'
-                minLength='1'
-                maxLength='20'
+                minLength='3'
                 value={data.budget}
                 placeholder='Budget €'
                 onChange={(e) => handleChange(e)}
                 required
               />
-
             </div>
 
             <Editor
@@ -251,7 +247,7 @@ const EditRecipes = () => {
             />
           </div>
 
-          <aside className='aside'>
+          <aside className='aside fit-content'>
             <div className='upload-img-container'>
               <input
                 className='editor-form-input'

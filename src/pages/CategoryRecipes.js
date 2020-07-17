@@ -93,13 +93,12 @@ function CategoryRecipes () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouvelle Catégorie de recette '
             value={fields.name}
             onChange={handleFieldChange}
           />
           <input
-            className='editor-form-input'
+            className='input-form-all'
             name='picture'
             required
             accept='image/*'
@@ -107,7 +106,7 @@ function CategoryRecipes () {
             type='file'
             onChange={e => uploadImage(e)}
           />
-          <img src={fields.image} alt={fields.image} />
+          <img className='img-preview' src={fields.image} alt={fields.image} />
           <button
             className='form-button'
             onClick={SaveCatRecipe}

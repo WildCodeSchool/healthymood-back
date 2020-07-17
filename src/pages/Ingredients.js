@@ -74,7 +74,6 @@ function Ingredients () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouvel ingredient'
             value={fields.name}
             onChange={handleFieldChange}
@@ -84,8 +83,7 @@ function Ingredients () {
             className='input-form-all'
             type='number'
             name='calories'
-            minLength='1'
-            maxLength='20'
+            minLength='3'
             value={fields.calories}
             placeholder='Calories / 100gr'
             onChange={handleFieldChange}
