@@ -70,7 +70,7 @@ function CategoryRecipes () {
               return (
                 <tr key={c.id}>
                   <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
-                  <td><img width="100" src={c.image} alt={c.name}/></td>
+                  <td><img width='100' src={c.image} alt={c.name} /></td>
                   <td>
                     <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
                     <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
