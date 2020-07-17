@@ -118,6 +118,7 @@ input[type='select']:hover {
 .hide-label, .hidden {
   display: none;
 }
+
 /* .pagination {
   margin-bottom: 50px;
   margin-top: 50px;
