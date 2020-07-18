@@ -10,7 +10,7 @@ const NoOptionsMessage = props => {
   );
 };
 
-export default function TagSelect (props) {
+export default function TagSelect(props) {
   return (
     <Select
       {...props}

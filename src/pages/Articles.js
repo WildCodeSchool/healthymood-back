@@ -27,6 +27,7 @@ const Articles = () => {
     API.get('/articles')
       .then(res => {
         setArticles(res.data.data);
+        console.log(res.data.data)
       })
       .catch(err => {
         console.log(err);
@@ -57,7 +58,7 @@ const Articles = () => {
             return (
               <tr key={a.id}>
                 <td>{a.title}</td>
-                <td>{a.slug}</td>
+                <td>/{a.slug}</td>
                 <td><img src={a.image} alt='article' className='img-uploaded' /></td>
                 <td>Crée le : {moment(a.created_at).format('DD/MM/YYYY')}</td>
                 <td>
