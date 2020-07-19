@@ -6,6 +6,7 @@ import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
 import SingleSelect from '../components/SingleSelect';
 import queryString from 'query-string';
+import ImagePlaceholder from '../images/image_placeholder.png';
 
 const EditArticle = () => {
   const { id } = useParams();
@@ -21,7 +22,8 @@ const EditArticle = () => {
     intro: '',
     content: '',
     created_at: date,
-    image: ''
+    image: '',
+    article_category_id: ''
   });
 
   const getResourceCollection = async (url) => {
@@ -134,7 +136,6 @@ const EditArticle = () => {
                 type='text'
                 name='title'
                 minLength='3'
-                maxLength='20'
                 value={data.title}
                 placeholder='Ajouter un titre'
                 onChange={(e) => handleChange(e)}
@@ -145,6 +146,7 @@ const EditArticle = () => {
                 className='editor-form-input'
                 type='text'
                 name='slug'
+                minLength='3'
                 value={data.slug}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
@@ -155,6 +157,7 @@ const EditArticle = () => {
                 className='editor-form-input'
                 type='text'
                 name='intro'
+                minLength='3'
                 value={data.intro}
                 placeholder='Ajouter une introduction'
                 onChange={(e) => handleChange(e)}
@@ -184,7 +187,7 @@ const EditArticle = () => {
             />
           </div>
           <aside className='aside'>
-            <div className='upload-img'>
+            <div className='upload-img-container'>
               <input
                 className='editor-form-input'
                 name='picture'
@@ -204,7 +207,7 @@ const EditArticle = () => {
                 placeholder='Types de Catégorie'
               />
               <div>
-                {data.image && <img src={data.image} style={{ height: '60px' }} alt='' />}
+                {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
               </div>
             </div>
             <div className='editor-bottom-container'>

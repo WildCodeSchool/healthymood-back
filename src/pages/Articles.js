@@ -27,7 +27,6 @@ const Articles = () => {
     API.get('/articles')
       .then(res => {
         setArticles(res.data.data);
-        console.log(res.data.data)
       })
       .catch(err => {
         console.log(err);

@@ -14,6 +14,7 @@ const EditPage = () => {
     title: '',
     slug: '',
     content: '',
+    display_in_footer: false,
     published: false
   });
 
@@ -65,60 +66,75 @@ const EditPage = () => {
   return (
     <>
       <main className='main-form-container'>
-        <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-          <div className='editor-form-input-container'>
-            <input
-              className='editor-form-input'
-              type='text'
-              name='title'
-              minLength='3'
-              maxLength='20'
-              value={data.title}
-              placeholder='Ajouter un titre'
-              onChange={(e) => handleChange(e)}
-              required
-            />
-            <label className='hide-label' htmlFor='slug'>slug</label>
-            <input
-              className='editor-form-input'
-              type='text'
-              name='slug'
-              value={data.slug}
-              placeholder='Ajouter un slug'
-              onChange={(e) => handleChange(e)}
-              required
-            />
-          </div>
-          <Editor
-            apiKey={process.env.REACT_APP_API_KEY}
-            value={data.content}
-            initialValue=''
-            init={{
-              height: 500,
-              autosave_interval: '5s',
-              plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount',
-                'autosave'
-              ],
-              autosave_retention: '30m',
-              autosave_restore_when_empty: true,
-              toolbar:
+        <form className='editor-form-center' onSubmit={(e) => handleSubmit(e)}>
+
+          <div className='editor-group'>
+            <div className='editor-form-input-container'>
+              <input
+                className='editor-form-input'
+                type='text'
+                name='title'
+                minLength='3'
+                value={data.title}
+                placeholder='Ajouter un titre'
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <label className='hide-label' htmlFor='slug'>slug</label>
+              <input
+                className='editor-form-input'
+                type='text'
+                name='slug'
+                minLength='3'
+                value={data.slug}
+                placeholder='Ajouter un slug'
+                onChange={(e) => handleChange(e)}
+                required
+              />
+            </div>
+            <Editor
+              apiKey={process.env.REACT_APP_API_KEY}
+              value={data.content}
+              initialValue=''
+              init={{
+                height: 500,
+                autosave_interval: '5s',
+                plugins: [
+                  'advlist autolink lists link image charmap print preview anchor',
+                  'searchreplace visualblocks code fullscreen',
+                  'insertdatetime media table paste code help wordcount',
+                  'autosave'
+                ],
+                autosave_retention: '30m',
+                autosave_restore_when_empty: true,
+                toolbar:
                 'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
-            }}
-            onEditorChange={handleChangeEditor}
-          />
-          <div className='editor-bottom-container'>
-            <label htmlFor='published'>Publier </label>
-            <input
-              style={{ width: '30px' }}
-              type='checkbox'
-              name='published'
-              checked={data.published}
-              onChange={(e) => handleChange(e)}
+              }}
+              onEditorChange={handleChangeEditor}
             />
-            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+            <div className='editor-bottom-container'>
+              <label className='editor-checkbox-label' htmlFor='display_in_footer'>
+                <input
+                  style={{ width: '30px' }}
+                  type='checkbox'
+                  name='display_in_footer'
+                  checked={data.display_in_footer}
+                  onChange={(e) => handleChange(e)}
+                />
+                Visible dans le footer ?
+              </label>
+              <label className='editor-checkbox-label' htmlFor='published'>
+                <input
+                  style={{ width: '30px' }}
+                  type='checkbox'
+                  name='published'
+                  checked={data.published}
+                  onChange={(e) => handleChange(e)}
+                />
+                Publier
+              </label>
+              <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+            </div>
           </div>
         </form>
       </main>

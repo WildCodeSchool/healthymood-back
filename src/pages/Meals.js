@@ -71,7 +71,6 @@ function Meals () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouveau type de repas'
             value={fields.name}
             onChange={handleFieldChange}

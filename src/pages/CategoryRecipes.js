@@ -69,7 +69,7 @@ function CategoryRecipes () {
               return (
                 <tr key={c.id}>
                   <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
-                  <td>{c.image}</td>
+                  <td><img width='100' src={c.image} alt={c.name} /></td>
                   <td>
                     <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
                     <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
@@ -92,14 +92,12 @@ function CategoryRecipes () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouvelle Catégorie de recette '
             value={fields.name}
             onChange={handleFieldChange}
           />
-          {fields.image && <img src={fields.image} alt='' />}
           <input
-            className='editor-form-input'
+            className='input-form-all'
             name='picture'
             required
             accept='image/*'
@@ -107,6 +105,7 @@ function CategoryRecipes () {
             type='file'
             onChange={e => uploadImage(e)}
           />
+          <img className='img-preview' src={fields.image} alt={fields.name} />
           <button
             className='form-button'
             onClick={SaveCatRecipe}

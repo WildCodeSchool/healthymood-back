@@ -70,7 +70,6 @@ function CategoryArticles () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder="Nouvelle Catégorie d'article"
             value={fields.name}
             onChange={handleFieldChange}
