@@ -13,12 +13,12 @@ function Meals () {
 
   const DeleteMeals = async (meal) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de repas ?')) {
-      deleteResource(meal.id, { optimistic: true });
+      deleteResource(meal.id, { optimistic: false });
     }
   };
   const SaveMeal = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields(initialForm);
   };
   const fillForm = async meal => {

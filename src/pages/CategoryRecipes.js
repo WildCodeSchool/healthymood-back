@@ -15,12 +15,12 @@ function CategoryRecipes () {
 
   const DeleteTask = async (task) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette catégorie de recette?')) {
-      deleteResource(task.id, { optimistic: true });
+      deleteResource(task.id, { optimistic: false });
     }
   };
   const SaveCatRecipe = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields(initialform);
   };
   const fillForm = async cat => {

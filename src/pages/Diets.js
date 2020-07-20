@@ -13,7 +13,7 @@ function Diets () {
 
   const DeleteDiets = async (diet) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de régime ?')) {
-      deleteResource(diet.id, { optimistic: true });
+      deleteResource(diet.id, { optimistic: false });
     }
   };
   const SaveDiets = async (event) => {
@@ -21,7 +21,7 @@ function Diets () {
     if (fields.name === '') {
       alert('Veuillez remplir les champs requis'); // eslint-disable-line
     } else {
-      saveResource(fields, { optimistic: true });
+      saveResource(fields, { optimistic: false });
       setFields(initialForm);
     }
   };

@@ -11,12 +11,12 @@ function Ingredients () {
 
   const DeleteIngredients = async (ingredient) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cet ingrédient ?')) {
-      deleteResource(ingredient.id, { optimistic: true });
+      deleteResource(ingredient.id, { optimistic: false });
     }
   };
   const SaveIngredients = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields(initialForm);
   };
   const fillForm = async ingredient => {
