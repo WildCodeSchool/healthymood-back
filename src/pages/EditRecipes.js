@@ -118,10 +118,10 @@ const EditRecipes = () => {
     if (diets) {
       setChosenDiets(allDiets.filter(diet => diets.includes(diet.value.toString())));
     }
-    if (dish_types) {
+    if (dish_types) {// eslint-disable-line
       setChosenDishTypes(allDishTypes.filter(dish => dish_types.includes(dish.value.toString())));
     }
-    if (recipe_categories) {
+    if (recipe_categories) {// eslint-disable-line
       setChosenRecipeCategory(allRecipeCategories.find(recipe => recipe_categories.includes(recipe.value.toString())));
     }
   };
@@ -137,14 +137,13 @@ const EditRecipes = () => {
           setChosenMealTypes(res.data.data.mealType.map(tagToOption));
           setChosenDiets(res.data.data.diets.map(tagToOption));
           setChosenRecipeCategory(res.data.data.category ? { label: res.data.data.category.name, value: res.data.data.category.id } : null);
-          console.log(res.data.data)
+          console.log(res.data.data);
         })
         .catch(err => {
           console.log(err);
         });
     }
   }, []); // eslint-disable-line
-
 
   const handleChange = (event) => {
     const target = event.target;
@@ -284,7 +283,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Ingrédients'
               />
-              <br></br>
+              <br />
               <TagSelect
                 options={allDiets}
                 value={chosenDiets}
@@ -294,7 +293,7 @@ const EditRecipes = () => {
                 placeholder='Régime spéciaux'
                 className='tag-select'
               />
-              <br></br>
+              <br />
               <TagSelect
                 className='tag-select'
                 options={allMealTypes}
@@ -304,7 +303,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Types de repas'
               />
-              <br></br>
+              <br />
               <TagSelect
                 className='tag-select'
                 options={allDishTypes}
@@ -314,7 +313,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Types de Plat'
               />
-              <br></br>
+              <br />
               <SingleSelect
                 className='tag-select'
                 options={allRecipeCategories}

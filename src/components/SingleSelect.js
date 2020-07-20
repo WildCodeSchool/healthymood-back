@@ -10,11 +10,11 @@ const NoOptionsMessage = props => {
   );
 };
 
-export default function SingleSelect(props) {
+export default function SingleSelect (props) {
   return (
     <Select
       {...props}
-      closeMenuOnSelect={true}
+      closeMenuOnSelect
       components={{ ...animatedComponents, NoOptionsMessage }}
       labelledBy='Select'
     />

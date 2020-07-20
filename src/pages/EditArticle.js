@@ -22,8 +22,8 @@ const EditArticle = () => {
     intro: '',
     content: '',
     created_at: date,
-    image: '',
-    article_category_id: ''
+    image: ''
+
   });
 
   const getResourceCollection = async (url) => {
@@ -69,8 +69,8 @@ const EditArticle = () => {
       API.get(`/articles/${id}`)
         .then(res => {
           setData({ ...res.data.data });
-          setChosenArticleCategory(res.data.data.categoryArticle ? { label: res.data.data.categoryArticle.name, value: res.data.data.categoryArticle.id } : null)
-          console.log(chosenArticleCategory)
+          setChosenArticleCategory(res.data.data.categoryArticle ? { label: res.data.data.categoryArticle.name, value: res.data.data.categoryArticle.id } : null);
+          console.log(chosenArticleCategory);
         })
         .catch(err => {
           console.log(err);
@@ -196,7 +196,7 @@ const EditArticle = () => {
                 type='file'
                 onChange={e => uploadImage(e)}
               />
-              <br></br>
+              <br />
               <SingleSelect
                 className='tag-select'
                 options={allArticleCategories}
