@@ -12,7 +12,6 @@ export default function useResourceCollection (collectionRelativeUrl) {
     fetcher: async (...args) => {
       fetchResponse = API.get(...args);
       const res = await fetchResponse;
-      // handle pagination here ?
       return res.data.data;
     }
   });
@@ -27,7 +26,6 @@ export default function useResourceCollection (collectionRelativeUrl) {
       mutate(async collectionItems => {
         return produce(collectionItems, draft => {
           const localResourceIndex = findIndex(draft, { id });
-          console.log(localResourceIndex);
           if (localResourceIndex === -1) {
             reject(new Error('index not found'));
           } else {
