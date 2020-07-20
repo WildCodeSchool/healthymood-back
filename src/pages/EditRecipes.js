@@ -273,15 +273,15 @@ const EditRecipes = () => {
               </div>
             </div>
 
-            <div className='tag-select'>
+            <div className='tag-select-container'>
               <TagSelect
                 options={allIngredients}
-                name='tag-select'
                 value={chosenIngredients}
                 onChange={(newValues) => {
                   setChosenIngredients(newValues);
                 }}
                 placeholder='Ingrédients'
+                className='tag-select'
               />
               <br />
               <TagSelect
