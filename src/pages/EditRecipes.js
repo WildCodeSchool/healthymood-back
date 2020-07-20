@@ -83,7 +83,6 @@ const EditRecipes = () => {
     });
   };
 
-
   const getAllDishs = () => {
     return getResourceCollection('dish_types').then(tags => {
       const options = tags.map(tagToOption);
@@ -119,10 +118,10 @@ const EditRecipes = () => {
     if (diets) {
       setChosenDiets(allDiets.filter(diet => diets.includes(diet.value.toString())));
     }
-    if (dish_types) {
+    if (dish_types) { // eslint-disable-line
       setChosenDishTypes(allDishTypes.filter(dish => dish_types.includes(dish.value.toString())));
     }
-    if (recipe_categories) {
+    if (recipe_categories) { // eslint-disable-line
       setChosenRecipeCategory(allRecipeCategories.find(recipe => recipe_categories.includes(recipe.value.toString())));
     }
   };
@@ -138,14 +137,13 @@ const EditRecipes = () => {
           setChosenMealTypes(res.data.data.mealType.map(tagToOption));
           setChosenDiets(res.data.data.diets.map(tagToOption));
           setChosenRecipeCategory(res.data.data.category ? { label: res.data.data.category.name, value: res.data.data.category.id } : null);
-          console.log(res.data.data)
+          console.log(res.data.data);
         })
         .catch(err => {
           console.log(err);
         });
     }
   }, []); // eslint-disable-line
-
 
   const handleChange = (event) => {
     const target = event.target;
@@ -183,7 +181,7 @@ const EditRecipes = () => {
       .then(([allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories]) => {
         populateInputs(allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories);
       });
-  }, [])
+  }, []); // eslint-disable-line
 
   return (
     <>
@@ -197,7 +195,6 @@ const EditRecipes = () => {
                 type='text'
                 name='name'
                 minLength='3'
-                maxLength='20'
                 value={data.name}
                 placeholder='Ajouter un titre'
                 onChange={(e) => handleChange(e)}
@@ -210,9 +207,19 @@ const EditRecipes = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                maxLength='20'
                 value={data.slug}
                 placeholder='Ajouter un slug'
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <label className='hide-label' htmlFor='intro'>intro</label>
+              <input
+                className='editor-form-input'
+                type='text'
+                name='intro'
+                minLength='3'
+                value={data.intro}
+                placeholder='Ajouter une introduction'
                 onChange={(e) => handleChange(e)}
                 required
               />
@@ -220,14 +227,12 @@ const EditRecipes = () => {
                 className='editor-form-input'
                 type='number'
                 name='budget'
-                minLength='1'
-                maxLength='20'
+                minLength='3'
                 value={data.budget}
                 placeholder='Budget €'
                 onChange={(e) => handleChange(e)}
                 required
               />
-
             </div>
 
             <Editor
@@ -253,7 +258,7 @@ const EditRecipes = () => {
             />
           </div>
 
-          <aside className='aside'>
+          <aside className='aside fit-content'>
             <div className='upload-img-container'>
               <input
                 className='editor-form-input'
@@ -278,7 +283,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Ingrédients'
               />
-              <br></br>
+              <br />
               <TagSelect
                 options={allDiets}
                 value={chosenDiets}
@@ -288,7 +293,7 @@ const EditRecipes = () => {
                 placeholder='Régime spéciaux'
                 className='tag-select'
               />
-              <br></br>
+              <br />
               <TagSelect
                 className='tag-select'
                 options={allMealTypes}
@@ -298,7 +303,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Types de repas'
               />
-              <br></br>
+              <br />
               <TagSelect
                 className='tag-select'
                 options={allDishTypes}
@@ -308,7 +313,7 @@ const EditRecipes = () => {
                 }}
                 placeholder='Types de Plat'
               />
-              <br></br>
+              <br />
               <SingleSelect
                 className='tag-select'
                 options={allRecipeCategories}

@@ -2,6 +2,7 @@ import React from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import API from '../services/API';
 import '../Styles/Form.css';
 
 function CategoryRecipes () {
@@ -27,15 +28,21 @@ function CategoryRecipes () {
   };
 
   const uploadImage = (e) => {
-    console.log('uploadFunction');
     e.preventDefault();
+
     const image = e.target.files[0];
     const formData = new FormData(); // eslint-disable-line
     formData.append('picture', image);
-    console.log(formData);
-    saveResource(fields);
-    setFields(initialform);
-    console.log(fields);
+    API.post('/recipes/uploads', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(res => res.data)
+      .then(tab => {
+        setFields({ ...fields, image: tab });
+        console.log(tab);
+      });
   };
 
   if (fetchError) {
@@ -63,7 +70,7 @@ function CategoryRecipes () {
               return (
                 <tr key={c.id}>
                   <td style={{ opacity: (!!c._saving || !!c._deleting) ? 0.7 : 1 }}>{c.name}</td>
-                  <td>{c.image}</td>
+                  <td><img width='100' src={c.image} alt={c.name} /></td>
                   <td>
                     <EditOutlined className='edit-icon' onClick={() => fillForm(c)} />
                     <DeleteOutlined className='delete-icon' onClick={() => DeleteTask(c)} />
@@ -86,14 +93,12 @@ function CategoryRecipes () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouvelle Catégorie de recette '
             value={fields.name}
             onChange={handleFieldChange}
           />
-          {fields.image && <img src={fields.image} alt='' />}
           <input
-            className='editor-form-input'
+            className='input-form-all'
             name='picture'
             required
             accept='image/*'
@@ -101,6 +106,7 @@ function CategoryRecipes () {
             type='file'
             onChange={e => uploadImage(e)}
           />
+          <img className='img-preview' src={fields.image} alt={fields.image} />
           <button
             className='form-button'
             onClick={SaveCatRecipe}

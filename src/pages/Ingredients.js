@@ -8,6 +8,7 @@ function Ingredients () {
   const initialForm = ({ name: '', is_allergen: false, calories: 0 });
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: ingredientsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/ingredients');
+
   const DeleteIngredients = async (ingredient) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cet ingrédient ?')) {
       deleteResource(ingredient.id, { optimistic: true });
@@ -73,7 +74,6 @@ function Ingredients () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouvel ingredient'
             value={fields.name}
             onChange={handleFieldChange}
@@ -83,8 +83,7 @@ function Ingredients () {
             className='input-form-all'
             type='number'
             name='calories'
-            minLength='1'
-            maxLength='20'
+            minLength='3'
             value={fields.calories}
             placeholder='Calories / 100gr'
             onChange={handleFieldChange}
