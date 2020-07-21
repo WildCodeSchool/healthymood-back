@@ -22,7 +22,6 @@ const SideBar = () => {
 
   return (
     <Sider
-      style={{ width: '500px' }}
       collapsible
       collapsed={collapsed}
       onCollapse={() => { onCollapse(); }}

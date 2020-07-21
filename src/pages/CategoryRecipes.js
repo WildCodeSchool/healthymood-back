@@ -29,7 +29,6 @@ function CategoryRecipes () {
 
   const uploadImage = (e) => {
     e.preventDefault();
-
     const image = e.target.files[0];
     const formData = new FormData(); // eslint-disable-line
     formData.append('picture', image);
@@ -106,7 +105,7 @@ function CategoryRecipes () {
             type='file'
             onChange={e => uploadImage(e)}
           />
-          <img className='img-preview' src={fields.image} alt={fields.image} />
+          <img className='img-preview' src={fields.image} alt={fields.name} />
           <button
             className='form-button'
             onClick={SaveCatRecipe}
