@@ -1,7 +1,10 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import API from '../services/API';
 import '../Styles/Form.css';
 
 function CategoryArticles () {
@@ -11,14 +14,36 @@ function CategoryArticles () {
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: categoryArticlesToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/article_categories');
 
+  const [categoryArticles, setcategoryArticles] = useState([categoryArticlesToShow]);
+  const [totalCategoryArticles, setTotalCategoryArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const categoryArticlesPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const pageNumbers = [];
+
+  useEffect(() => {
+    const fetchCategoryArticles = async () => {
+      setLoading(true);
+      const res = await API.get('/article_categories?per_page=' + categoryArticlesPerPage + '&page=' + currentPage);
+      setcategoryArticles(res.data.data);
+      setTotalCategoryArticles(res.data.total);
+      setLoading(false);
+    };
+    fetchCategoryArticles();
+  }, [currentPage, categoryArticlesToShow]);
+
+  for (let i = 1; i <= Math.ceil(totalCategoryArticles / categoryArticlesPerPage); i++) { pageNumbers.push(i); }
+  if (loading) { return <h2>Loading...</h2>; }
+
   const DeleteCategoryArticles = async (categoryArticles) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette catégorie d\'article?')) {
-      deleteResource(categoryArticles.id, { optimistic: true });
+      deleteResource(categoryArticles.id, { optimistic: false });
     }
   };
   const SaveCategoryArticles = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields(initialForm);
   };
   const fillForm = async categoryArticles => {
@@ -45,7 +70,7 @@ function CategoryArticles () {
           </thead>
           <tbody>
 
-            {categoryArticlesToShow.map(t => {
+            {categoryArticles.map(t => {
               return (
                 <tr key={t.id}>
                   <td>{t.name}</td>
@@ -58,6 +83,11 @@ function CategoryArticles () {
             })}
           </tbody>
         </table>
+        <nav>
+          <ul className='pagination'>
+            {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+          </ul>
+        </nav>
       </>
     );
   }
@@ -65,7 +95,6 @@ function CategoryArticles () {
     <>
       <div className='form-top'>
         <form className='form-inline' onSubmit={SaveCategoryArticles}>
-
           <input
             className='input-form-all'
             required
@@ -86,7 +115,6 @@ function CategoryArticles () {
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
           )}
-
         </form>
       </div>
 
