@@ -95,7 +95,6 @@ function CategoryArticles () {
     <>
       <div className='form-top'>
         <form className='form-inline' onSubmit={SaveCategoryArticles}>
-
           <input
             className='input-form-all'
             required
@@ -116,7 +115,6 @@ function CategoryArticles () {
           {newResourceSaveError && (
             <p className='errorText'>Une erreur lors de l'ajout de la catégorie</p>
           )}
-
         </form>
       </div>
 
