@@ -12,7 +12,7 @@ const TopBar = () => {
   const setTokenInLocalStorage = useContext(AuthContext).setToken;
   const token = useContext(AuthContext).token;
   const currentUser = token ? JWTDecode(token) : {};
-  console.log(currentUser);
+
   const menu = (
     <Menu>
       <Menu.Item key='0' icon={<LogoutOutlined />}>

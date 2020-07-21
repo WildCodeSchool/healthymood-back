@@ -30,7 +30,6 @@ function CategoryRecipes () {
 
   const uploadImage = (e) => {
     e.preventDefault();
-
     const image = e.target.files[0];
     const formData = new FormData(); // eslint-disable-line
     formData.append('picture', image);
