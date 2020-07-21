@@ -6,15 +6,10 @@
   height: 100vh;
 }
 
-.login-logo {
-  top: 10%;
-  position: absolute;
-}
-
 .form-login {
   background-color: white;
   width: 400px;
-  height: 500px;
+  height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +21,6 @@
 }
 
 .form-login h1 {
-  justify-self: flex-start;
   margin-bottom: 50px;
 }
 

@@ -53,56 +53,54 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='dashboard-main-main'>
-      <div className='dashboard-main-container'>
-        <div className='dashboard-container dashboard-articles-container'>
-          <h2>Recettes</h2>
-          {recipes.map(r => {
-            return (
-              <div key={r.name} className='single-article'>
-                <h3>{r.name.length >= 18 ? `${r.name.slice(0, 15)}...` : r.name}</h3>
-                <Link to={`/recipes/edit/${r.id}`}>
-                  <span>Modifier</span>
-                </Link>
-              </div>
-            );
-          })}
-          <Link className='dashboard-all-link' to='/recipes/'>
-            <span>Toutes les recettes</span>
-          </Link>
-        </div>
-        <div className='dashboard-container'>
-          <h2>Articles</h2>
-          {articles.map(a => {
-            return (
-              <div key={a.title} className='single-article'>
-                <h3>{a.title.length >= 18 ? `${a.title.slice(0, 15)}...` : a.title}</h3>
-                <Link to={`/articles/edit/${a.id}`}>
-                  <span>Modifier</span>
-                </Link>
-              </div>
-            );
-          })}
-          <Link className='dashboard-all-link' to='/articles/'>
-            <span>Tous les articles</span>
-          </Link>
-        </div>
-        <div className='dashboard-container dashboard-articles-container'>
-          <h2>Pages</h2>
-          {pages.map(p => {
-            return (
-              <div key={p.title} className='single-article'>
-                <h3>{p.title.length >= 18 ? `${p.title.slice(0, 15)}...` : p.title}</h3>
-                <Link to={`/pages/edit/${p.id}`}>
-                  <span>Modifier</span>
-                </Link>
-              </div>
-            );
-          })}
-          <Link className='dashboard-all-link' to='/pages/'>
-            <span>Toutes les pages</span>
-          </Link>
-        </div>
+    <div className='dashboard-main-container'>
+      <div className='shortlink-container'>
+        <h2>Recettes</h2>
+        {recipes.map(r => {
+          return (
+            <div key={r.name} className='single-shortlink'>
+              <h3>{r.name.length >= 18 ? `${r.name.slice(0, 15)}...` : r.name}</h3>
+              <Link to={`/recipes/edit/${r.id}`}>
+                <span>Modifier</span>
+              </Link>
+            </div>
+          );
+        })}
+        <Link className='see-all' to='/recipes/'>
+          <span>Toutes les recettes</span>
+        </Link>
+      </div>
+      <div className='shortlink-container'>
+        <h2>Articles</h2>
+        {articles.map(a => {
+          return (
+            <div key={a.title} className='single-shortlink'>
+              <h3>{a.title.length >= 18 ? `${a.title.slice(0, 15)}...` : a.title}</h3>
+              <Link to={`/articles/edit/${a.id}`}>
+                <span>Modifier</span>
+              </Link>
+            </div>
+          );
+        })}
+        <Link className='see-all' to='/articles/'>
+          <span>Tous les articles</span>
+        </Link>
+      </div>
+      <div className='shortlink-container'>
+        <h2>Pages</h2>
+        {pages.map(p => {
+          return (
+            <div key={p.title} className='single-shortlink'>
+              <h3>{p.title.length >= 18 ? `${p.title.slice(0, 15)}...` : p.title}</h3>
+              <Link to={`/pages/edit/${p.id}`}>
+                <span>Modifier</span>
+              </Link>
+            </div>
+          );
+        })}
+        <Link className='see-all' to='/pages/'>
+          <span>Toutes les pages</span>
+        </Link>
       </div>
     </div>
   );

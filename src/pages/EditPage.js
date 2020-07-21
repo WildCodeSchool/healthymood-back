@@ -113,26 +113,28 @@ const EditPage = () => {
               onEditorChange={handleChangeEditor}
             />
             <div className='editor-bottom-container'>
-              <label className='editor-checkbox-label' htmlFor='display_in_footer'>
-                <input
-                  style={{ width: '30px' }}
-                  type='checkbox'
-                  name='display_in_footer'
-                  checked={data.display_in_footer}
-                  onChange={(e) => handleChange(e)}
-                />
-                Visible dans le footer ?
-              </label>
-              <label className='editor-checkbox-label' htmlFor='published'>
-                <input
-                  style={{ width: '30px' }}
-                  type='checkbox'
-                  name='published'
-                  checked={data.published}
-                  onChange={(e) => handleChange(e)}
-                />
+              <div className='editor-checkbox-container'>
+                <label className='editor-checkbox-label' htmlFor='display_in_footer'>
+                  <input
+                    style={{ width: '30px' }}
+                    type='checkbox'
+                    name='display_in_footer'
+                    checked={data.display_in_footer}
+                    onChange={(e) => handleChange(e)}
+                  />
+                Visible dans le footer
+                </label>
+                <label className='editor-checkbox-label' htmlFor='published'>
+                  <input
+                    style={{ width: '30px' }}
+                    type='checkbox'
+                    name='published'
+                    checked={data.published}
+                    onChange={(e) => handleChange(e)}
+                  />
                 Publier
-              </label>
+                </label>
+              </div>
               <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
             </div>
           </div>
