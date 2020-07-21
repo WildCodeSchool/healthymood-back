@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
@@ -37,12 +38,12 @@ function CategoryArticles () {
 
   const DeleteCategoryArticles = async (categoryArticles) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette catégorie d\'article?')) {
-      deleteResource(categoryArticles.id, { optimistic: true });
+      deleteResource(categoryArticles.id, { optimistic: false });
     }
   };
   const SaveCategoryArticles = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields(initialForm);
   };
   const fillForm = async categoryArticles => {
@@ -101,7 +102,6 @@ function CategoryArticles () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder="Nouvelle Catégorie d'article"
             value={fields.name}
             onChange={handleFieldChange}

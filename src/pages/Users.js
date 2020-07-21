@@ -37,7 +37,7 @@ function Users () {
 
   const SaveUser = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields({ is_admin: false, blocked: false });
     setIsvisible(!isVisible);
   };

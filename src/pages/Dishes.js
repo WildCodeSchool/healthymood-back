@@ -35,12 +35,12 @@ function Dishes () {
 
   const DeleteDishes = async (dish) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de plat ?')) {
-      deleteResource(dish.id, { optimistic: true });
+      deleteResource(dish.id, { optimistic: false });
     }
   };
   const SaveDishes = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields(initialForm);
   };
   const fillForm = async dish => {
@@ -99,7 +99,6 @@ function Dishes () {
             name='name'
             id='name'
             minLength='3'
-            maxLength='20'
             placeholder='Nouveau type de plat'
             value={fields.name}
             onChange={handleFieldChange}

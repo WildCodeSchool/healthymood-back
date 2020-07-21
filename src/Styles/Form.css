@@ -46,6 +46,10 @@
   background-color: #0d7ae0;
 }
 
+.img-preview {
+  width: 150px;
+}
+
 table { 
   width: 100%; 
   border-collapse: collapse; 

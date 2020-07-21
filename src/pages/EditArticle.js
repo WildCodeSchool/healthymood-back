@@ -4,6 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import API from '../services/API';
 import '../Styles/EditorForm.css';
 import '../Styles/Form.css';
+import ImagePlaceholder from '../images/image_placeholder.png';
 
 const EditArticle = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const EditArticle = () => {
   const [data, setData] = useState({
     title: '',
     slug: '',
+    intro: '',
     content: '',
     created_at: date,
     image: ''
@@ -86,62 +88,80 @@ const EditArticle = () => {
     <>
       <main className='main-form-container'>
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-          <div className='editor-form-input-container'>
-            <input
-              className='editor-form-input'
-              type='text'
-              name='title'
-              minLength='3'
-              maxLength='20'
-              value={data.title}
-              placeholder='Ajouter un titre'
-              onChange={(e) => handleChange(e)}
-              required
-            />
-            <label className='hide-label' htmlFor='slug'>slug</label>
-            <input
-              className='editor-form-input input-custom-margin'
-              type='text'
-              name='slug'
-              value={data.slug}
-              placeholder='Ajouter un slug'
-              onChange={(e) => handleChange(e)}
-              required
-            />
-            {data.image && <img src={data.image} alt='' />}
-            <input
-              className='editor-form-input'
-              name='picture'
-              required
-              accept='image/*'
-              id='picture'
-              type='file'
-              onChange={e => uploadImage(e)}
+          <div className='editor-group'>
+            <div className='editor-form-input-container'>
+              <input
+                className='editor-form-input'
+                type='text'
+                name='title'
+                minLength='3'
+                value={data.title}
+                placeholder='Ajouter un titre'
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <label className='hide-label' htmlFor='slug'>slug</label>
+              <input
+                className='editor-form-input'
+                type='text'
+                name='slug'
+                minLength='3'
+                value={data.slug}
+                placeholder='Ajouter un slug'
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <label className='hide-label' htmlFor='intro'>intro</label>
+              <input
+                className='editor-form-input'
+                type='text'
+                name='intro'
+                minLength='3'
+                value={data.intro}
+                placeholder='Ajouter une introduction'
+                onChange={(e) => handleChange(e)}
+                required
+              />
+            </div>
+            <Editor
+              apiKey={process.env.REACT_APP_API_KEY}
+              value={data.content}
+              initialValue=''
+              init={{
+                height: 500,
+                autosave_interval: '5s',
+                plugins: [
+                  'advlist autolink lists link image charmap print preview anchor',
+                  'searchreplace visualblocks code fullscreen',
+                  'insertdatetime media table paste code help wordcount',
+                  'autosave'
+                ],
+                autosave_retention: '30m',
+                autosave_restore_when_empty: true,
+                toolbar:
+                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+              }}
+              onEditorChange={handleChangeEditor}
             />
           </div>
-          <Editor
-            apiKey={process.env.REACT_APP_API_KEY}
-            value={data.content}
-            initialValue=''
-            init={{
-              height: 500,
-              autosave_interval: '5s',
-              plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount',
-                'autosave'
-              ],
-              autosave_retention: '30m',
-              autosave_restore_when_empty: true,
-              toolbar:
-                'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
-            }}
-            onEditorChange={handleChangeEditor}
-          />
-          <div className='editor-bottom-container'>
-            <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
-          </div>
+          <aside className='aside'>
+            <div className='upload-img-container'>
+              <input
+                className='editor-form-input'
+                name='picture'
+                accept='image/*'
+                id='picture'
+                type='file'
+                onChange={e => uploadImage(e)}
+              />
+              <div>
+                {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
+              </div>
+            </div>
+            <div className='editor-bottom-container'>
+              <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+            </div>
+          </aside>
         </form>
       </main>
     </>
