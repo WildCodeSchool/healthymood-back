@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import API from '../services/API';
 import '../Styles/Form.css';
 
 function Diets () {
@@ -11,9 +13,31 @@ function Diets () {
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: dietToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/diet');
 
+  const [Diet, setDiet] = useState([dietToShow]);
+  const [totalDiet, setTotalDiet] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const dietPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const pageNumbers = [];
+
+  useEffect(() => {
+    const fetchDiet = async () => {
+      setLoading(true);
+      const res = await API.get('/diet?per_page=' + dietPerPage + '&page=' + currentPage);
+      setDiet(res.data.data);
+      setTotalDiet(res.data.total);
+      setLoading(false);
+    };
+    fetchDiet();
+  }, [currentPage, dietToShow]);
+
+  for (let i = 1; i <= Math.ceil(totalDiet / dietPerPage); i++) { pageNumbers.push(i); }
+  if (loading) { return <h2>Loading...</h2>; }
+
   const DeleteDiets = async (diet) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de régime ?')) {
-      deleteResource(diet.id, { optimistic: true });
+      deleteResource(diet.id, { optimistic: false });
     }
   };
   const SaveDiets = async (event) => {
@@ -21,7 +45,7 @@ function Diets () {
     if (fields.name === '') {
       alert('Veuillez remplir les champs requis'); // eslint-disable-line
     } else {
-      saveResource(fields, { optimistic: true });
+      saveResource(fields, { optimistic: false });
       setFields(initialForm);
     }
   };
@@ -48,7 +72,7 @@ function Diets () {
             </tr>
           </thead>
           <tbody>
-            {dietToShow.map(t => {
+            {Diet.map(t => {
               return (
                 <tr key={t.id}>
                   <td>{t.name}</td>
@@ -61,6 +85,11 @@ function Diets () {
             })}
           </tbody>
         </table>
+        <nav>
+          <ul className='pagination'>
+            {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+          </ul>
+        </nav>
       </>
     );
   }

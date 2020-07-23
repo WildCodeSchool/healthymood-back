@@ -50,7 +50,7 @@ const EditRecipes = () => {
   const tagToOption = tag => ({ value: tag.id, label: tag.name });
 
   const getAllMealTypes = () => {
-    return getResourceCollection('meal_types').then(tags => {
+    return getResourceCollection('meal_types/all').then(tags => {
       const options = tags.map(tagToOption);
       setAllMealTypes(options);
       return options;
@@ -58,7 +58,7 @@ const EditRecipes = () => {
   };
 
   const getAllIngredients = () => {
-    return getResourceCollection('ingredients')
+    return getResourceCollection('ingredients/all')
       .then(tags => {
         const options = tags.map(tagToOption);
         setAllIngredients(options);
@@ -67,7 +67,7 @@ const EditRecipes = () => {
   };
 
   const getAllRecipeCategories = () => {
-    return getResourceCollection('recipe_categories')
+    return getResourceCollection('recipe_categories/all')
       .then(tags => {
         const options = tags.map(tagToOption);
         setAllRecipeCategories(options);
@@ -76,7 +76,7 @@ const EditRecipes = () => {
   };
 
   const getAllDiets = () => {
-    return getResourceCollection('diet').then(tags => {
+    return getResourceCollection('diet/all').then(tags => {
       const options = tags.map(tagToOption);
       setAllDiets(options);
       return options;
@@ -84,7 +84,7 @@ const EditRecipes = () => {
   };
 
   const getAllDishs = () => {
-    return getResourceCollection('dish_types').then(tags => {
+    return getResourceCollection('dish_types/all').then(tags => {
       const options = tags.map(tagToOption);
       setAllDishTypes(options);
       return options;

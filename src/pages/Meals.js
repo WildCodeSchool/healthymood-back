@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import useResourceCollection from '../hooks/useResourceCollection';
 import useFormData from '../hooks/useFormData';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import API from '../services/API';
 import '../Styles/Form.css';
 
 function Meals () {
@@ -11,14 +13,36 @@ function Meals () {
   const { fields, setFields, handleFieldChange } = useFormData(initialForm);
   const { saveResource, newResourceIsSaving, newResourceSaveError, collection: mealsToShow, fetchCollectionError: fetchError, deleteResource } = useResourceCollection('/meal_types');
 
+  const [meals, setMeals] = useState([mealsToShow]);
+  const [totalMeals, setTotalMeals] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const mealsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const pageNumbers = [];
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      setLoading(true);
+      const res = await API.get('/meal_types?per_page=' + mealsPerPage + '&page=' + currentPage);
+      setMeals(res.data.data);
+      setTotalMeals(res.data.total);
+      setLoading(false);
+    };
+    fetchMeals();
+  }, [currentPage, mealsToShow]);
+
+  for (let i = 1; i <= Math.ceil(totalMeals / mealsPerPage); i++) { pageNumbers.push(i); }
+  if (loading) { return <h2>Loading...</h2>; }
+
   const DeleteMeals = async (meal) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer ce type de repas ?')) {
-      deleteResource(meal.id, { optimistic: true });
+      deleteResource(meal.id, { optimistic: false });
     }
   };
   const SaveMeal = async (event) => {
     event.preventDefault();
-    saveResource(fields, { optimistic: true });
+    saveResource(fields, { optimistic: false });
     setFields(initialForm);
   };
   const fillForm = async meal => {
@@ -44,7 +68,7 @@ function Meals () {
             </tr>
           </thead>
           <tbody>
-            {mealsToShow.map(t => {
+            {meals.map(t => {
               return (
                 <tr key={t.id}>
                   <td>{t.name}</td>
@@ -57,6 +81,11 @@ function Meals () {
             })}
           </tbody>
         </table>
+        <nav>
+          <ul className='pagination'>
+            {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+          </ul>
+        </nav>
       </>
     );
   }
