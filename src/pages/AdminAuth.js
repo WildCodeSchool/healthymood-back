@@ -18,6 +18,7 @@ const AdminAuth = () => {
         setToken(res.data.token);
         setLoading(false);
         history.push('/');
+        console.log(res.data.token);
       })
       .catch(err => {
         console.log(err);

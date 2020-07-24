@@ -9,6 +9,12 @@ import moment from 'moment';
 const Articles = () => {
   const history = useHistory();
   const [articles, setArticles] = useState([]);
+  const [totalArticles, setTotalArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const articlesPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const pageNumbers = [];
 
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Article ?')) {
@@ -32,6 +38,20 @@ const Articles = () => {
         console.log(err);
       });
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      setLoading(true);
+      const res = await API.get('/articles?per_page=' + articlesPerPage + '&page=' + currentPage);
+      setArticles(res.data.data);
+      setTotalArticles(res.data.total);
+      setLoading(false);
+    };
+    fetchArticles();
+  }, [currentPage]);
+
+  for (let i = 1; i <= Math.ceil(totalArticles / articlesPerPage); i++) { pageNumbers.push(i); }
+  if (loading) { return <h2>Loading...</h2>; }
 
   return (
     <>
@@ -57,7 +77,7 @@ const Articles = () => {
             return (
               <tr key={a.id}>
                 <td>{a.title}</td>
-                <td>{a.slug}</td>
+                <td>/{a.slug}</td>
                 <td><img src={a.image} alt='article' className='img-uploaded' /></td>
                 <td>Crée le : {moment(a.created_at).format('DD/MM/YYYY')}</td>
                 <td>
@@ -69,7 +89,11 @@ const Articles = () => {
           })}
         </tbody>
       </table>
-
+      <nav>
+        <ul className='pagination'>
+          {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+        </ul>
+      </nav>
     </>
   );
 };
