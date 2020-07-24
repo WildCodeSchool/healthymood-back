@@ -12,6 +12,7 @@
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
   margin: 20px;
   background-color: white;
+  max-height: 204px;
 }
 
 .shortlink-container h2 {
@@ -40,4 +41,5 @@
 
 .single-shortlink:hover {
   background-color:#efefef;
+  cursor: pointer;
 }

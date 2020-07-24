@@ -66,7 +66,7 @@ const Home = () => {
             </div>
           );
         })}
-        <Link className='see-all' to='/recipes/'>
+        <Link className='see-all' to='/recipes'>
           <span>Toutes les recettes</span>
         </Link>
       </div>
@@ -82,7 +82,7 @@ const Home = () => {
             </div>
           );
         })}
-        <Link className='see-all' to='/articles/'>
+        <Link className='see-all' to='/articles'>
           <span>Tous les articles</span>
         </Link>
       </div>
@@ -98,7 +98,7 @@ const Home = () => {
             </div>
           );
         })}
-        <Link className='see-all' to='/pages/'>
+        <Link className='see-all' to='/pages'>
           <span>Toutes les pages</span>
         </Link>
       </div>
