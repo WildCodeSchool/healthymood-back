@@ -154,7 +154,7 @@ const EditRecipes = () => {
     if (editMode) {
       API.get(`/recipes/${id}`)
         .then((res) => {
-          setData({ ...res.data.data });
+          setData({ ...res.data.data, preparation_duration_seconds: (res.data.data.preparation_duration_seconds / 60) });
           setChosenIngredients(res.data.data.ingredients.map(tagToOption));
           setChosenDishTypes(res.data.data.dish_types.map(tagToOption));
           setChosenMealTypes(res.data.data.mealType.map(tagToOption));
