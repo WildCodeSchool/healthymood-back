@@ -12,7 +12,6 @@ export default function useResourceCollection (collectionRelativeUrl) {
     fetcher: async (...args) => {
       fetchResponse = API.get(...args);
       const res = await fetchResponse;
-      // handle pagination here ?
       return res.data.data;
     }
   });
