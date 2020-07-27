@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   padding: 30px 30px 30px 30px;
-  height: 100%
+  height: 100%;
+  overflow-y: auto;
 }
 
 .editor-container {
@@ -39,34 +40,13 @@
   margin-bottom: 20px;
 }
 
-.editor-button {
-  margin-top: 20px;
-  align-self: flex-end;
-}
-
-.editor-bottom-container {
-  width: 100%;
-  height: 25%;
-  justify-content: space-evenly;
-  padding: 20px;
+.editor-checkbox-container {
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
-}
-
-.editor-bottom-container button.btn {
+  justify-content: space-evenly;
+  height: calc(100% - 44px);
+  padding: 20px 0px;
   width: 100%;
-  transition: all 0.15s ease-in-out;
-}
-
-.editor-bottom-container button.publish {
-  background-color:#008D36;
-}
-
-.label-input-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
 }
 
 aside.aside {
@@ -106,11 +86,38 @@ aside.aside {
 
 .img-preview-container {
   width: 100%;
-  padding: 10px;
 }
 
 .img-preview {
-  width: 150px;
+  width: 60px;
+}
+
+.tag-select-container {
+  margin-top: 20px;
+}
+
+.editor-bottom-container {
+  width: 100%;
+  height: 25%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.editor-bottom-container button.btn {
+  width: 100%;
+  transition: all 0.15s ease-in-out;
+}
+
+.editor-bottom-container button.publish {
+  background-color:#008D36;
+}
+
+.label-input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
@@ -125,6 +132,11 @@ aside.aside {
 
   .editor-group {
     margin: 0px
+  }
+
+  aside.aside {
+    margin-top: 20px;
+    width: 100%;
   }
 
 }
