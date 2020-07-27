@@ -21,10 +21,10 @@ const EditPage = () => {
   useEffect(() => {
     if (editMode) {
       API.get(`/generic_pages/${id}`)
-        .then(res => {
+        .then((res) => {
           setData(res.data.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     }
@@ -46,7 +46,7 @@ const EditPage = () => {
 
     if (editMode) {
       API.patch(`/generic_pages/${id}`, data)
-        .then(res => {
+        .then((res) => {
           history.push('/pages');
         })
         .catch((err) => {
@@ -67,9 +67,9 @@ const EditPage = () => {
     <>
       <main className='main-form-container'>
         <form className='editor-form-center' onSubmit={(e) => handleSubmit(e)}>
-
           <div className='editor-group'>
             <div className='editor-form-input-container'>
+              <label htmlFor='title'>Titre</label>
               <input
                 className='editor-form-input'
                 type='text'
@@ -80,7 +80,7 @@ const EditPage = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
-              <label className='hide-label' htmlFor='slug'>slug</label>
+              <label htmlFor='slug'>slug</label>
               <input
                 className='editor-form-input'
                 type='text'
@@ -108,13 +108,16 @@ const EditPage = () => {
                 autosave_retention: '30m',
                 autosave_restore_when_empty: true,
                 toolbar:
-                'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
               }}
               onEditorChange={handleChangeEditor}
             />
             <div className='editor-bottom-container'>
               <div className='editor-checkbox-container'>
-                <label className='editor-checkbox-label' htmlFor='display_in_footer'>
+                <label
+                  className='editor-checkbox-label'
+                  htmlFor='display_in_footer'
+                >
                   <input
                     style={{ width: '30px' }}
                     type='checkbox'
@@ -122,7 +125,7 @@ const EditPage = () => {
                     checked={data.display_in_footer}
                     onChange={(e) => handleChange(e)}
                   />
-                Visible dans le footer
+                  Visible dans le footer
                 </label>
                 <label className='editor-checkbox-label' htmlFor='published'>
                   <input
@@ -132,10 +135,12 @@ const EditPage = () => {
                     checked={data.published}
                     onChange={(e) => handleChange(e)}
                   />
-                Publier
+                  Publier
                 </label>
               </div>
-              <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+              <button type='submit' className='btn'>
+                {editMode ? 'Modifier' : 'Ajouter'}
+              </button>
             </div>
           </div>
         </form>

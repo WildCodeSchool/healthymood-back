@@ -5,7 +5,10 @@
   height: 100%;
   overflow-y: auto;
 }
-
+.editor-form-input-container label {
+  text-align: left;
+  font-weight: 900;
+}
 .editor-container {
   display: flex;
   width: 1200px;
@@ -65,7 +68,7 @@ aside.aside {
   width: 78.5%;
   background-color: white;
   border-radius: 5px;
-  padding: 20px
+  padding: 20px;
 }
 
 .editor-checkbox-label {
@@ -76,7 +79,7 @@ aside.aside {
 .upload-img-container {
   border: solid 1px lightgray;
   border-radius: 5px;
-  cursor:pointer;
+  cursor: pointer;
   padding: 10px;
 }
 
@@ -111,7 +114,7 @@ aside.aside {
 }
 
 .editor-bottom-container button.publish {
-  background-color:#008D36;
+  background-color: #008d36;
 }
 
 .label-input-container {
@@ -120,9 +123,11 @@ aside.aside {
   margin-bottom: 20px;
 }
 
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
-
-  .editor-form-input-container input, .editor-group, .aside {
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  .editor-form-input-container input,
+  .editor-group,
+  .aside {
     width: 100%;
   }
 
@@ -131,12 +136,11 @@ aside.aside {
   }
 
   .editor-group {
-    margin: 0px
+    margin: 0px;
   }
 
   aside.aside {
     margin-top: 20px;
     width: 100%;
   }
-
 }
