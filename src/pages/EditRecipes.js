@@ -114,7 +114,7 @@ const EditRecipes = () => {
     allRecipeCategories
   ) => {
     const query = queryString.parse({ arrayFormat: 'bracket' });
-    const {meal_types, ingredients, diets, dish_types, recipe_categories } = query; // eslint-disable-line
+    const { meal_types, ingredients, diets, dish_types, recipe_categories } = query; // eslint-disable-line
     if (meal_types) { // eslint-disable-line
       setChosenMealTypes(
         allMealTypes.filter((mealType) =>
@@ -190,6 +190,7 @@ const EditRecipes = () => {
     if (editMode) {
       API.patch(`/recipes/${id}`, {
         ...data,
+        preparation_duration_seconds: (data.preparation_duration_seconds * 60),
         ingredients: chosenIngredients,
         dish_types: chosenDishTypes,
         meal_types: chosenMealTypes,
@@ -205,6 +206,7 @@ const EditRecipes = () => {
     } else {
       API.post('/recipes', {
         ...data,
+        preparation_duration_seconds: (data.preparation_duration_seconds * 60),
         ingredients: chosenIngredients,
         dish_types: chosenDishTypes,
         meal_types: chosenMealTypes,

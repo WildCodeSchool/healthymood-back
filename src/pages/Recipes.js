@@ -89,7 +89,7 @@ const Recipes = () => {
                 <td>{r.name}</td>
                 <td>{r.slug}</td>
                 <td>{r.calories}</td>
-                <td>{r.preparation_duration_seconds}</td>
+                <td>~{r.preparation_duration_seconds / 60} min</td>
                 <td>
                   <img src={r.image} alt='recette' className='img-uploaded' />
                 </td>
