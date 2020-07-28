@@ -14,6 +14,7 @@ const EditArticle = () => {
   const editMode = id !== 'new';
   const [chosenArticleCategory, setChosenArticleCategory] = useState(null);
   const [allArticleCategories, setAllArticleCategories] = useState([]);
+  const regex = /[^a-za-z0-9]+/g;
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
@@ -67,18 +68,10 @@ const EditArticle = () => {
       API.get(`/articles/${id}`)
         .then((res) => {
           setData({ ...res.data.data });
-          setChosenArticleCategory(
-            res.data.data.categoryArticle
-              ? {
-                label: res.data.data.categoryArticle.name,
-                value: res.data.data.categoryArticle.id
-              }
-              : null
-          );
-          console.log(chosenArticleCategory);
+          setChosenArticleCategory(res.data.data.categoryArticle ? { label: res.data.data.categoryArticle.name, value: res.data.data.categoryArticle.id } : null);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(err => {
+          console.error(err);
         });
     }
   }, []); // eslint-disable-line
@@ -118,7 +111,7 @@ const EditArticle = () => {
           history.push('/articles');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     } else {
       API.post('/articles', {
@@ -129,7 +122,7 @@ const EditArticle = () => {
           history.push('/articles');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
@@ -162,7 +155,7 @@ const EditArticle = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                value={data.slug}
+                value={data.slug.replace(regex, '-')}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
                 required
@@ -179,6 +172,7 @@ const EditArticle = () => {
                 required
               />
             </div>
+            <input id='my-file' type='file' name='my-file' style={{ display: 'none' }} onChange='' />
             <Editor
               apiKey={process.env.REACT_APP_API_KEY}
               value={data.content}
@@ -195,7 +189,25 @@ const EditArticle = () => {
                 autosave_retention: '30m',
                 autosave_restore_when_empty: true,
                 toolbar:
-                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help',
+                file_browser_callback_types: 'image',
+                file_picker_callback: function (callback, value, meta) {
+                  if (meta.filetype === 'image') {
+                    const input = document.getElementById('my-file');
+                    input.click();
+                    input.onchange = function () {
+                      const reader = new FileReader();// eslint-disable-line
+                      const file = input.files[0];
+                      reader.onload = function (e) {
+                        callback(e.target.result, {
+                          alt: file.name
+                        });
+                      };
+                      reader.readAsDataURL(file);
+                    };
+                  }
+                },
+                paste_data_images: true
               }}
               onEditorChange={handleChangeEditor}
             />
@@ -209,16 +221,6 @@ const EditArticle = () => {
                 id='picture'
                 type='file'
                 onChange={(e) => uploadImage(e)}
-              />
-              <br />
-              <SingleSelect
-                className='tag-select'
-                options={allArticleCategories}
-                value={chosenArticleCategory}
-                onChange={(newValues) => {
-                  setChosenArticleCategory(newValues);
-                }}
-                placeholder='Types de Catégorie'
               />
               <div>
                 {data.image ? (
@@ -236,6 +238,15 @@ const EditArticle = () => {
                 )}
               </div>
             </div>
+            <SingleSelect
+              className='tag-select'
+              options={allArticleCategories}
+              value={chosenArticleCategory}
+              onChange={(newValues) => {
+                setChosenArticleCategory(newValues);
+              }}
+              placeholder='Types de Catégorie'
+            />
             <div className='editor-bottom-container'>
               <button type='submit' className='btn'>
                 {editMode ? 'Modifier' : 'Ajouter'}

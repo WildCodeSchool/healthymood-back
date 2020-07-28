@@ -24,8 +24,8 @@ const Recipes = () => {
           const currentRecipe = recipes.filter((r) => r.id !== id);
           setRecipes(currentRecipe);
         })
-        .catch((err) => {
-          console.warn(err);
+        .catch(err => {
+          console.error(err);
         });
     }
   };
@@ -35,8 +35,8 @@ const Recipes = () => {
       .then((res) => {
         setRecipes(res.data.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(err => {
+        console.error(err);
       });
   }, []); // eslint-disable-line
 

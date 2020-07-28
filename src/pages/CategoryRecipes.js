@@ -64,7 +64,6 @@ function CategoryRecipes () {
       .then(res => res.data)
       .then(tab => {
         setFields({ ...fields, image: tab });
-        console.log(tab);
       });
   };
 

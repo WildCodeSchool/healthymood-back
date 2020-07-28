@@ -24,6 +24,7 @@ const EditRecipes = () => {
   const [allDishTypes, setAllDishTypes] = useState([]);
   const [chosenRecipeCategory, setChosenRecipeCategory] = useState(null);
   const [allRecipeCategories, setAllRecipeCategories] = useState([]);
+  const regex = /[^a-za-z0-9]+/g;
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
@@ -159,16 +160,9 @@ const EditRecipes = () => {
           setChosenDishTypes(res.data.data.dish_types.map(tagToOption));
           setChosenMealTypes(res.data.data.mealType.map(tagToOption));
           setChosenDiets(res.data.data.diets.map(tagToOption));
-          setChosenRecipeCategory(
-            res.data.data.category
-              ? {
-                label: res.data.data.category.name,
-                value: res.data.data.category.id
-              }
-              : null
-          );
+          setChosenRecipeCategory(res.data.data.category ? { label: res.data.data.category.name, value: res.data.data.category.id } : null);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
         });
     }
@@ -201,7 +195,7 @@ const EditRecipes = () => {
           history.push('/recipes');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     } else {
       API.post('/recipes', {
@@ -217,7 +211,7 @@ const EditRecipes = () => {
           history.push('/recipes');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
@@ -271,7 +265,7 @@ const EditRecipes = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                value={data.slug}
+                value={data.slug.replace(regex, '-')}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
                 required
@@ -320,7 +314,7 @@ const EditRecipes = () => {
                 required
               />
             </div>
-
+            <input id='my-file' type='file' name='my-file' style={{ display: 'none' }} onChange='' />
             <Editor
               apiKey={process.env.REACT_APP_API_KEY}
               value={data.content}
@@ -338,7 +332,25 @@ const EditRecipes = () => {
                 autosave_retention: '30m',
                 autosave_restore_when_empty: true,
                 toolbar:
-                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help',
+                file_browser_callback_types: 'image',
+                file_picker_callback: function (callback, value, meta) {
+                  if (meta.filetype === 'image') {
+                    const input1 = document.getElementById('my-file');
+                    input1.click();
+                    input1.onchange = function () {
+                      const reader = new FileReader();// eslint-disable-line
+                      const file = input1.files[0];
+                      reader.onload = function (e) {
+                        callback(e.target.result, {
+                          alt: file.name
+                        });
+                      };
+                      reader.readAsDataURL(file);
+                    };
+                  }
+                },
+                paste_data_images: true
               }}
               onEditorChange={handleChangeEditor}
             />
