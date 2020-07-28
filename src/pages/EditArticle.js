@@ -94,7 +94,6 @@ const EditArticle = () => {
     setData({ ...data, [name]: value });
   };
 
-
   const handleChangeEditor = (content) => {
     setData({ ...data, content });
   };
@@ -126,7 +125,6 @@ const EditArticle = () => {
         populateInputs(allArticleCategories);
       });
   }, [])// eslint-disable-line
-
 
   return (
     <>
