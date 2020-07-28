@@ -136,6 +136,7 @@ function CategoryRecipes () {
             />
             {fields.image ? <img className='img-preview' src={fields.image} alt={fields.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
           </div>
+
           <button
             className='form-button'
             onClick={SaveCatRecipe}

@@ -24,6 +24,7 @@ const EditArticle = () => {
     content: '',
     created_at: date,
     image: ''
+
   });
 
   const getResourceCollection = async (url) => {
@@ -127,10 +128,11 @@ const EditArticle = () => {
     }
   };
   useEffect(() => {
-    Promise.all([getAllArticleCategory()]).then(([allArticleCategories]) => {
-      populateInputs(allArticleCategories);
-    });
-  }, []); // eslint-disable-line
+    Promise.all([getAllArticleCategory()])
+      .then(([allArticleCategories]) => {
+        populateInputs(allArticleCategories);
+      });
+  }, [])// eslint-disable-line
 
   return (
     <>
@@ -171,6 +173,7 @@ const EditArticle = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
+
             </div>
             <input id='my-file' type='file' name='my-file' style={{ display: 'none' }} onChange='' />
             <Editor
@@ -221,6 +224,16 @@ const EditArticle = () => {
                 id='picture'
                 type='file'
                 onChange={(e) => uploadImage(e)}
+              />
+              <br />
+              <SingleSelect
+                className='tag-select'
+                options={allArticleCategories}
+                value={chosenArticleCategory}
+                onChange={(newValues) => {
+                  setChosenArticleCategory(newValues);
+                }}
+                placeholder='Types de Catégorie'
               />
               <div>
                 {data.image ? (
