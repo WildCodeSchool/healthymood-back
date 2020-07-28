@@ -181,7 +181,26 @@ const EditArticle = () => {
                 autosave_retention: '30m',
                 autosave_restore_when_empty: true,
                 toolbar:
-                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help',
+                file_browser_callback_types: 'image',
+                file_picker_callback: function (callback, value, meta) {
+                  if (meta.filetype === 'image') {
+                    const input = document.getElementById('my-file');
+                    input.click();
+                    input.onchange = function () {
+                      const reader = new FileReader();// eslint-disable-line
+                      const file = input.files[0];
+                      reader.onload = function (e) {
+                        console.log('name', e.target.result);
+                        callback(e.target.result, {
+                          alt: file.name
+                        });
+                      };
+                      reader.readAsDataURL(file);
+                    };
+                  }
+                },
+                paste_data_images: true
               }}
               onEditorChange={handleChangeEditor}
             />
