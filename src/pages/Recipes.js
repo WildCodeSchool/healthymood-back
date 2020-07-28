@@ -14,14 +14,14 @@ const Recipes = () => {
   const [loading, setLoading] = useState(false);
   const recipesPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const pageNumbers = [];
 
   const handleDelete = (id) => {
     if (window.confirm('Êtes vous sûr de vouloir supprimer cette Recette ?')) {
       API.delete(`/recipes/${id}`)
-        .then(res => {
-          const currentRecipe = recipes.filter(r => r.id !== id);
+        .then((res) => {
+          const currentRecipe = recipes.filter((r) => r.id !== id);
           setRecipes(currentRecipe);
         })
         .catch(err => {
@@ -32,7 +32,7 @@ const Recipes = () => {
 
   useEffect(() => {
     API.get('/recipes')
-      .then(res => {
+      .then((res) => {
         setRecipes(res.data.data);
       })
       .catch(err => {
@@ -43,7 +43,9 @@ const Recipes = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       setLoading(true);
-      const res = await API.get('/recipes?per_page=' + recipesPerPage + '&page=' + currentPage);
+      const res = await API.get(
+        '/recipes?per_page=' + recipesPerPage + '&page=' + currentPage
+      );
       setRecipes(res.data.data);
       setTotalRecipes(res.data.total);
       setLoading(false);
@@ -51,8 +53,12 @@ const Recipes = () => {
     fetchRecipes();
   }, [currentPage]);
 
-  for (let i = 1; i <= Math.ceil(totalRecipes / recipesPerPage); i++) { pageNumbers.push(i); }
-  if (loading) { return <h2>Loading...</h2>; }
+  for (let i = 1; i <= Math.ceil(totalRecipes / recipesPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <>
@@ -68,6 +74,8 @@ const Recipes = () => {
           <tr>
             <td>Titre</td>
             <td>Slug</td>
+            <td>Calories</td>
+            <td>Temps de préparation</td>
             <td>Image principale</td>
             <td>Date</td>
             <td>Publié</td>
@@ -75,19 +83,27 @@ const Recipes = () => {
           </tr>
         </thead>
         <tbody>
-          {recipes.map(r => {
+          {recipes.map((r) => {
             return (
               <tr key={r.id}>
                 <td>{r.name}</td>
                 <td>{r.slug}</td>
+                <td>{r.calories}</td>
+                <td>~{r.preparation_duration_seconds / 60} min</td>
                 <td>
                   <img src={r.image} alt='recette' className='img-uploaded' />
                 </td>
                 <td>Crée le : {moment(r.created_at).format('DD/MM/YYYY')}</td>
                 <td>{r.published === 0 ? 'Non' : 'Oui'}</td>
                 <td>
-                  <EditOutlined className='edit-icon' onClick={() => history.push(`/recipes/edit/${r.id}`)} />
-                  <DeleteOutlined className='delete-icon' onClick={() => handleDelete(r.id)} />
+                  <EditOutlined
+                    className='edit-icon'
+                    onClick={() => history.push(`/recipes/edit/${r.id}`)}
+                  />
+                  <DeleteOutlined
+                    className='delete-icon'
+                    onClick={() => handleDelete(r.id)}
+                  />
                 </td>
               </tr>
             );
@@ -96,7 +112,17 @@ const Recipes = () => {
       </table>
       <nav>
         <ul className='pagination'>
-          {pageNumbers.map(number => (<li key={number}><Link onClick={() => paginate(number)} to='#' className='page-link'>{number}</Link></li>))}
+          {pageNumbers.map((number) => (
+            <li key={number}>
+              <Link
+                onClick={() => paginate(number)}
+                to='#'
+                className='page-link'
+              >
+                {number}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </>

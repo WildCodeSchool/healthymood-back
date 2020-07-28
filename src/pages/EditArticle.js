@@ -24,7 +24,6 @@ const EditArticle = () => {
     content: '',
     created_at: date,
     image: ''
-
   });
 
   const getResourceCollection = async (url) => {
@@ -38,15 +37,14 @@ const EditArticle = () => {
     return data;
   };
 
-  const tagToOption = tag => ({ value: tag.id, label: tag.name });
+  const tagToOption = (tag) => ({ value: tag.id, label: tag.name });
 
   const getAllArticleCategory = () => {
-    return getResourceCollection('article_categories')
-      .then(tags => {
-        const options = tags.map(tagToOption);
-        setAllArticleCategories(options);
-        return options;
-      });
+    return getResourceCollection('article_categories').then((tags) => {
+      const options = tags.map(tagToOption);
+      setAllArticleCategories(options);
+      return options;
+    });
   };
 
   const uploadImage = (e) => {
@@ -59,8 +57,8 @@ const EditArticle = () => {
         'Content-Type': 'multipart/form-data'
       }
     })
-      .then(res => res.data)
-      .then(tab => {
+      .then((res) => res.data)
+      .then((tab) => {
         setData({ ...data, image: tab });
       });
   };
@@ -68,7 +66,7 @@ const EditArticle = () => {
   useEffect(() => {
     if (editMode) {
       API.get(`/articles/${id}`)
-        .then(res => {
+        .then((res) => {
           setData({ ...res.data.data });
           setChosenArticleCategory(res.data.data.categoryArticle ? { label: res.data.data.categoryArticle.name, value: res.data.data.categoryArticle.id } : null);
         })
@@ -82,7 +80,11 @@ const EditArticle = () => {
     const query = queryString.parse({ arrayFormat: 'bracket' });
     const { article_categories } = query; // eslint-disable-line
     if (article_categories) { // eslint-disable-line
-      setChosenArticleCategory(allArticleCategories.find(category => article_categories.includes(category.value.toString())));
+      setChosenArticleCategory(
+        allArticleCategories.find((category) =>
+          article_categories.includes(category.value.toString())
+        )
+      );
     }
   };
 
@@ -101,15 +103,21 @@ const EditArticle = () => {
     event.preventDefault();
 
     if (editMode) {
-      API.patch(`/articles/${id}`, ({ ...data, article_category: chosenArticleCategory }))
-        .then(res => {
+      API.patch(`/articles/${id}`, {
+        ...data,
+        article_category: chosenArticleCategory
+      })
+        .then((res) => {
           history.push('/articles');
         })
         .catch((err) => {
           console.error(err);
         });
     } else {
-      API.post('/articles', ({ ...data, article_category: chosenArticleCategory }))
+      API.post('/articles', {
+        ...data,
+        article_category: chosenArticleCategory
+      })
         .then((res) => {
           history.push('/articles');
         })
@@ -119,11 +127,10 @@ const EditArticle = () => {
     }
   };
   useEffect(() => {
-    Promise.all([getAllArticleCategory()])
-      .then(([allArticleCategories]) => {
-        populateInputs(allArticleCategories);
-      });
-  }, [])// eslint-disable-line
+    Promise.all([getAllArticleCategory()]).then(([allArticleCategories]) => {
+      populateInputs(allArticleCategories);
+    });
+  }, []); // eslint-disable-line
 
   return (
     <>
@@ -131,6 +138,7 @@ const EditArticle = () => {
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
           <div className='editor-group'>
             <div className='editor-form-input-container'>
+              <label htmlFor='title'>Titre</label>
               <input
                 className='editor-form-input'
                 type='text'
@@ -141,7 +149,7 @@ const EditArticle = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
-              <label className='hide-label' htmlFor='slug'>slug</label>
+              <label htmlFor='slug'>slug</label>
               <input
                 className='editor-form-input'
                 type='text'
@@ -152,7 +160,7 @@ const EditArticle = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
-              <label className='hide-label' htmlFor='intro'>intro</label>
+              <label htmlFor='intro'>Intro</label>
               <input
                 className='editor-form-input'
                 type='text'
@@ -163,7 +171,6 @@ const EditArticle = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
-
             </div>
             <input id='my-file' type='file' name='my-file' style={{ display: 'none' }} onChange='' />
             <Editor
@@ -213,10 +220,22 @@ const EditArticle = () => {
                 accept='image/*'
                 id='picture'
                 type='file'
-                onChange={e => uploadImage(e)}
+                onChange={(e) => uploadImage(e)}
               />
               <div>
-                {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
+                {data.image ? (
+                  <img
+                    src={data.image}
+                    className='img-preview'
+                    alt={data.image}
+                  />
+                ) : (
+                  <img
+                    className='img-preview'
+                    src={ImagePlaceholder}
+                    alt='img-placeholder'
+                  />
+                )}
               </div>
             </div>
             <SingleSelect
@@ -229,7 +248,9 @@ const EditArticle = () => {
               placeholder='Types de Catégorie'
             />
             <div className='editor-bottom-container'>
-              <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
+              <button type='submit' className='btn'>
+                {editMode ? 'Modifier' : 'Ajouter'}
+              </button>
             </div>
           </aside>
         </form>
