@@ -25,7 +25,7 @@ const Recipes = () => {
           setRecipes(currentRecipe);
         })
         .catch(err => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
@@ -36,7 +36,7 @@ const Recipes = () => {
         setRecipes(res.data.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }, []); // eslint-disable-line
 

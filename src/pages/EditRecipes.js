@@ -137,10 +137,9 @@ const EditRecipes = () => {
           setChosenMealTypes(res.data.data.mealType.map(tagToOption));
           setChosenDiets(res.data.data.diets.map(tagToOption));
           setChosenRecipeCategory(res.data.data.category ? { label: res.data.data.category.name, value: res.data.data.category.id } : null);
-          console.log(res.data.data);
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
         });
     }
   }, []); // eslint-disable-line
@@ -164,7 +163,7 @@ const EditRecipes = () => {
           history.push('/recipes');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     } else {
       API.post('/recipes', ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes, meal_types: chosenMealTypes, diets: chosenDiets, recipe_category: chosenRecipeCategory }))
@@ -172,7 +171,7 @@ const EditRecipes = () => {
           history.push('/recipes');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };

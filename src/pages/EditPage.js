@@ -25,7 +25,7 @@ const EditPage = () => {
           setData(res.data.data);
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
         });
     }
   }, []); // eslint-disable-line
@@ -50,7 +50,7 @@ const EditPage = () => {
           history.push('/pages');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     } else {
       API.post('/generic_pages', data)
@@ -58,7 +58,7 @@ const EditPage = () => {
           history.push('/pages');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
