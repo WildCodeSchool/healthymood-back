@@ -256,14 +256,12 @@ const EditRecipes = () => {
                 file_browser_callback_types: 'image',
                 file_picker_callback: function (callback, value, meta) {
                   if (meta.filetype === 'image') {
-                    const input = document.getElementById('my-file');
-                    input.click();
-                    input.onchange = function () {
+                    const input1 = document.getElementById('my-file');
+                    input1.click();
+                    input1.onchange = function () {
                       const reader = new FileReader();// eslint-disable-line
-                      const file = input.files[0];
-
+                      const file = input1.files[0];
                       reader.onload = function (e) {
-                        console.log('name', e.target.result);
                         callback(e.target.result, {
                           alt: file.name
                         });

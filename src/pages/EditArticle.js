@@ -165,6 +165,7 @@ const EditArticle = () => {
               />
 
             </div>
+            <input id='my-file' type='file' name='my-file' style={{ display: 'none' }} onChange='' />
             <Editor
               apiKey={process.env.REACT_APP_API_KEY}
               value={data.content}
