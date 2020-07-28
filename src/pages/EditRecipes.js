@@ -302,7 +302,7 @@ const EditRecipes = () => {
                 required
               />
               <label htmlFor='preparation_duration_seconds'>
-                Temps de préparation
+                Temps de préparation (en minutes)
               </label>
               <input
                 className='editor-form-input'
