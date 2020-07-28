@@ -24,7 +24,7 @@ const Pages = () => {
           setPages(currentPage);
         })
         .catch(err => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
@@ -35,7 +35,7 @@ const Pages = () => {
         setPages(res.data.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }, []); // eslint-disable-line
 

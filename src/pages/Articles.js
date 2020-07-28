@@ -24,7 +24,7 @@ const Articles = () => {
           setArticles(currentArticle);
         })
         .catch(err => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
@@ -35,7 +35,7 @@ const Articles = () => {
         setArticles(res.data.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }, []); // eslint-disable-line
 

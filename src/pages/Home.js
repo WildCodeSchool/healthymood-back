@@ -4,23 +4,9 @@ import API from '../services/API';
 import '../Styles/Home.css';
 
 const Home = () => {
-  // const [user, setUser] = useState('');
   const [articles, setArticles] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [pages, setPages] = useState([]);
-  // const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const id = 1;
-    API.get(`/users/${id}`)
-      .then(res => {
-        // setUser({ ...res.data.data });
-        // setIsLoaded(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
 
   useEffect(() => {
     API.get('/articles/?per_page=3&page=1&sort_by=created_at')
@@ -28,7 +14,7 @@ const Home = () => {
         setArticles([...res.data.data]);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }, []);
 
@@ -38,7 +24,7 @@ const Home = () => {
         setRecipes([...res.data.data]);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }, []);
 
@@ -48,7 +34,7 @@ const Home = () => {
         setPages([...res.data.data]);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }, []);
 

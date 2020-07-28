@@ -71,10 +71,9 @@ const EditArticle = () => {
         .then(res => {
           setData({ ...res.data.data });
           setChosenArticleCategory(res.data.data.categoryArticle ? { label: res.data.data.categoryArticle.name, value: res.data.data.categoryArticle.id } : null);
-          console.log(chosenArticleCategory);
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
         });
     }
   }, []); // eslint-disable-line
@@ -107,7 +106,7 @@ const EditArticle = () => {
           history.push('/articles');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     } else {
       API.post('/articles', ({ ...data, article_category: chosenArticleCategory }))
@@ -115,7 +114,7 @@ const EditArticle = () => {
           history.push('/articles');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
