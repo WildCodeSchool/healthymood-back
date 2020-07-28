@@ -24,7 +24,7 @@ const Pages = () => {
           setPages(currentPage);
         })
         .catch(err => {
-          console.warn(err);
+          console.error(err);
         });
     }
   };
@@ -35,7 +35,7 @@ const Pages = () => {
         setPages(res.data.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }, []); // eslint-disable-line
 
@@ -76,7 +76,7 @@ const Pages = () => {
             return (
               <tr key={p.id}>
                 <td>{p.title}</td>
-                <td>/{p.slug}</td>
+                <td>{p.slug}</td>
                 <td>{p.published === 0 ? 'Non' : 'Oui'} </td>
                 <td>
                   <EditOutlined className='edit-icon' onClick={() => history.push(`/pages/edit/${p.id}`)} />

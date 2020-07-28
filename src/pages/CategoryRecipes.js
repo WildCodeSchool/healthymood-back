@@ -5,6 +5,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import API from '../services/API';
 import '../Styles/Form.css';
+import ImagePlaceholder from '../images/image_placeholder.png';
 
 function CategoryRecipes () {
   const initialform = {
@@ -63,7 +64,6 @@ function CategoryRecipes () {
       .then(res => res.data)
       .then(tab => {
         setFields({ ...fields, image: tab });
-        console.log(tab);
       });
   };
 
@@ -124,16 +124,19 @@ function CategoryRecipes () {
             value={fields.name}
             onChange={handleFieldChange}
           />
-          <input
-            className='input-form-all'
-            name='picture'
-            required
-            accept='image/*'
-            id='picture'
-            type='file'
-            onChange={e => uploadImage(e)}
-          />
-          <img className='img-preview' src={fields.image} alt={fields.name} />
+          <div className='upload-img-inline-container'>
+            <input
+              className='editor-form-input'
+              name='picture'
+              required
+              accept='image/*'
+              id='picture'
+              type='file'
+              onChange={e => uploadImage(e)}
+            />
+            {fields.image ? <img className='img-preview' src={fields.image} alt={fields.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
+          </div>
+
           <button
             className='form-button'
             onClick={SaveCatRecipe}

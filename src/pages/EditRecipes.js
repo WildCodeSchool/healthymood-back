@@ -24,12 +24,15 @@ const EditRecipes = () => {
   const [allDishTypes, setAllDishTypes] = useState([]);
   const [chosenRecipeCategory, setChosenRecipeCategory] = useState(null);
   const [allRecipeCategories, setAllRecipeCategories] = useState([]);
+  const regex = /[^a-za-z0-9]+/g;
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
     name: '',
     slug: '',
     content: '',
+    calories: 0,
+    preparation_duration_seconds: 0,
     budget: null,
     published: true,
     created_at: date,
@@ -47,10 +50,10 @@ const EditRecipes = () => {
     }
     return data;
   };
-  const tagToOption = tag => ({ value: tag.id, label: tag.name });
+  const tagToOption = (tag) => ({ value: tag.id, label: tag.name });
 
   const getAllMealTypes = () => {
-    return getResourceCollection('meal_types/all').then(tags => {
+    return getResourceCollection('meal_types/all').then((tags) => {
       const options = tags.map(tagToOption);
       setAllMealTypes(options);
       return options;
@@ -58,25 +61,23 @@ const EditRecipes = () => {
   };
 
   const getAllIngredients = () => {
-    return getResourceCollection('ingredients/all')
-      .then(tags => {
-        const options = tags.map(tagToOption);
-        setAllIngredients(options);
-        return options;
-      });
+    return getResourceCollection('ingredients/all').then((tags) => {
+      const options = tags.map(tagToOption);
+      setAllIngredients(options);
+      return options;
+    });
   };
 
   const getAllRecipeCategories = () => {
-    return getResourceCollection('recipe_categories/all')
-      .then(tags => {
-        const options = tags.map(tagToOption);
-        setAllRecipeCategories(options);
-        return options;
-      });
+    return getResourceCollection('recipe_categories/all').then((tags) => {
+      const options = tags.map(tagToOption);
+      setAllRecipeCategories(options);
+      return options;
+    });
   };
 
   const getAllDiets = () => {
-    return getResourceCollection('diet/all').then(tags => {
+    return getResourceCollection('diet/all').then((tags) => {
       const options = tags.map(tagToOption);
       setAllDiets(options);
       return options;
@@ -84,7 +85,7 @@ const EditRecipes = () => {
   };
 
   const getAllDishs = () => {
-    return getResourceCollection('dish_types/all').then(tags => {
+    return getResourceCollection('dish_types/all').then((tags) => {
       const options = tags.map(tagToOption);
       setAllDishTypes(options);
       return options;
@@ -101,46 +102,68 @@ const EditRecipes = () => {
         'Content-Type': 'multipart/form-data'
       }
     })
-      .then(res => res.data)
-      .then(tab => {
+      .then((res) => res.data)
+      .then((tab) => {
         setData({ ...data, image: tab });
       });
   };
-  const populateInputs = (allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories) => {
+  const populateInputs = (
+    allMealTypes,
+    allIngredients,
+    allDiets,
+    allDishTypes,
+    allRecipeCategories
+  ) => {
     const query = queryString.parse({ arrayFormat: 'bracket' });
     const { meal_types, ingredients, diets, dish_types, recipe_categories } = query; // eslint-disable-line
     if (meal_types) { // eslint-disable-line
-      setChosenMealTypes(allMealTypes.filter(mealType => meal_types.includes(mealType.value.toString())));
+      setChosenMealTypes(
+        allMealTypes.filter((mealType) =>
+          meal_types.includes(mealType.value.toString())
+        )
+      );
     }
     if (ingredients) {
-      setChosenIngredients(allIngredients.filter(ingredient => ingredients.includes(ingredient.value.toString())));
+      setChosenIngredients(
+        allIngredients.filter((ingredient) =>
+          ingredients.includes(ingredient.value.toString())
+        )
+      );
     }
     if (diets) {
-      setChosenDiets(allDiets.filter(diet => diets.includes(diet.value.toString())));
+      setChosenDiets(
+        allDiets.filter((diet) => diets.includes(diet.value.toString()))
+      );
     }
-    if (dish_types) {// eslint-disable-line
-      setChosenDishTypes(allDishTypes.filter(dish => dish_types.includes(dish.value.toString())));
+    if (dish_types) { // eslint-disable-line
+      setChosenDishTypes(
+        allDishTypes.filter((dish) =>
+          dish_types.includes(dish.value.toString())
+        )
+      );
     }
-    if (recipe_categories) {// eslint-disable-line
-      setChosenRecipeCategory(allRecipeCategories.find(recipe => recipe_categories.includes(recipe.value.toString())));
+    if (recipe_categories) { // eslint-disable-line
+      setChosenRecipeCategory(
+        allRecipeCategories.find((recipe) =>
+          recipe_categories.includes(recipe.value.toString())
+        )
+      );
     }
-  };
-  // eslint-disable-line
+  }; // eslint-disable-line
 
   useEffect(() => {
     if (editMode) {
       API.get(`/recipes/${id}`)
-        .then(res => {
-          setData({ ...res.data.data });
+        .then((res) => {
+          setData({ ...res.data.data, preparation_duration_seconds: (res.data.data.preparation_duration_seconds / 60) });
           setChosenIngredients(res.data.data.ingredients.map(tagToOption));
           setChosenDishTypes(res.data.data.dish_types.map(tagToOption));
           setChosenMealTypes(res.data.data.mealType.map(tagToOption));
           setChosenDiets(res.data.data.diets.map(tagToOption));
           setChosenRecipeCategory(res.data.data.category ? { label: res.data.data.category.name, value: res.data.data.category.id } : null);
-          console.log(res.data.data);
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
         });
     }
   }, []); // eslint-disable-line
@@ -159,37 +182,72 @@ const EditRecipes = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (editMode) {
-      API.patch(`/recipes/${id}`, ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes, meal_types: chosenMealTypes, diets: chosenDiets, recipe_category: chosenRecipeCategory }))
-        .then(res => {
-          history.push('/recipes');
-        })
-        .catch((err) => {
-          console.warn(err);
-        });
-    } else {
-      API.post('/recipes', ({ ...data, ingredients: chosenIngredients, dish_types: chosenDishTypes, meal_types: chosenMealTypes, diets: chosenDiets, recipe_category: chosenRecipeCategory }))
+      API.patch(`/recipes/${id}`, {
+        ...data,
+        preparation_duration_seconds: (data.preparation_duration_seconds * 60),
+        ingredients: chosenIngredients,
+        dish_types: chosenDishTypes,
+        meal_types: chosenMealTypes,
+        diets: chosenDiets,
+        recipe_category: chosenRecipeCategory
+      })
         .then((res) => {
           history.push('/recipes');
         })
         .catch((err) => {
-          console.warn(err);
+          console.error(err);
+        });
+    } else {
+      API.post('/recipes', {
+        ...data,
+        preparation_duration_seconds: (data.preparation_duration_seconds * 60),
+        ingredients: chosenIngredients,
+        dish_types: chosenDishTypes,
+        meal_types: chosenMealTypes,
+        diets: chosenDiets,
+        recipe_category: chosenRecipeCategory
+      })
+        .then((res) => {
+          history.push('/recipes');
+        })
+        .catch((err) => {
+          console.error(err);
         });
     }
   };
   useEffect(() => {
-    Promise.all([getAllMealTypes(), getAllIngredients(), getAllDiets(), getAllDishs(), getAllRecipeCategories()])
-      .then(([allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories]) => {
-        populateInputs(allMealTypes, allIngredients, allDiets, allDishTypes, allRecipeCategories);
-      });
-  }, [])// eslint-disable-line
+    Promise.all([
+      getAllMealTypes(),
+      getAllIngredients(),
+      getAllDiets(),
+      getAllDishs(),
+      getAllRecipeCategories()
+    ]).then(
+      ([
+        allMealTypes,
+        allIngredients,
+        allDiets,
+        allDishTypes,
+        allRecipeCategories
+      ]) => {
+        populateInputs(
+          allMealTypes,
+          allIngredients,
+          allDiets,
+          allDishTypes,
+          allRecipeCategories
+        );
+      }
+    );
+  }, []); // eslint-disable-line
 
   return (
     <>
       <main className='main-form-container'>
         <form className='editor-form' onSubmit={(e) => handleSubmit(e)}>
-
           <div className='editor-group'>
             <div className='editor-form-input-container'>
+              <label htmlFor='name'>Nom</label>
               <input
                 className='editor-form-input'
                 type='text'
@@ -201,18 +259,18 @@ const EditRecipes = () => {
                 required
               />
 
-              <label className='hide-label' htmlFor='slug'>slug</label>
+              <label htmlFor='slug'>Slug</label>
               <input
                 className='editor-form-input'
                 type='text'
                 name='slug'
                 minLength='3'
-                value={data.slug}
+                value={data.slug.replace(regex, '-')}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
                 required
               />
-              <label className='hide-label' htmlFor='intro'>intro</label>
+              <label htmlFor='intro'>Intro</label>
               <input
                 className='editor-form-input'
                 type='text'
@@ -223,18 +281,40 @@ const EditRecipes = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
+              <label htmlFor='budget'>Budget</label>
               <input
                 className='editor-form-input'
                 type='number'
                 name='budget'
-                minLength='3'
                 value={data.budget}
                 placeholder='Budget €'
                 onChange={(e) => handleChange(e)}
                 required
               />
+              <label htmlFor='calories'>Calories</label>
+              <input
+                className='editor-form-input'
+                type='number'
+                name='calories'
+                value={parseInt(data.calories)}
+                placeholder='Nombre total de calories'
+                onChange={(e) => handleChange(e)}
+                required
+              />
+              <label htmlFor='preparation_duration_seconds'>
+                Temps de préparation (en minutes)
+              </label>
+              <input
+                className='editor-form-input'
+                type='number'
+                name='preparation_duration_seconds'
+                value={parseInt(data.preparation_duration_seconds)}
+                placeholder='Temps de préparation (en minutes)'
+                onChange={(e) => handleChange(e)}
+                required
+              />
             </div>
-
+            <input id='my-file' type='file' name='my-file' style={{ display: 'none' }} onChange='' />
             <Editor
               apiKey={process.env.REACT_APP_API_KEY}
               value={data.content}
@@ -252,7 +332,25 @@ const EditRecipes = () => {
                 autosave_retention: '30m',
                 autosave_restore_when_empty: true,
                 toolbar:
-                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help',
+                file_browser_callback_types: 'image',
+                file_picker_callback: function (callback, value, meta) {
+                  if (meta.filetype === 'image') {
+                    const input1 = document.getElementById('my-file');
+                    input1.click();
+                    input1.onchange = function () {
+                      const reader = new FileReader();// eslint-disable-line
+                      const file = input1.files[0];
+                      reader.onload = function (e) {
+                        callback(e.target.result, {
+                          alt: file.name
+                        });
+                      };
+                      reader.readAsDataURL(file);
+                    };
+                  }
+                },
+                paste_data_images: true
               }}
               onEditorChange={handleChangeEditor}
             />
@@ -266,22 +364,34 @@ const EditRecipes = () => {
                 accept='image/*'
                 id='picture'
                 type='file'
-                onChange={e => uploadImage(e)}
+                onChange={(e) => uploadImage(e)}
               />
               <div className='img-preview-container'>
-                {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
+                {data.image ? (
+                  <img
+                    src={data.image}
+                    className='img-preview'
+                    alt={data.image}
+                  />
+                ) : (
+                  <img
+                    className='img-preview'
+                    src={ImagePlaceholder}
+                    alt='img-placeholder'
+                  />
+                )}
               </div>
             </div>
 
-            <div className='tag-select'>
+            <div className='tag-select-container'>
               <TagSelect
                 options={allIngredients}
-                name='tag-select'
                 value={chosenIngredients}
                 onChange={(newValues) => {
                   setChosenIngredients(newValues);
                 }}
                 placeholder='Ingrédients'
+                className='tag-select'
               />
               <br />
               <TagSelect
@@ -335,7 +445,16 @@ const EditRecipes = () => {
                 />
                 <label htmlFor='published'>Publier </label>
               </div>
-              <button type='submit' className={data.published ? 'btn publish' : 'btn'}>{editMode ? 'Modifier' : data.published ? 'Publier' : 'Sauvegarder'}</button>
+              <button
+                type='submit'
+                className={data.published ? 'btn publish' : 'btn'}
+              >
+                {editMode
+                  ? 'Modifier'
+                  : data.published
+                    ? 'Publier'
+                    : 'Sauvegarder'}
+              </button>
             </div>
           </aside>
         </form>
