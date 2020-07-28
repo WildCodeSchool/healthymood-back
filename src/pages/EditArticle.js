@@ -197,20 +197,19 @@ const EditArticle = () => {
                 type='file'
                 onChange={e => uploadImage(e)}
               />
-              <br />
-              <SingleSelect
-                className='tag-select'
-                options={allArticleCategories}
-                value={chosenArticleCategory}
-                onChange={(newValues) => {
-                  setChosenArticleCategory(newValues);
-                }}
-                placeholder='Types de Catégorie'
-              />
               <div>
                 {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
               </div>
             </div>
+            <SingleSelect
+              className='tag-select'
+              options={allArticleCategories}
+              value={chosenArticleCategory}
+              onChange={(newValues) => {
+                setChosenArticleCategory(newValues);
+              }}
+              placeholder='Types de Catégorie'
+            />
             <div className='editor-bottom-container'>
               <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
             </div>
