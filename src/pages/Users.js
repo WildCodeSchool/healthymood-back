@@ -62,7 +62,6 @@ function Users () {
         <table className='Render-list'>
           <thead>
             <tr className='first-tr'>
-              <td>Nom</td>
               <td>Pseudo</td>
               <td>Adresse de messagerie</td>
               <td>Administrateur</td>
@@ -74,7 +73,6 @@ function Users () {
             {users.map(u => {
               return (
                 <tr key={u.id}>
-                  <td>{u.firstname}</td>
                   <td>{u.username}</td>
                   <td>{u.email}</td>
                   <td>{u.is_admin ? 'Oui' : 'Non'}</td>
