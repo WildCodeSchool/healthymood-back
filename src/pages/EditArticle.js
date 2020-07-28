@@ -192,7 +192,6 @@ const EditArticle = () => {
                       const reader = new FileReader();// eslint-disable-line
                       const file = input.files[0];
                       reader.onload = function (e) {
-                        console.log('name', e.target.result);
                         callback(e.target.result, {
                           alt: file.name
                         });
