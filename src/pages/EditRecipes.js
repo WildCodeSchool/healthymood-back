@@ -24,6 +24,7 @@ const EditRecipes = () => {
   const [allDishTypes, setAllDishTypes] = useState([]);
   const [chosenRecipeCategory, setChosenRecipeCategory] = useState(null);
   const [allRecipeCategories, setAllRecipeCategories] = useState([]);
+  const regex = /[^a-za-z0-9]+/g;
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
@@ -207,7 +208,7 @@ const EditRecipes = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                value={data.slug}
+                value={data.slug.replace(regex, '-')}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
                 required

@@ -14,6 +14,7 @@ const EditArticle = () => {
   const editMode = id !== 'new';
   const [chosenArticleCategory, setChosenArticleCategory] = useState(null);
   const [allArticleCategories, setAllArticleCategories] = useState([]);
+  const regex = /[^a-za-z0-9]+/g;
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
@@ -93,6 +94,7 @@ const EditArticle = () => {
     setData({ ...data, [name]: value });
   };
 
+
   const handleChangeEditor = (content) => {
     setData({ ...data, content });
   };
@@ -125,6 +127,7 @@ const EditArticle = () => {
       });
   }, [])// eslint-disable-line
 
+
   return (
     <>
       <main className='main-form-container'>
@@ -147,7 +150,7 @@ const EditArticle = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                value={data.slug}
+                value={data.slug.replace(regex, '-')}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
                 required
