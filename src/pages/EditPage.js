@@ -9,6 +9,7 @@ const EditPage = () => {
   const { id } = useParams();
   const history = useHistory();
   const editMode = id !== 'new';
+  const regex = /[^a-za-z0-9]+/g;
 
   const [data, setData] = useState({
     title: '',
@@ -86,7 +87,7 @@ const EditPage = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                value={data.slug}
+                value={data.slug.replace(regex, '-')}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
                 required

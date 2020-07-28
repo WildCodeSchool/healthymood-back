@@ -14,6 +14,7 @@ const EditArticle = () => {
   const editMode = id !== 'new';
   const [chosenArticleCategory, setChosenArticleCategory] = useState(null);
   const [allArticleCategories, setAllArticleCategories] = useState([]);
+  const regex = /[^a-za-z0-9]+/g;
 
   const date = new Date().toISOString().slice(0, 10);
   const [data, setData] = useState({
@@ -147,7 +148,7 @@ const EditArticle = () => {
                 type='text'
                 name='slug'
                 minLength='3'
-                value={data.slug}
+                value={data.slug.replace(regex, '-')}
                 placeholder='Ajouter un slug'
                 onChange={(e) => handleChange(e)}
                 required
@@ -215,20 +216,19 @@ const EditArticle = () => {
                 type='file'
                 onChange={e => uploadImage(e)}
               />
-              <br />
-              <SingleSelect
-                className='tag-select'
-                options={allArticleCategories}
-                value={chosenArticleCategory}
-                onChange={(newValues) => {
-                  setChosenArticleCategory(newValues);
-                }}
-                placeholder='Types de Catégorie'
-              />
               <div>
                 {data.image ? <img src={data.image} className='img-preview' alt={data.image} /> : <img className='img-preview' src={ImagePlaceholder} alt='img-placeholder' />}
               </div>
             </div>
+            <SingleSelect
+              className='tag-select'
+              options={allArticleCategories}
+              value={chosenArticleCategory}
+              onChange={(newValues) => {
+                setChosenArticleCategory(newValues);
+              }}
+              placeholder='Types de Catégorie'
+            />
             <div className='editor-bottom-container'>
               <button type='submit' className='btn'>{editMode ? 'Modifier' : 'Ajouter'}</button>
             </div>
