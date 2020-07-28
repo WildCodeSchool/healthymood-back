@@ -63,6 +63,7 @@ const EditPage = () => {
     }
   };
 
+
   return (
     <>
       <main className='main-form-container'>
@@ -99,6 +100,7 @@ const EditPage = () => {
               init={{
                 height: 500,
                 autosave_interval: '5s',
+
                 plugins: [
                   'advlist autolink lists link image charmap print preview anchor',
                   'searchreplace visualblocks code fullscreen',
@@ -107,8 +109,10 @@ const EditPage = () => {
                 ],
                 autosave_retention: '30m',
                 autosave_restore_when_empty: true,
+                media_live_embeds: true,
+                paste_data_images: true,
                 toolbar:
-                'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
+                  'undo redo | formatselect | bold italic backcolor blockquote | alignleft aligncenter alignright alignjustify | link image media | bullist numlist outdent indent | removeformat | help'
               }}
               onEditorChange={handleChangeEditor}
             />
